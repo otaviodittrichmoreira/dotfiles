@@ -1,0 +1,94 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+
+endglobal
+
+snippet '(?<!\w)sp\s' "Parenthesis outside mathmode" iAr
+(${1:${VISUAL}}) $0
+endsnippet
+
+snippet '(?<!\w)sb\s' "Brackets outside mathmode" iAr
+[${1:${VISUAL}}] $0
+endsnippet
+
+snippet '(?<!\w)sc\s' "Curly brackets outside mathmode" iAr
+{${1:${VISUAL}}} $0
+endsnippet
+
+context "math()"
+snippet '(\+|=|-?)(\s*)Sp' "Parentheses" iAr
+`!p
+symbol = match.group(1) + ' ' if match.group(1) else ''
+space = '' if match.group(2) else match.group(2)
+snip.rv = symbol + space`\left( ${1:${VISUAL}} \right)$0
+endsnippet
+
+
+context "math()"
+snippet '(\+|=|-?)(\s*)Sb' "Brackets" iAr
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`\left[ ${1:${VISUAL}} \right]$0
+endsnippet
+
+
+context "math()"
+snippet '(\+|=|-?)(\s*)Sc'  "Curly Brackets" iAr
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`\left\{ ${1:${VISUAL}} \right\\}$0
+endsnippet
+
+context "math()"
+snippet '(\+|=|-?)(\s*)Sn'  "Norm" iAr
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`\left\| ${1:${VISUAL}} \right\|$0
+endsnippet
+
+
+context "math()"
+snippet '(\+|=|-?)(\s*)sp'  "Parentheses" iAr
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`(${1:${VISUAL}})$0
+endsnippet
+
+context "math()"
+snippet '(\+|=|-?)(\s*)sb'  "Brackets" iAr
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`[${1:${VISUAL}}]$0
+endsnippet
+
+context "math()"
+snippet '(\+|=|-?)(\s*)sc'  "Curly Brackets" iAr
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`\\{${1:${VISUAL}}\\}$0
+endsnippet
+
+context "math()"
+snippet '(\+|=|-?)(\s*)(?<![\\\w])sn'  "Norm" iAr
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`\|${1:${VISUAL}}\|$0
+endsnippet
+
+context "math()"
+snippet lr, "<>" iA
+\left< ${1:${VISUAL}} \right> $0
+endsnippet
+
+context "math()"
+snippet abs "Absolute Value" iA
+\left| ${1:${VISUAL}} \right| $0
+endsnippet

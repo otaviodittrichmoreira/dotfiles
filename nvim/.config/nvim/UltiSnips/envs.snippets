@@ -1,0 +1,173 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def not_math():
+	return not math()
+
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+
+endglobal
+
+snippet newdoc "New Document" b
+\documentclass{article}
+\input{"C:/Users/otavi/OneDrive/Documentos/Latex/preamble/classnote.tex"}
+
+\title{${1:Title}}
+\author{Ot\'avio Dittrich Moreira}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\clearpage 
+$0
+
+\end{document}
+endsnippet
+
+snippet newchp "New Chapter" b
+\input{chapters/${1:chapter}/$1.tex}$0
+endsnippet
+
+snippet newex "New Exercise" b
+
+endsnippet
+
+snippet '\\input\{([^\}]*)\}' "Create file input" br
+`!p import os; filename = match.group(1); os.makedirs(os.path.dirname(filename), exist_ok=True) if '/' in filename else None; open(filename, "a").close(); snip.rv = match.group(0)`
+endsnippet
+
+snippet begg "begin{} / end{}" bA
+\\begin{$1}
+	$0
+\\end{$1}
+endsnippet
+
+
+snippet sec "Section" b
+\section{${1:Section Title}}
+$0
+endsnippet
+
+snippet '(ssec|subsec)' "Subsection" br
+\subsection{${1:Subsection Title}}
+$0
+endsnippet
+
+snippet '(sssec|subsubsec)' "Subsubsection" br
+\subsubsection{${1:Subsubsection Title}}
+$0
+endsnippet
+
+snippet `(?<!\\)bthm` "Theorem" bAr
+\begin{theorem}[${1:Title}]
+	$2
+\end{theorem}
+$0
+endsnippet
+
+snippet `(?<!\\)bprop` "Proposition" bAr
+\begin{proposition}
+	$1
+\end{proposition}
+$0
+endsnippet
+
+snippet `(?<!\\)blemm` "Lemma" bAr
+\begin{lemma}
+	$1
+\end{lemma}
+$0
+endsnippet
+
+snippet `(?<!\\)bcor` "Corollary" bAr
+\begin{corollary}
+	$1
+\end{corollary}
+$0
+endsnippet
+
+snippet `(?<!\\)bfa` "Fact" bAr
+\begin{fact}
+	$1
+\end{fact}
+$0
+endsnippet
+
+snippet `(?<!\\)bqu` "Question" bAr
+\begin{question}
+	$1
+\end{question}
+$0
+endsnippet
+
+snippet `(?<!\\)bexer` "Exercise" bAr
+\begin{exercise}
+	$1
+\end{exercise}
+$0
+endsnippet
+
+snippet `(?<!\\)bexam` "Example" bAr
+\begin{example}
+	$1
+\end{example}
+$0
+endsnippet
+
+snippet `(?<!\\)bdef` "Definition" bAr
+\begin{definition}[${1:Title}]
+	$2
+\end{definition}
+$0
+endsnippet
+
+snippet `(?<!\\)brmk` "Remark" bAr
+\begin{remark}
+	$1
+\end{remark}
+$0
+endsnippet
+
+snippet `(?<!\\)bpf` "Proof" bAr
+\begin{proof}
+	$1
+\end{proof}
+$0
+endsnippet
+
+snippet `(?<!\\)ben` "Enumerate" bAr
+\begin{enumerate}
+	\item $1
+\end{enumerate}
+$0
+endsnippet
+
+context "not_math()"
+snippet '-\s' "Init Itemize" bAr 
+\begin{itemize}
+	\item $1
+\end{itemize}$0
+endsnippet
+
+priority 100
+context "env('itemize') or env('enumerate')"
+snippet '-\s' "Item" bAr
+\item $0
+endsnippet
+
+snippet ali "Align" bA
+\begin{align*}
+	${1:${VISUAL}}
+.\end{align*}
+endsnippet
+
+

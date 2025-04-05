@@ -1,0 +1,35 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+
+endglobal
+snippet -- "em dash" iA
+—
+endsnippet
+
+context "math()"
+snippet `(?<!\\)by` "Justification" riA
+ \quad \text{(By $1)}$0
+endsnippet
+
+context "math()"
+snippet `->|(?<!\\)to` "to" Ar
+\to $0
+endsnippet
+
+context "math()"
+snippet `(~|(?<![\\\w])sim)` "sim" Ar
+\sim
+endsnippet
+
+context "math()"
+snippet `(?<![\\\w])tp` "transpose" Ar
+^\top
+endsnippet

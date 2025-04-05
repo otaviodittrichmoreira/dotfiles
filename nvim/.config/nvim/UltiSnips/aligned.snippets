@@ -1,0 +1,84 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+
+endglobal
+
+priority 200
+context "env('align*')"
+snippet '^(\s*)je'  "Equal align beggining of the line" Ar
+`!p snip.rv=match.group(1)`=& $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^((?!.*&).*\S)(\s*)je'  "Equal align" iAr
+`!p snip.rv=match.group(1)` =& $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^(\s*)(leq|lq)'  "Leq align beggining of the line" Ar
+`!p snip.rv=match.group(1)`\leq & $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^((?!.*&).*\S)(\s*)(leq|lq)'  "Leq align" iAr
+`!p snip.rv=match.group(1)` \leq & $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^(\s*)(geq|gq)'  "Geq align beggining of the line" Ar
+`!p snip.rv=match.group(1)`\geq & $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^((?!.*&).*\S)(\s*)(geq|gq)'  "geq align" iAr
+`!p snip.rv=match.group(1)` \geq & $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^(\s*)>'  "> align beggining of the line" Ar
+`!p snip.rv=match.group(1)`>& $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^((?!.*&).*\S)(\s*)>'  "> align" iAr
+`!p snip.rv=match.group(1)` >& $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^(\s*)<'  "< align beggining of the line" Ar
+`!p snip.rv=match.group(1)`<& $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^((?!.*&).*\S)(\s*)<'  "< align" iAr
+`!p snip.rv=match.group(1)` &< $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^(\s*)jp'  "Plus align beggining of the line" Ar
+`!p snip.rv=match.group(1)`&+ $0
+endsnippet
+
+priority 200
+context "env('align*')"
+snippet '^(\s*)jm'  "Plus align beggining of the line" Ar
+`!p snip.rv=match.group(1)`&- $0
+endsnippet
