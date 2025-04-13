@@ -112,7 +112,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias nvim="~/nvim.appimage"
+alias nvim="~/bin/nvim.appimage"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
-export EDITOR="~/nvim.appimage"
-export VISUAL="~/nvim.appimage"
+export EDITOR="~/bin/nvim.appimage"
+export VISUAL="~/bin/nvim.appimage"
