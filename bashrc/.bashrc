@@ -116,3 +116,5 @@ alias nvim="~/bin/nvim.appimage"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export EDITOR="~/bin/nvim.appimage"
 export VISUAL="~/bin/nvim.appimage"
+
+set -o vi
