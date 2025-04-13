@@ -993,6 +993,7 @@ require("lazy").setup({
 	require("pluggins.slime"),
 	require("pluggins.folding"),
 	require("pluggins.markdown"),
+	require("pluggins.obsidian"),
 	-- require 'pluggins.startup',
 	-- require 'kickstart.plugins.neo-tree',
 
