@@ -1001,6 +1001,7 @@ require("lazy").setup({
 	require("pluggins.folding"),
 	require("pluggins.markdown"),
 	require("pluggins.obsidian"),
+	require("pluggins.zen-mode"),
 	-- require 'pluggins.startup',
 	-- require 'kickstart.plugins.neo-tree',
 
