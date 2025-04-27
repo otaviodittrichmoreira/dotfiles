@@ -201,7 +201,7 @@ bindsym $mod+r mode "resize"
 ##############################
 # USER CONFIGURATION FILE #
 ##############################
-exec_always feh --bg-fill ~/Pictures/wallpapers/wallpaper1.jpg
+exec_always feh --bg-fill ~/Pictures/wallpapers/All+Or+Nothing+Final.jpg
 
 # Swap Caps Lock and Escape
 exec --no-startup-id setxkbmap -option caps:swapescape
@@ -214,6 +214,10 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +10% && ~/.conf
 
 # Screen brightness down
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && ~/.config/i3/scripts/brightness_notify.sh
+
+# Screenshot
+# bindsym Print exec --no-startup-id $script_dir/screenshot_import.sh
+bindsym Print exec --no-startup-id bash -c "$HOME/.config/i3/scripts/screenshot_import.sh > /tmp/screenshot.log 2>&1"
 
 # Toggle borders for focused windows
 bindsym $mod+b border toggle
