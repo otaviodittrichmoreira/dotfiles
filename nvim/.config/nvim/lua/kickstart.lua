@@ -1002,6 +1002,7 @@ require("lazy").setup({
 	require("pluggins.markdown"),
 	require("pluggins.obsidian"),
 	require("pluggins.zen-mode"),
+	require("pluggins.nvim-colorizer"),
 	-- require 'pluggins.startup',
 	-- require 'kickstart.plugins.neo-tree',
 
