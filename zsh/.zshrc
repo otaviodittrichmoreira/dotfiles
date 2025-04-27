@@ -135,6 +135,9 @@ unset key
 
 # add nvim to path
 alias nvim="$HOME/bin/nvim.appimage"
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+export EDITOR="~/bin/nvim.appimage"
+export VISUAL="~/bin/nvim.appimage"
 
 # Bind ctrl+Y to accept the autosuggestion
 bindkey '^Y' autosuggest-accept
