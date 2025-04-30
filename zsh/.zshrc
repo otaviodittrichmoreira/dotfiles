@@ -1,3 +1,4 @@
+ZSH_AUTOSUGGEST_DISABLE=1
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
@@ -136,8 +137,10 @@ unset key
 # add nvim to path
 alias nvim="$HOME/bin/nvim.appimage"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
-export EDITOR="~/bin/nvim.appimage"
-export VISUAL="~/bin/nvim.appimage"
+export EDITOR="$HOME/bin/nvim.appimage"
+export VISUAL="$HOME/bin/nvim.appimage"
+bindkey -M vicmd v edit-command-line
 
 # Bind ctrl+Y to accept the autosuggestion
 bindkey '^Y' autosuggest-accept
+export PATH="$HOME/.local/bin:$PATH"
