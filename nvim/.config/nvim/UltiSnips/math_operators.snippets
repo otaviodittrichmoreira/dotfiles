@@ -95,3 +95,9 @@ context "math()"
 snippet `(?<=\S)(\s*)(?<!\{)([a-zA-Z])\2` "auto subscript" wrA
 _{`!p snip.rv = match.group(2)`}$0
 endsnippet
+
+########## Operators ##########
+context "math()"
+snippet sup "sup" wA
+\sup_{$1} $0
+endsnippet

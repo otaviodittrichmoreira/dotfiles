@@ -1004,6 +1004,7 @@ require("lazy").setup({
 	require("pluggins.zen-mode"),
 	require("pluggins.nvim-colorizer"),
 	require("pluggins.neoscroll"),
+	require("pluggins.oil"),
 	-- require 'pluggins.startup',
 	-- require 'kickstart.plugins.neo-tree',
 
