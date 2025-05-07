@@ -16,7 +16,13 @@ vim.keymap.set("n", "<Leader>j", ":w<CR>", { silent = true, desc = "Save" })
 vim.keymap.set("i", "<M-l>", "<Plug>(copilot-accept-word)")
 
 -- Refresh UltiSnips snippets
-vim.keymap.set("n", "<Leader>ur", ":call UltiSnips#RefreshSnippets()<CR>", { silent = true, desc = "Update Snippet" })
+vim.keymap.set("n", "<Leader>ur", function()
+	vim.cmd("call UltiSnips#RefreshSnippets()")
+	vim.notify("UltiSnips snippets reloaded", vim.log.levels.INFO)
+end, {
+	silent = true,
+	desc = "Update Snippet",
+})
 
 -- Run python file in a tmux pane
 vim.api.nvim_create_autocmd("FileType", {
