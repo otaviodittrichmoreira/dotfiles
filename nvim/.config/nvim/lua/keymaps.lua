@@ -92,3 +92,6 @@ vim.keymap.set("n", "<leader>yd", function()
 		print("No diagnostics on this line.")
 	end
 end, { desc = "Save current line's diagnostics to register +" })
+
+-- Print defined variable
+vim.keymap.set("n", "<Leader>pv", [[^"vyt=oprint()<ESC>h"vp]], { desc = "Print defined variable" })
