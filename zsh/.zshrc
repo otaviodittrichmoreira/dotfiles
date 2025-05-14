@@ -144,3 +144,6 @@ bindkey -M vicmd v edit-command-line
 # Bind ctrl+Y to accept the autosuggestion
 bindkey '^Y' autosuggest-accept
 export PATH="$HOME/.local/bin:$PATH"
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
