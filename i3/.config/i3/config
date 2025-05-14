@@ -36,7 +36,8 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- betterscreenlock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -58,7 +59,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -173,10 +174,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -192,11 +193,12 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+# Start i3bar to display a workspace bar (plus the system information i3status
 # bar {
 #         status_command i3status
 # }
+
 
 ##############################
 # USER CONFIGURATION FILE #
@@ -231,3 +233,13 @@ exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
 exec_always --no-startup-id picom
 
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/rofi/powermenu/type-1/powermenu.sh
+
+# # Autotiling
+# exec_always --no-startup-id $script_dir/autotiling.sh
+
+# Hide borders
+hide_edge_borders both
+
+# Screen timeout
+exec --no-startup-id xset s 300
+exec --no-startup-id xset dpms 0 0 900
