@@ -2,6 +2,9 @@ global !p
 def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
+def not_math():
+	return not math()
+
 def comment(): 
 	return vim.eval('vimtex#syntax#in_comment()') == '1'
 
@@ -13,243 +16,243 @@ endglobal
 ########## Functions ##########
 context "math()"
 snippet `([a-zA-Z])(c|C)al` "Mathcal" Ar
-\mathcal{`!p snip.rv=match.group(1).upper()`}$0
+\mathcal{`!p snip.rv=match.group(1).upper()`} $0
 endsnippet
 
 context "math()"
 snippet `(\\\\)([a-zA-Z])` "Mathbb" Ar
-\mathbb{`!p snip.rv=match.group(2).upper()`}$0
+\mathbb{`!p snip.rv=match.group(2).upper()`} $0
 endsnippet
 
 ########## Greek Letters ##########
 context "math()"
 snippet `(;a)|((?<![\a-zA-Z])alpha)` "Alpha" Ar
-\alpha$0
+\alpha $0
 endsnippet
 
 context "math()"
 snippet `(;A)|((?<![\a-zA-Z])Alpha)` "Alpha Uppercase" Ar
-\Alpha$0
+\Alpha $0
 endsnippet
 
 context "math()"
 snippet `(;b)|((?<![\a-zA-Z])beta)` "Beta" Ar
-\beta$0
+\beta $0
 endsnippet
 
 context "math()"
 snippet `(;B)|((?<![\a-zA-Z])Beta)` "Beta Uppercase" Ar
-\Beta$0
+\Beta $0
 endsnippet
 
 context "math()"
 snippet `(;g)|((?<![\a-zA-Z])gamma)` "Gamma" Ar
-\gamma$0
+\gamma $0
 endsnippet
 
 context "math()"
 snippet `(;G)|((?<![\a-zA-Z])Gamma)` "Gamma Uppercase" Ar
-\Gamma$0
+\Gamma $0
 endsnippet
 
 context "math()"
 snippet `(;d)|((?<![\a-zA-Z])delta)` "Delta" Ar
-\delta$0
+\delta $0
 endsnippet
 
 context "math()"
 snippet `(;D)|((?<![\a-zA-Z])Delta)` "Delta Uppercase" Ar
-\Delta$0
+\Delta $0
 endsnippet
 
 context "math()"
 snippet `((?<![\a-zA-Z])Eps)` "Epsilon Uppercase" Ar
-\Epsilon$0
+\Epsilon $0
 endsnippet
 
 context "math()"
 snippet eps "Epsilon" Aw
-\epsilon$0
+\epsilon $0
 endsnippet
 
 context "math()"
 snippet `(;e)|((?<![\a-zA-Z])eta)` "Eta" Ar
-\eta$0
+\eta $0
 endsnippet
 
 context "math()"
 snippet `(;E)|((?<![\a-zA-Z])Eta)` "Eta Uppercase" Ar
-\Eta$0
+\Eta $0
 endsnippet
 
 context "math()"
 snippet `(;l)|((?<![\a-zA-Z])lambda)` "Lambda" Ar
-\lambda$0
+\lambda $0
 endsnippet
 
 context "math()"
 snippet `(;L)|((?<![\a-zA-Z])Lambda)` "Lambda Uppercase" Ar
-\Lambda$0
+\Lambda $0
 endsnippet
 
 context "math()"
 snippet `(;m)|((?<![\a-zA-Z])mu)` "Mu" Ar
-\mu$0
+\mu $0
 endsnippet
 
 context "math()"
 snippet `(;M)|((?<![\a-zA-Z])Mu)` "Mu Uppercase" Ar
-\Mu$0
+\Mu $0
 endsnippet
 
 context "math()"
 snippet `(;p)|((?<![\a-zA-Z])pi)` "Pi" Ar
-\pi$0
+\pi $0
 endsnippet
 
 context "math()"
 snippet `(;P)|((?<![\a-zA-Z])Pi)` "Pi Uppercase" Ar
-\Pi$0
+\Pi $0
 endsnippet
 
 context "math()"
 snippet `(;s)|((?<![\a-zA-Z])sigma)` "Sigma" Ar
-\sigma$0
+\sigma $0
 endsnippet
 
 context "math()"
 snippet `(;S)|((?<![\a-zA-Z])Sigma)` "Sigma Uppercase" Ar
-\Sigma$0
+\Sigma $0
 endsnippet
 
 context "math()"
 snippet `(;t)|((?<![\a-zA-Z])theta)` "Theta" Ar
-\theta$0
+\theta $0
 endsnippet
 
 context "math()"
 snippet `(;T)|((?<![\a-zA-Z])Theta)` "Theta Uppercase" Ar
-\Theta$0
+\Theta $0
 endsnippet
 
 context "math()"
 snippet `(;o)|((?<![\a-zA-Z])omega)` "Omega" Ar
-\omega$0
+\omega $0
 endsnippet
 
 context "math()"
 snippet `(;O)|((?<![\a-zA-Z])Omega)` "Omega Uppercase" Ar
-\Omega$0
+\Omega $0
 endsnippet
 
 context "math()"
 snippet `(;z)|((?<![\a-zA-Z])zeta)` "Zeta" Ar
-\zeta$0
+\zeta $0
 endsnippet
 
 context "math()"
 snippet `(;Z)|((?<![\a-zA-Z])Zeta)` "Zeta Uppercase" Ar
-\Zeta$0
+\Zeta $0
 endsnippet
 
-context "math()"
-snippet `(;x)|((?<![\a-zA-Z])xi)` "Xi" Ar
-\xi$0
-endsnippet
+# context "math()"
+# snippet `(;x)|((?<![\a-zA-Z])xi)` "Xi" Ar
+# \xi $0
+# endsnippet
 
 context "math()"
 snippet `(;X)|((?<![\a-zA-Z])Xi)` "Xi Uppercase" Ar
-\Xi$0
+\Xi $0
 endsnippet
 
 context "math()"
 snippet `(;r)|((?<![\a-zA-Z])rho)` "Rho" Ar
-\rho$0
+\rho $0
 endsnippet
 
 context "math()"
 snippet `(;R)|((?<![\a-zA-Z])Rho)` "Rho Uppercase" Ar
-\Rho$0
+\Rho $0
 endsnippet
 
 context "math()"
 snippet `(;n)|((?<![\a-zA-Z])nu)` "Nu" Ar
-\nu$0
+\nu $0
 endsnippet
 
 context "math()"
 snippet `(;N)|((?<![\a-zA-Z])Nu)` "Nu Uppercase" Ar
-\Nu$0
+\Nu $0
 endsnippet
 
 context "math()"
 snippet `(;f)|((?<![\a-zA-Z])phi)` "Phi" Ar
-\phi$0
+\phi $0
 endsnippet
 
 context "math()"
 snippet `(;F)|((?<![\a-zA-Z])Phi)` "Phi Uppercase" Ar
-\Phi$0
+\Phi $0
 endsnippet
 
 context "math()"
 snippet `(;c)|((?<![\a-zA-Z])chi)` "Chi" Ar
-\chi$0
+\chi $0
 endsnippet
 
 context "math()"
 snippet `(;C)|((?<![\a-zA-Z])Chi)` "Chi Uppercase" Ar
-\Chi$0
+\Chi $0
 endsnippet
 
 context "math()"
 snippet `(;y)|((?<![\a-zA-Z])psi)` "Psi" Ar
-\psi$0
+\psi $0
 endsnippet
 
 context "math()"
 snippet `(;Y)|((?<![\a-zA-Z])Psi)` "Psi Uppercase" Ar
-\Psi$0
+\Psi $0
 endsnippet
 
 context "math()"
 snippet `(;w)|((?<![\a-zA-Z])tau)` "Tau" Ar
-\tau$0
+\tau $0
 endsnippet
 
 context "math()"
 snippet `(;W)|((?<![\a-zA-Z])Tau)` "Tau Uppercase" Ar
-\Tau$0
+\Tau $0
 endsnippet
 
 context "math()"
 snippet `(;v)|((?<![\a-zA-Z])upsilon)` "Upsilon" Ar
-\upsilon$0
+\upsilon $0
 endsnippet
 
 context "math()"
 snippet `(;V)|((?<![\a-zA-Z])Upsilon)` "Upsilon Uppercase" Ar
-\Upsilon$0
+\Upsilon $0
 endsnippet
 
 context "math()"
 snippet `(;k)|((?<![\a-zA-Z])kappa)` "Kappa" Ar
-\kappa$0
+\kappa $0
 endsnippet
 
 context "math()"
 snippet `(;K)|((?<![\a-zA-Z])Kappa)` "Kappa Uppercase" Ar
-\Kappa$0
+\Kappa $0
 endsnippet
 
 context "math()"
 snippet `(;i)|((?<![\a-zA-Z])iota)` "Iota" Ar
-\iota$0
+\iota $0
 endsnippet
 
 context "math()"
 snippet `(;I)|((?<![\a-zA-Z])Iota)` "Iota Uppercase" Ar
-\Iota$0
+\Iota $0
 endsnippet
 
 ########## Probability ##########
@@ -276,5 +279,16 @@ endsnippet
 context "math()"
 snippet `pid` "iid" Arw
 \stackrel{\text{iid}}{\sim}
+endsnippet
+
+context "not_math()"
+snippet wp "with probability" i
+with probability at least \(1 - ${1:delta}\) $0
+endsnippet
+
+########## Sets ##########
+context "math()"
+snippet empty "Empty Set" Aw
+\varnothing  $0
 endsnippet
 

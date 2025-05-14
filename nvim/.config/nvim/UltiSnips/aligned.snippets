@@ -23,10 +23,10 @@ snippet '^((?!.*&).*\S)(\s*)je'  "Equal align" iAr
 `!p snip.rv=match.group(1)` =& $0
 endsnippet
 
-priority 200
+priority 1000
 context "env('align*')"
-snippet '^(\s*)(leq|lq)'  "Leq align beggining of the line" Ar
-`!p snip.rv=match.group(1)`\leq & $0
+snippet '(leq|lq)'  "Leq align beggining of the line" Arb
+\leq& $0
 endsnippet
 
 priority 200
@@ -35,10 +35,10 @@ snippet '^((?!.*&).*\S)(\s*)(leq|lq)'  "Leq align" iAr
 `!p snip.rv=match.group(1)` \leq & $0
 endsnippet
 
-priority 200
+priority 1000
 context "env('align*')"
-snippet '^(\s*)(geq|gq)'  "Geq align beggining of the line" Ar
-`!p snip.rv=match.group(1)`\geq & $0
+snippet '(geq|gq)'  "Geq align beggining of the line" Arb
+\geq& $0
 endsnippet
 
 priority 200

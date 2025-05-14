@@ -94,4 +94,6 @@ vim.keymap.set("n", "<leader>yd", function()
 end, { desc = "Save current line's diagnostics to register +" })
 
 -- Print defined variable
-vim.keymap.set("n", "<Leader>pv", [[^"vyt=oprint()<ESC>h"vp]], { desc = "Print defined variable" })
+local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
+vim.fn.setreg("p", [[^"vyinoprint(f"{ = }")]] .. esc .. [[6h"vp]])
+vim.keymap.set("n", "<Leader>p", "@p", { desc = "Print defined variable" })
