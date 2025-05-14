@@ -913,6 +913,10 @@ require("lazy").setup({
 			--  Check out: https://github.com/echasnovski/mini.nvim
 		end,
 	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -948,6 +952,19 @@ require("lazy").setup({
 				disable = { "latex" },
 			},
 			indent = { enable = true, disable = { "ruby" } },
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true, -- Jump forward to textobj
+
+					keymaps = {
+						["iv"] = "@assignment.rhs", -- inner value (right-hand side)
+						["av"] = "@assignment.rhs", -- around value
+						["in"] = "@assignment.lhs", -- inner name (left-hand side)
+						["an"] = "@assignment.lhs", -- around name
+					},
+				},
+			},
 		},
 		-- There are additional nvim-treesitter modules that you can use to interact
 		-- with nvim-treesitter. You should go explore a few and see what interests you:

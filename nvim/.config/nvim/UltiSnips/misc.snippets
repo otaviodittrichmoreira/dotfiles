@@ -26,10 +26,23 @@ endsnippet
 
 context "math()"
 snippet `(~|(?<![\\\w])sim)` "sim" Ar
-\sim
+\sim $0
 endsnippet
 
 context "math()"
 snippet `(?<![\\\w])tp` "transpose" Ar
-^\top
+^\top $0
+endsnippet
+
+snippet ref "Reference" i
+\ref{${1:label}} $0
+endsnippet
+
+snippet label "Label" i
+\label{${1:label}} $0
+endsnippet
+
+######### Probability #########
+snippet wp "with probability" i
+with probability at least \(1 - ${1:delta}\) $0
 endsnippet

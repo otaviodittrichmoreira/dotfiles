@@ -36,51 +36,50 @@ context "math()"
 snippet '(\+|=|-?)(\s*)Sb' "Brackets" iAr
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\left[ ${1:${VISUAL}} \right]$0
+`\left[ ${1:${VISUAL}} \right] $0
 endsnippet
-
 
 context "math()"
 snippet '(\+|=|-?)(\s*)Sc'  "Curly Brackets" iAr
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\left\{ ${1:${VISUAL}} \right\\}$0
+`\left\\{ ${1:${VISUAL}} \right\\} $0
 endsnippet
 
 context "math()"
 snippet '(\+|=|-?)(\s*)Sn'  "Norm" iAr
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\left\| ${1:${VISUAL}} \right\|$0
+`\left\| ${1:${VISUAL}} \right\| $0
 endsnippet
 
 
 context "math()"
 snippet '(\+|=|-?)(\s*)sp'  "Parentheses" iAr
 `!p
-snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`(${1:${VISUAL}})$0
+snip.rv = match.group(1) + ' ' if match.group(1) else ' '
+`(${1:${VISUAL}}) $0
 endsnippet
 
 context "math()"
 snippet '(\+|=|-?)(\s*)sb'  "Brackets" iAr
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`[${1:${VISUAL}}]$0
+`[${1:${VISUAL}}] $0
 endsnippet
 
 context "math()"
 snippet '(\+|=|-?)(\s*)sc'  "Curly Brackets" iAr
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\\{${1:${VISUAL}}\\}$0
+`\\{${1:${VISUAL}}\\} $0
 endsnippet
 
 context "math()"
 snippet '(\+|=|-?)(\s*)(?<![\\\w])sn'  "Norm" iAr
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\|${1:${VISUAL}}\|$0
+`\|${1:${VISUAL}}\| $0
 endsnippet
 
 context "math()"

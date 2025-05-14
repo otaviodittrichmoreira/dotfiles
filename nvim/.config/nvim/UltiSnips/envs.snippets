@@ -75,8 +75,8 @@ $0
 endsnippet
 
 snippet `(?<!\\)bprop` "Proposition" bAr
-\begin{proposition}
-	$1
+\begin{proposition}[${1:Title}]
+	$2
 \end{proposition}
 $0
 endsnippet
@@ -159,6 +159,12 @@ snippet '-\s' "Init Itemize" bAr
 endsnippet
 
 priority 100
+context "env('itemize') or env('enumerate')"
+snippet item "Item" bA
+\item $0
+endsnippet
+priority 100
+
 context "env('itemize') or env('enumerate')"
 snippet '-\s' "Item" bAr
 \item $0

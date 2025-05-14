@@ -15,7 +15,7 @@ endglobal
 
 priority 100
 snippet ... "ldots" iA
-\ldots
+\ldots $0
 endsnippet
 
 snippet table "Table environment" b
@@ -56,17 +56,18 @@ endsnippet
 
 context "math()"
 snippet `(=>|implies)` "implies" rAi
-\implies
+\implies $0
 endsnippet
 
 context "math()"
 snippet `(=>|implied)` "implies" rAi
-\impliedby
+\impliedby $0
 endsnippet
 
+priority 1000
 context "math()"
 snippet iff "iff" Ai
-\iff
+\iff $0
 endsnippet
 
 snippet fm "Math" wA
@@ -86,16 +87,16 @@ endsnippet
 
 context "math()"
 snippet // "Fraction" iA
-\\frac{$1}{$2}$0
+\\frac{$1}{$2} $0
 endsnippet
 
 snippet / "Fraction" i
-\\frac{${VISUAL}}{$1}$0
+\\frac{${VISUAL}}{$1} $0
 endsnippet
 
 context "math()"
 snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
-\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+\\frac{`!p snip.rv = match.group(1)`}{$1} $0
 endsnippet
 
 priority 1000
@@ -111,17 +112,17 @@ while True:
 	if depth == 0: break;
 	i-=1
 snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
-`{$1}$0
+`{$1} 
 endsnippet
 
 context "math()"
 snippet '([A-Za-z])(\d)' "auto subscript" wrA
-`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)` 
 endsnippet
 
 context "math()"
 snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
-`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`} 
 endsnippet
 
 
@@ -167,7 +168,7 @@ endsnippet
 
 context "math()"
 snippet floor "floor" iA
-\left\lfloor $1 \right\rfloor$0
+\left\lfloor $1 \right\rfloor $0
 endsnippet
 
 snippet pmat "pmat" iA
@@ -208,12 +209,12 @@ snippet lr[ "left[ right]" i
 endsnippet
 
 snippet lra "leftangle rightangle" iA
-\left<${1:${VISUAL}} \right>$0
+\left<${1:${VISUAL}} \right> $0
 endsnippet
 
 context "math()"
 snippet conj "conjugate" iA
-\overline{$1}$0
+\overline{$1} $0
 endsnippet
 
 snippet taylor "taylor" w
@@ -232,49 +233,50 @@ snippet prod "product" w
 \prod_{${1:n=${2:1}}}^{${3:\infty}} ${4:${VISUAL}} $0
 endsnippet
 
-snippet part "d/dx" w
+context "math()"
+snippet `(?<!\\)part|del` "d/dx" wAr
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
 endsnippet
 
-context "math()"
-snippet sr "^2" iA
-^2
-endsnippet
+# context "math()"
+# snippet sr "^2" iA
+# ^2 
+# endsnippet
+#
+# context "math()"
+# snippet cb "^3" iA
+# ^3 
+# endsnippet
+#
+# context "math()"
+# snippet td "to the ... power" iA
+# ^{$1} $0
+# endsnippet
 
-context "math()"
-snippet cb "^3" iA
-^3
-endsnippet
-
-context "math()"
-snippet td "to the ... power" iA
-^{$1}$0
-endsnippet
-
-context "math()"
-snippet rd "to the ... power" iA
-^{($1)}$0
-endsnippet
+# context "math()"
+# snippet rd "to the ... power" iA
+# ^{($1)} $0
+# endsnippet
 
 snippet __ "subscript" iA
-_{$1}$0
+_{$1} $0
 endsnippet
 
 context "math()"
 snippet oo "\infty" iA
-\infty
+\infty 
 endsnippet
 
 snippet rij "mrij" i
-(${1:x}_${2:n})_{${3:$2}\\in${4:\\N}}$0
+(${1:x}_${2:n})_{${3:$2}\\in${4:\\N}} $0
 endsnippet
 
 snippet <= "leq" iA
-\le 
+\leq 
 endsnippet
 
 snippet >= "geq" iA
-\ge 
+\geq 
 endsnippet
 
 context "math()"
@@ -289,47 +291,47 @@ endsnippet
 
 context "math()"
 snippet xnn "xn" iA
-x_{n}
+x_{n} 
 endsnippet
 
 context "math()"
 snippet ynn "yn" iA
-y_{n}
+y_{n} 
 endsnippet
 
 
 context "math()"
 snippet xii "xi" iA
-x_{i}
+x_{i} 
 endsnippet
 
 context "math()"
 snippet yii "yi" iA
-y_{i}
+y_{i} 
 endsnippet
 
 context "math()"
 snippet xjj "xj" iA
-x_{j}
+x_{j} 
 endsnippet
 
 context "math()"
 snippet yjj "yj" iA
-y_{j}
+y_{j} 
 endsnippet
 
 context "math()"
 snippet xp1 "x" iA
-x_{n+1}
+x_{n+1} 
 endsnippet
 
 context "math()"
 snippet xmm "x" iA
-x_{m}
+x_{m} 
 endsnippet
 
 snippet R0+ "R0+" iA
-\\R_0^+
+\\R_0^+ 
 endsnippet
 
 snippet plot "Plot" w
@@ -356,18 +358,19 @@ endsnippet
 
 context "math()"
 snippet mcal "mathcal" iA
-\mathcal{$1}$0
+\mathcal{$1} $0
 endsnippet
 
 snippet lll "l" iA
-\ell
+\ell 
 endsnippet
 
 context "math()"
-snippet nabl "nabla" iA
+snippet nabla "nabla" iA
 \nabla 
 endsnippet
 
+priority 300
 context "math()"
 snippet xx "cross" iA
 \times 
@@ -380,7 +383,7 @@ endsnippet
 
 context "math()"
 snippet `(norm|nrmo|nrom)` "norm" iAr
-\|$1\|$0
+\|$1\| $0
 endsnippet
 
 priority 100
@@ -398,7 +401,7 @@ endsnippet
 priority 200
 context "math()"
 snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
-\\`!p snip.rv = match.group(1)`
+\\`!p snip.rv = match.group(1)` 
 endsnippet
 
 
@@ -411,7 +414,7 @@ endsnippet
 priority 200
 context "math()"
 snippet <-> "leftrightarrow" iA
-\leftrightarrow
+\leftrightarrow 
 endsnippet
 
 context "math()"
@@ -421,25 +424,25 @@ endsnippet
 
 context "math()"
 snippet invs "inverse" iA
-^{-1}
+^{-1} 
 endsnippet
 
 context "math()"
 snippet compl "complement" iA
-^{c}
+^{c} 
 endsnippet
 
 context "math()"
 snippet \\\ "setminus" iA
-\setminus
+\setminus 
 endsnippet
 
 snippet >> ">>" iA
-\gg
+\gg 
 endsnippet
 
 snippet << "<<" iA
-\ll
+\ll 
 endsnippet
 
 
@@ -472,10 +475,11 @@ snippet inn "in " iA
 endsnippet
 
 snippet NN "n" iA
-\N
+\N 
 endsnippet
 
-snippet Nn "cap" iA
+context "math()"
+snippet `(Nn|cap)` "cap" iAr
 \cap 
 endsnippet
 
@@ -492,19 +496,29 @@ snippet nnn "bigcap" iA
 endsnippet
 
 snippet OO "emptyset" iA
-\O
+\O 
 endsnippet
 
 snippet RR "real" iA
-\R
+\R 
+endsnippet
+
+context "math()"
+snippet Rn "Rn" iA
+\Rn 
+endsnippet
+
+context "math()"
+snippet Rm "Rm" iA
+\R^{m}
 endsnippet
 
 snippet QQ "Q" iA
-\Q
+\Q 
 endsnippet
 
 snippet ZZ "Z" iA
-\Z
+\Z 
 endsnippet
 
 snippet <! "normal" iA
@@ -523,7 +537,7 @@ endsnippet
 
 context "math()"
 snippet tt "text" iA
-\text{$1}$0
+\text{$1} $0
 endsnippet
 
 context "math()"
@@ -551,7 +565,7 @@ endsnippet
 priority 10
 context "math()"
 snippet "bar" "bar" riA
-\overline{$1}$0
+\overline{$1} $0
 endsnippet
 
 priority 100
@@ -563,13 +577,13 @@ endsnippet
 priority 10
 context "math()"
 snippet `(?<!\\)hat` "hat" riA
-\hat{${1:${VISUAL}}}$0
+\hat{${1:${VISUAL}}} $0
 endsnippet
 
 priority 100
 context "math()"
 snippet "([a-zA-Z])hat" "hat" riA
-\hat{`!p snip.rv=match.group(1)`}
+\hat{`!p snip.rv=match.group(1)`} 
 endsnippet
 
 snippet letw "let omega" iA
@@ -578,11 +592,11 @@ endsnippet
 
 
 snippet HH "H" iA
-\mathbb{H}
+\mathbb{H} 
 endsnippet
 
 snippet DD "D" iA
-\mathbb{D}
+\mathbb{D} 
 endsnippet
 
 # vim:ft=snippets

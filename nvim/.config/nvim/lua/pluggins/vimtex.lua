@@ -9,5 +9,13 @@ return {
 		vim.g.vimtex_view_general_viewer = "zathura"
 		vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
 		vim.g.vimtex_view_forward_search_on_start = 1
+		vim.g.vimtex_compiler_latexmk = {
+			build_dir = "",
+			options = {
+				"-pdf",
+				"-pdflatex=lualatex",
+				"-interaction=nonstopmode",
+			},
+		}
 	end,
 }
