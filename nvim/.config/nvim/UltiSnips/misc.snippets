@@ -15,8 +15,18 @@ snippet -- "em dash" iA
 endsnippet
 
 context "math()"
+snippet quad "Quad - spacement" iA
+\quad $0
+endsnippet
+
+context "math()"
 snippet `(?<!\\)by` "Justification" riA
  \quad \text{(By $1)}$0
+endsnippet
+
+context "math()"
+snippet and "and" wA
+\quad \text{and} \quad $0
 endsnippet
 
 context "math()"
@@ -44,5 +54,8 @@ endsnippet
 
 ######### Probability #########
 snippet wp "with probability" i
-with probability at least \(1 - ${1:delta}\) $0
+with probability at least \(1 - ${1:delta}\)$0
 endsnippet
+
+
+###############################

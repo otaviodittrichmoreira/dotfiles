@@ -361,6 +361,7 @@ snippet mcal "mathcal" iA
 \mathcal{$1} $0
 endsnippet
 
+context "math()"
 snippet lll "l" iA
 \ell 
 endsnippet
@@ -455,9 +456,6 @@ snippet set "set" wA
 \\{$1\\} $0
 endsnippet
 
-snippet || "mid" iA
- \mid 
-endsnippet
 
 
 context "math()"
@@ -576,8 +574,20 @@ endsnippet
 
 priority 10
 context "math()"
+snippet `(?<!\\)til` "tilde" riA
+\tilde{${1:${VISUAL}}} $0
+endsnippet
+
+priority 10
+context "math()"
 snippet `(?<!\\)hat` "hat" riA
 \hat{${1:${VISUAL}}} $0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])til" "tilde" riA
+\tilde{`!p snip.rv=match.group(1)`} 
 endsnippet
 
 priority 100
