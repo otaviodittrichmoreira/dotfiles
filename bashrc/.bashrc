@@ -118,3 +118,6 @@ export EDITOR="~/bin/nvim.appimage"
 export VISUAL="~/bin/nvim.appimage"
 
 set -o vi
+. "$HOME/.cargo/env"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

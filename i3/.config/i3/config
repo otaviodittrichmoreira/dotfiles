@@ -243,3 +243,6 @@ hide_edge_borders both
 # Screen timeout
 exec --no-startup-id xset s 300
 exec --no-startup-id xset dpms 0 0 900
+
+# Battery popup
+exec --no-startup-id i3-battery-popup
