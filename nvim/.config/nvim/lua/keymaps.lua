@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			0,
 			"n",
 			"<Leader>r",
-			[[:up<CR>:execute "silent !tmux send-keys -t top-right 'python3 %' C-m" <CR>]],
+			[[:up<CR>:execute "silent !tmux send-keys -t top-right 'python3 %:p' C-m" <CR>]],
 			{ noremap = true, silent = true, desc = "Run python file in a tmux pane" }
 		)
 	end,
