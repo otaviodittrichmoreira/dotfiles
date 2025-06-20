@@ -20,12 +20,12 @@ if [ "$power" == "yes" ]; then
 
     if [ -n "$device_name" ]; then
         if [ -n "$battery_level" ]; then
-            echo " $device_name ($battery_level%)"
+            echo "%{F#89b4fa}%{F-} $device_name ($battery_level%)"
         else
-            echo " $device_name" 
+            echo "%{F#89b4fa}%{F-} $device_name" 
         fi
     else
-        echo " On"
+        echo "%{F#89b4fa}%{F-} On"
     fi
 else
     echo "󰂲 Off"

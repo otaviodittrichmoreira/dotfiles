@@ -1,0 +1,49 @@
+%%% THEME %%%
+\usetheme{metropolis}           % Use Metropolis theme
+\usepackage{appendixnumberbeamer}
+
+%%% PACKAGES %%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{color}
+\usepackage{microtype}
+\usepackage{lmodern}
+\usepackage[mathscr]{eucal}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+
+
+%%% MACROS %%%
+\def\spam{\operatorname{spam}}
+\def\Id{\operatorname{Id}}
+\def\sign{{\operatorname{sign}}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\inner}[1]{\left\langle #1\right\rangle}
+\newcommand{\re}[1]{\operatorname{Re}(#1)}
+\newcommand{\im}[1]{\operatorname{Im}(#1)}
+\newcommand{\sgn}[1]{\operatorname{sgn}(#1)}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normp}[2][p]{\parent{\int |#2|^#1}^{1/#1}}
+\newcommand{\del}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\deldel}[3]{\dfrac{\partial^2 #1}{\partial #3\partial #2}}
+\newcommand{\indicator}[1]{\mathbf{1}_{(#1)}}
+\newcommand{\E}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\var}[1]{\mathbb{V}\left[#1\right]}
+\newcommand{\cov}[1]{\text{Cov}\left[#1\right]}
+%\newcommand{\EP}[2]{\underset{#1}{\mathbb{E}}\left[#2\right]}
+\newcommand{\EP}[2]{\mathbb{E}_{#1}\left[#2\right]}
+\newcommand{\under}[2]{\underset{#2}{{\underbrace{#1}}}} % para escrever texto embaixo de um brace.
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+
+%%% SETTINGS %%%
+% \usepackage{fullpage}  % full page style
+\graphicspath{{figures/}}  %  add figures to graphics path
+\graphicspath{{../figures/}}  %  add upper figures folder to graphics path

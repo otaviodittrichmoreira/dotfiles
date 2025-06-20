@@ -33,14 +33,6 @@ $0
 \end{document}
 endsnippet
 
-snippet newchp "New Chapter" b
-\input{chapters/${1:chapter}/$1.tex}$0
-endsnippet
-
-snippet newex "New Exercise" b
-
-endsnippet
-
 snippet '\\input\{([^\}]*)\}' "Create file input" br
 `!p import os; filename = match.group(1); os.makedirs(os.path.dirname(filename), exist_ok=True) if '/' in filename else None; open(filename, "a").close(); snip.rv = match.group(0)`
 endsnippet
@@ -178,4 +170,49 @@ endsnippet
 
 snippet emph "Emphasize" bA
 \emph{${1:Text}}$0
+endsnippet
+
+
+##### Beamer Snippets #####
+snippet newbeamer "New Beamer Document" b
+\documentclass{beamer}
+\input{"~/.config/latex/preamble/beamer.tex"}
+
+\title{${1:Presentation Title}}
+\author{Ot\'avio Dittrich Moreira}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+$0
+
+\end{document}
+endsnippet
+
+snippet nf "Beamer Frame" bA
+\begin{frame}{${1:Frame Title}}
+	$0
+\end{frame}
+endsnippet
+
+snippet fig2side "Two side-by-side figures" b
+\begin{columns}
+\column{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{${2:fig1.png}}\\
+{\footnotesize ${3:Caption 1}}
+
+\column{0.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{${4:fig2.png}}\\
+{\footnotesize ${5:Caption 2}}
+\end{columns}
 endsnippet

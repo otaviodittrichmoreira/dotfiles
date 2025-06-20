@@ -206,7 +206,9 @@ bindsym $mod+r mode "resize"
 exec_always feh --bg-fill ~/Pictures/wallpapers/All+Or+Nothing+Final.jpg
 
 # Swap Caps Lock and Escape
-exec --no-startup-id setxkbmap -option caps:swapescape
+# exec_always --no-startup-id setxkbmap -option caps:swapescape
+
+exec_always --no-startup-id $script_dir/maps.sh
 
 # Start notification daemon for volume notifications
 exec --no-startup-id dunst
@@ -245,4 +247,15 @@ exec --no-startup-id xset s 300
 exec --no-startup-id xset dpms 0 0 900
 
 # Battery popup
-exec --no-startup-id i3-battery-popup
+exec_always --no-startup-id i3-battery-popup
+
+# Toggle keyboard layout
+bindsym Mod4+space exec --no-startup-id ~/.config/i3/scripts/toggle_keyboard_layout.sh
+
+# Floating terminal for quick note
+bindsym $mod+n exec --no-startup-id $script_dir/note_clip.sh
+for_window [class="nvimfloat"] floating enable, resize set 80 ppt 40 ppt, move position center
+
+# Floating terminal for editing clipboard
+bindsym $mod+i exec --no-startup-id $script_dir/nvim_edit_clip.sh
+for_window [class="nvimfloat"] floating enable, resize set 80 ppt 40 ppt, move position center

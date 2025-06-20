@@ -917,6 +917,10 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
+	{
+		"nvim-treesitter/playground",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -962,6 +966,14 @@ require("lazy").setup({
 						["av"] = "@assignment.rhs", -- around value
 						["in"] = "@assignment.lhs", -- inner name (left-hand side)
 						["an"] = "@assignment.lhs", -- around name
+						["am"] = "@function.outer",
+						["im"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
+						["ai"] = "@conditional.outer",
+						["ii"] = "@conditional.inner",
+						["al"] = "@loop.outer",
+						["il"] = "@loop.inner",
 					},
 				},
 			},
@@ -1022,6 +1034,7 @@ require("lazy").setup({
 	require("pluggins.nvim-colorizer"),
 	require("pluggins.neoscroll"),
 	require("pluggins.oil"),
+	require("pluggins.jupytext"),
 	-- require 'pluggins.startup',
 	-- require 'kickstart.plugins.neo-tree',
 

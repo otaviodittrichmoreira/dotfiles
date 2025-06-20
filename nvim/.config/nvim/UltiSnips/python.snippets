@@ -15,6 +15,10 @@ snippet exit "Exit" bA
 exit(0)
 endsnippet
 
+snippet pf "Print format" bA
+print(f"{$1 = }")
+endsnippet
+
 snippet print "Print" bA
 print($1)
 endsnippet
@@ -27,4 +31,9 @@ endsnippet
 snippet `for\s` "for loop" rbA
 for $1 in $2:
     $0
+endsnippet
+
+snippet `^main` "if name == main" rbA
+if __name__ == "__main__":
+	$0
 endsnippet

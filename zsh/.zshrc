@@ -149,3 +149,6 @@ export PATH="$HOME/.local/bin:$PATH"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(zoxide init zsh)"
 # eval "$(zoxide init --cmd cd zsh)"
+#
+
+precmd() { print '' }  # Adds a blank line before each prompt
