@@ -113,11 +113,16 @@ if ! shopt -oq posix; then
 fi
 
 alias nvim="~/bin/nvim.appimage"
+alias cht.sh="~/bin/cht.sh"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export EDITOR="~/bin/nvim.appimage"
 export VISUAL="~/bin/nvim.appimage"
 
 set -o vi
-. "$HOME/.cargo/env"
+# setxkbmap -option caps:swapescape
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$PATH:/path/to/bin"

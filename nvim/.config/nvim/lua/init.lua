@@ -15,7 +15,7 @@ require("mini.icons").setup()
 require("mini.starter").setup()
 -- require("mini.git").setup()
 require("keymaps")
-require("ruff")
+-- require("ruff")
 
 -- vim.opt.relativenumber = true
 
