@@ -152,3 +152,4 @@ eval "$(zoxide init zsh)"
 #
 
 precmd() { print '' }  # Adds a blank line before each prompt
+fpath=(~/.zsh.d/ $fpath)
