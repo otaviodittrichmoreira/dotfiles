@@ -98,3 +98,16 @@ local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
 vim.fn.setreg("p", [[^"vyinviv]] .. esc .. [[oprint(f"{ = }")]] .. esc .. [[6h"vp]])
 
 vim.keymap.set("n", "<Leader>p", "@p", { desc = "Print defined variable" })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(
+			0,
+			"n",
+			"<Leader>a",
+			[[:up<CR>:lua require("tmux_runner").run_in_tmux()<CR>]],
+			{ noremap = true, silent = true, desc = "Run file in a tmux pane" }
+		)
+	end,
+})
