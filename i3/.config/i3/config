@@ -246,6 +246,9 @@ hide_edge_borders both
 exec --no-startup-id xset s 300
 exec --no-startup-id xset dpms 0 0 900
 
+# Ajust screen brightness
+exec $script_dir/ajust_dimmer.sh
+
 # Battery popup
 exec_always --no-startup-id i3-battery-popup
 

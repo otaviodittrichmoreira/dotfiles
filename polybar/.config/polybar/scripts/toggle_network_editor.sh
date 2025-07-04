@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# This gets the window ID of the open editor if it exists
-WINDOW_ID=$(xdotool search --onlyvisible --class nm-connection-editor 2>/dev/null | head -n1)
-
-if [ -n "$WINDOW_ID" ]; then
-    # If it's open, close it gracefully
-    xdotool windowclose "$WINDOW_ID"
+# Check if nmtui is already running (in any terminal)
+if pgrep -f "nmtui" > /dev/null; then
+    # Kill all nmtui instances
+    pkill -f "nmtui"
 else
-    # Otherwise, open it
-    nohup nm-connection-editor >/dev/null 2>&1 &
+    # Launch nmtui in a floating terminal (change alacritty if needed)
+    nohup alacritty -e nmtui >/dev/null 2>&1 &
 fi
