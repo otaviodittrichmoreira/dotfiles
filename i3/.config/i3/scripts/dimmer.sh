@@ -10,6 +10,6 @@ notif() {
 
 [ "$1" = 10 ] && percent="1" || percent="0.$1"
 
-[ "$2" = night ] && gamma="1.0:0.9:0.8" || gamma="1.0:1.0:1.0"
+[ "$2" = night ] && gamma="1.0:0.95:0.9" || gamma="1.0:1.0:1.0"
 
 xrandr --output "$m1" --brightness "$percent" --gamma "$gamma"
