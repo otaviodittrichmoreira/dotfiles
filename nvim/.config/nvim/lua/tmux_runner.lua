@@ -19,7 +19,10 @@ end
 
 function M._send_tmux_exec(cmd)
 	local escaped_cmd = cmd:gsub("'", [["'"']]) -- escape single quotes safely for shell
-	local vim_cmd = string.format([[execute "silent !tmux send-keys -t top-right '%s' C-m"]], escaped_cmd)
+	local vim_cmd = string.format(
+		[[execute "silent !tmux send-keys -t top-right -X cancel; tmux send-keys -t top-right C-u '%s' C-m"]],
+		escaped_cmd
+	)
 	vim.cmd("up") -- save buffer
 	vim.cmd(vim_cmd)
 end
