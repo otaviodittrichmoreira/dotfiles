@@ -87,16 +87,31 @@ endsnippet
 
 context "math()"
 snippet // "Fraction" iA
-\\frac{$1}{$2} $0
+\\frac{$1}{$2}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 snippet / "Fraction" i
-\\frac{${VISUAL}}{$1} $0
+\\frac{${VISUAL}}{$1}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
-\\frac{`!p snip.rv = match.group(1)`}{$1} $0
+\\frac{`!p snip.rv = match.group(1)`}{$1}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 priority 1000
