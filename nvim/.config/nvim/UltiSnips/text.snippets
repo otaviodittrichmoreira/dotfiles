@@ -15,15 +15,30 @@ endglobal
 
 context "not_math()"
 snippet it "Italics" w
-\textit{${1:${VISUAL}}} $0
+\textit{${1:${VISUAL}}}`!p
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "not_math()"
 snippet bf "Bold" w
-\textbf{${1:${VISUAL}}} $0
+\textbf{${1:${VISUAL}}}`!p
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "not_math()"
 snippet emph "Emphasize" w
-\emph{${1:${VISUAL}}} $0
+\emph{${1:${VISUAL}}}`!p
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet

@@ -11,55 +11,52 @@ def env(name):
 
 endglobal
 
-snippet '(?<!\w)sp\s' "Parenthesis outside mathmode" iAr
-(${1:${VISUAL}}) $0
+snippet sp "Parenthesis outside mathmode" w
+(${1:${VISUAL}})`!p
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
-snippet '(?<!\w)sb\s' "Brackets outside mathmode" iAr
-[${1:${VISUAL}}] $0
+snippet sb "Brackets outside mathmode" w
+[${1:${VISUAL}}]`!p
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
-snippet '(?<!\w)sc\s' "Curly brackets outside mathmode" iAr
-{${1:${VISUAL}}} $0
+snippet sc "Curly brackets outside mathmode" w
+{${1:${VISUAL}}}`!p
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0 
 endsnippet
 
 context "math()"
-snippet '(\+|=|-?)(\s*)Sp' "Parentheses" iAr
+snippet '(\+|=|-?)Sp' "Parentheses" Ar
 `!p
 symbol = match.group(1) + ' ' if match.group(1) else ''
-space = '' if match.group(2) else match.group(2)
-snip.rv = symbol + space`\left( ${1:${VISUAL}} \right)$0
+snip.rv = symbol`\left(  ${1:${VISUAL}} \right)`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 
 context "math()"
-snippet '(\+|=|-?)(\s*)Sb' "Brackets" iAr
+snippet '(\+|=|-?)Sb' "Brackets" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\left[ ${1:${VISUAL}} \right] $0
-endsnippet
-
-context "math()"
-snippet '(\+|=|-?)(\s*)Sc'  "Curly Brackets" iAr
-`!p
-snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\left\\{ ${1:${VISUAL}} \right\\} $0
-endsnippet
-
-context "math()"
-snippet '(\+|=|-?)(\s*)Sn'  "Norm" iAr
-`!p
-snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\left\| ${1:${VISUAL}} \right\| $0
-endsnippet
-
-
-context "math()"
-snippet '(\+|=|-?)sp'  "Parentheses" iAr
-`!p
-snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`(${1:${VISUAL}})`!p
-if t[0]:
+`\left[  ${1:${VISUAL}} \right]`!p
+if t[0] and t[0][0] not in [',', ' ']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -67,37 +64,104 @@ else:
 endsnippet
 
 context "math()"
-snippet '(\+|=|-?)(\s*)sb'  "Brackets" iAr
+snippet '(\+|=|-?)Sc'  "Curly Brackets" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`[${1:${VISUAL}}] $0
+`\left\\{  ${1:${VISUAL}} \right\\}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
-snippet '(\+|=|-?)(\s*)sc'  "Curly Brackets" iAr
+snippet '(\+|=|-?)Sn'  "Norm" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\\{${1:${VISUAL}}\\} $0
+`\left\|  ${1:${VISUAL}} \right\|`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+
+context "math()"
+snippet '(\+|=|-?)sp'  "Parentheses" Ar
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`(${1:${VISUAL}})`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
-snippet '(\+|=|-?)(\s*)(?<![\\\w])sn'  "Norm" iAr
+snippet '(\+|=|-?)sb'  "Brackets" iAr
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\|${1:${VISUAL}}\| $0
+`[${1:${VISUAL}}]`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "math()"
+snippet '(\+|=|-?)sc'  "Curly Brackets" Ar
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`\\{${1:${VISUAL}}\\}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "math()"
+snippet '(\+|=|-?)(?<![\\\w])sn'  "Norm" Ar
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`\|${1:${VISUAL}}\|`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet lr, "<>" iA
-\left< ${1:${VISUAL}} \right> $0
+\left< ${1:${VISUAL}} \right>`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet Abs "Absolute Value" iA
-\left| ${1:${VISUAL}} \right| $0
+\left| ${1:${VISUAL}} \right|`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet abs "Absolute Value" iA
-| ${1:${VISUAL}} | $0
+| ${1:${VISUAL}} |`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet

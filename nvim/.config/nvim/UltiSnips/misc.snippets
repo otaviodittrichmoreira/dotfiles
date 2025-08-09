@@ -41,7 +41,12 @@ endsnippet
 
 context "math()"
 snippet `(\s?)tp` "transpose" iAr
-^\top $0
+^\top`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 snippet eqref "Reference" iw

@@ -24,7 +24,12 @@ endsnippet
 
 context "math()"
 snippet `(\s?)jr` "supscript" iAr
-^{$1} $0
+^{$1}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
@@ -50,26 +55,36 @@ endsnippet
 
 context "math()"
 snippet '(\s*)js' "square" iAr
-^{2} $0
+^{2}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0 
 endsnippet
 
 context "math()"
 snippet jq "\sqrt{}" iA
-\sqrt{${1:${VISUAL}}} $0
+\sqrt{${1:${VISUAL}}}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0 
 endsnippet
 
 context "math()"
-snippet `(?<!\\)(lq|leq)` "Less than or equal to" Ar
+snippet `(?<!\\)\b(lq|leq)` "Less than or equal to" wAr
 \leq $0
 endsnippet
 
 context "math()"
-snippet `(?<!\\)(gq|geq)` "Greater than or equal to" rA
+snippet `(?<!\\)\b(gq|geq)` "Greater than or equal to" rA
 \geq $0
 endsnippet
 
 context "math()"
-snippet `(?<!\\)sum` "sum" Ar
+snippet `(?<!\\)\bsum` "sum" Ar
 \sum_{$1} $0
 endsnippet
 
@@ -88,12 +103,22 @@ endsnippet
 ########## Subscripts and Superscripts ##########
 context "math()"
 snippet '([A-Za-z])(\d)' "auto subscript" wrA
-`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)``!p
+if t[0] and t[0][0] not in [',', ' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
-`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 # context "math()"
@@ -103,7 +128,7 @@ endsnippet
 
 ########## Operators ##########
 context "math()"
-snippet op "sup" i
+snippet op "operator" w
 \operatorname{$1} $0
 endsnippet
 
@@ -134,11 +159,21 @@ endsnippet
 
 context "math()"
 snippet binom "binom" wA
-\binom{$1}{$2} $0
+\binom{$1}{$2}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 ######## Linear Algebra ########
 context "math()"
 snippet iprod "inner product" wA
-\langle $1 , $2 \rangle $0
+\langle $1 , $2 \rangle`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
