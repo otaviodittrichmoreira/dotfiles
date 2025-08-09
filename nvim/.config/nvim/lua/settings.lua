@@ -14,6 +14,7 @@ vim.opt.timeoutlen = 500 -- Key timeout duration
 vim.opt.ttimeoutlen = 0 -- Key code timeout
 vim.opt.autoread = true -- Auto reload files changed outside vim
 vim.opt.autowrite = false
+vim.opt.tabstop = 4 -- Number of spaces for a tab
 
 local cmp = require("cmp")
 
@@ -36,10 +37,13 @@ cmp.setup({
 -- set linebreak
 vim.opt.linebreak = true
 
--- Disable copilot on .tex files
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "tex",
-	callback = function()
-		vim.cmd("Copilot disable")
-	end,
-})
+-- Disable copilot
+vim.cmd("Copilot disable")
+
+-- -- Disable copilot on .tex files
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "tex",
+-- 	callback = function()
+-- 		vim.cmd("Copilot disable")
+-- 	end,
+-- })

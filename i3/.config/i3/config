@@ -262,3 +262,6 @@ for_window [class="nvimfloat"] floating enable, resize set 80 ppt 40 ppt, move p
 # Floating terminal for editing clipboard
 bindsym $mod+i exec --no-startup-id $script_dir/nvim_edit_clip.sh
 for_window [class="nvimfloat"] floating enable, resize set 80 ppt 40 ppt, move position center
+
+# Hide title bar in applications
+for_window [class="^.*"] border pixel 1

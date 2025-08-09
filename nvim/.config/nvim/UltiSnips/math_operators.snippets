@@ -14,11 +14,16 @@ endglobal
 
 context "math()"
 snippet `(\s?)jv` "subscript" iAr
-_{$1} $0
+_{$1}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
-snippet jr "supscript" iA
+snippet `(\s?)jr` "supscript" iAr
 ^{$1} $0
 endsnippet
 
@@ -103,13 +108,23 @@ snippet op "sup" i
 endsnippet
 
 context "math()"
-snippet min "sup" wA
-\min $0
+snippet `\sargmin` "argmin" rwA
+ \argmin $0
 endsnippet
 
 context "math()"
-snippet max "sup" wA
-\max $0
+snippet `\smin` "min" rwA
+ \min $0
+endsnippet
+
+context "math()"
+snippet `\sargmax` "argmax" wAr
+ \argmax $0
+endsnippet
+
+context "math()"
+snippet `\smax` "max" wAr
+ \max $0
 endsnippet
 
 context "math()"

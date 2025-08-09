@@ -40,11 +40,15 @@ snippet `(~|(?<![\\\w])sim)` "sim" Ar
 endsnippet
 
 context "math()"
-snippet `(?<![\\\w])tp` "transpose" Ar
+snippet `(\s?)tp` "transpose" iAr
 ^\top $0
 endsnippet
 
-snippet ref "Reference" i
+snippet eqref "Reference" iw
+\eqref{${1:label}} $0
+endsnippet
+
+snippet ref "Reference" iw
 \ref{${1:label}} $0
 endsnippet
 
@@ -57,5 +61,18 @@ snippet wp "with probability" i
 with probability at least \(1 - ${1:delta}\)$0
 endsnippet
 
-
 ###############################
+
+context "math()"
+snippet `(\w|\d)\.\.(\w|\d)` "Sequence" iAr
+${1:x}_`!p snip.rv = match.group(1)`, \ldots, $1_`!p snip.rv = match.group(2)` $0
+endsnippet
+
+context "math()"
+snippet under "Underbrace" iA
+\underbrace{${1:expression}}_{\text{${2:label}}}$0
+endsnippet
+
+snippet input "Input" bA
+\input{${1:filename}}$0
+endsnippet

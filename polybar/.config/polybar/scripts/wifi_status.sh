@@ -1,6 +1,17 @@
 #!/bin/bash
 
 IFACE="wlo1"
+ETHERNET="enp2s0"
+
+# Check if ethernet cable is connected
+if nmcli device status | grep -q "$ETHERNET.*connected"; then
+    if ping -q -w 1 -c 1 8.8.8.8 >/dev/null 2>&1; then
+        echo "%{F#a6e3a1}󰈁%{F-} ETH"
+    else
+        echo "%{F#f38ba8}󰈁 %{F-} ETH"
+    fi
+    exit 0
+fi
 
 # Check if Wi-Fi is disabled
 if [ "$(nmcli radio wifi)" = "disabled" ]; then

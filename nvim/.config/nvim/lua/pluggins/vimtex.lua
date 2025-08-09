@@ -7,14 +7,17 @@ return {
 		vim.g.vimtex_quickfix_open_on_warning = 0
 		vim.g.vimtex_view_method = "zathura"
 		vim.g.vimtex_view_general_viewer = "zathura"
-		vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
+		-- vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
+		vim.g.vimtex_view_general_options = "--synctex-forward @line:0:@tex @pdf"
 		vim.g.vimtex_view_forward_search_on_start = 1
 		vim.g.vimtex_compiler_latexmk = {
 			build_dir = "",
 			options = {
 				"-pdf",
-				"-pdflatex=lualatex",
+				"-bibtex",
+				-- "-pdflatex=lualatex",
 				"-interaction=nonstopmode",
+				"-synctex=1",
 			},
 		}
 	end,

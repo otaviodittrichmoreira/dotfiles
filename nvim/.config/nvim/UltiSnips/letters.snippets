@@ -15,244 +15,494 @@ endglobal
 
 ########## Functions ##########
 context "math()"
+snippet `([a-zA-Z1-9])(b|B)f` "Mathbf" Ar
+\mathbf{`!p snip.rv=match.group(1)`}`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "math()"
 snippet `([a-zA-Z])(c|C)al` "Mathcal" Ar
-\mathcal{`!p snip.rv=match.group(1).upper()`} $0
+\mathcal{`!p snip.rv=match.group(1).upper()`}`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(\\\\)([a-zA-Z])` "Mathbb" Ar
-\mathbb{`!p snip.rv=match.group(2).upper()`} $0
+\mathbb{`!p snip.rv=match.group(2).upper()`}`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 ########## Greek Letters ##########
 context "math()"
 snippet `(;a)|((?<![\a-zA-Z])alpha)` "Alpha" Ar
-\alpha $0
+\alpha`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;A)|((?<![\a-zA-Z])Alpha)` "Alpha Uppercase" Ar
-\Alpha $0
+\Alpha`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;b)|((?<![\a-zA-Z])beta)` "Beta" Ar
-\beta $0
+\beta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;B)|((?<![\a-zA-Z])Beta)` "Beta Uppercase" Ar
-\Beta $0
+\Beta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;g)|((?<![\a-zA-Z])gamma)` "Gamma" Ar
-\gamma $0
+\gamma`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;G)|((?<![\a-zA-Z])Gamma)` "Gamma Uppercase" Ar
-\Gamma $0
+\Gamma`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;d)|((?<![\a-zA-Z])delta)` "Delta" Ar
-\delta $0
+\delta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;D)|((?<![\a-zA-Z])Delta)` "Delta Uppercase" Ar
-\Delta $0
+\Delta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `((?<!\\)Eps)` "Epsilon Uppercase" Arw
-\Epsilon $0
+\Epsilon`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet eps "Epsilon" Aw
-\epsilon $0
+\epsilon`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;e)|((?<![\a-zA-Z])eta)` "Eta" Ar
-\eta $0
+\eta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;E)|((?<![\a-zA-Z])Eta)` "Eta Uppercase" Ar
-\Eta $0
+\Eta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;l)|((?<![\a-zA-Z])lambda)` "Lambda" Ar
-\lambda $0
+\lambda`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;L)|((?<![\a-zA-Z])Lambda)` "Lambda Uppercase" Ar
-\Lambda $0
+\Lambda`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;m)|((?<![\a-zA-Z])mu)` "Mu" Ar
-\mu $0
+\mu`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;M)|((?<![\a-zA-Z])Mu)` "Mu Uppercase" Ar
-\Mu $0
+\Mu`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;p)|((?<![\a-zA-Z])pi)` "Pi" Ar
-\pi $0
+\pi`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;P)|((?<![\a-zA-Z])Pi)` "Pi Uppercase" Ar
-\Pi $0
+\Pi`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;s)|((?<![\a-zA-Z])sigma)` "Sigma" Ar
-\sigma $0
+\sigma`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;S)|((?<![\a-zA-Z])Sigma)` "Sigma Uppercase" Ar
-\Sigma $0
+\Sigma`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;t)|((?<![\a-zA-Z])theta)` "Theta" Ar
-\theta $0
+\theta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;T)|((?<![\a-zA-Z])Theta)` "Theta Uppercase" Ar
-\Theta $0
+\Theta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;o)|((?<![\a-zA-Z])omega)` "Omega" Ar
-\omega $0
+\omega`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;O)|((?<![\a-zA-Z])Omega)` "Omega Uppercase" Ar
-\Omega $0
+\Omega`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;z)|((?<![\a-zA-Z])zeta)` "Zeta" Ar
-\zeta $0
+\zeta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;Z)|((?<![\a-zA-Z])Zeta)` "Zeta Uppercase" Ar
-\Zeta $0
+\Zeta`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 # context "math()"
 # snippet `(;x)|((?<![\a-zA-Z])xi)` "Xi" Ar
-# \xi $0
+# \xi`!p
+# if t[0]:
+# 	snip.rv = ' '
+# else:
+# 	snip.rv = ''
+# `$0
 # endsnippet
 
 context "math()"
 snippet `(;X)|((?<![\a-zA-Z])Xi)` "Xi Uppercase" Ar
-\Xi $0
+\Xi`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;r)|((?<![\a-zA-Z])rho)` "Rho" Ar
-\rho $0
+\rho`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;R)|((?<![\a-zA-Z])Rho)` "Rho Uppercase" Ar
-\Rho $0
+\Rho`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;n)|((?<![\a-zA-Z])nu)` "Nu" Ar
-\nu $0
+\nu`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;N)|((?<![\a-zA-Z])Nu)` "Nu Uppercase" Ar
-\Nu $0
+\Nu`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;f)|((?<![\a-zA-Z])phi)` "Phi" Ar
-\phi $0
+\phi`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;F)|((?<![\a-zA-Z])Phi)` "Phi Uppercase" Ar
-\Phi $0
+\Phi`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;c)|((?<![\a-zA-Z])chi)` "Chi" Ar
-\chi $0
+\chi`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;C)|((?<![\a-zA-Z])Chi)` "Chi Uppercase" Ar
-\Chi $0
+\Chi`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;y)|((?<![\a-zA-Z])psi)` "Psi" Ar
-\psi $0
+\psi`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;Y)|((?<![\a-zA-Z])Psi)` "Psi Uppercase" Ar
-\Psi $0
+\Psi`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;w)|((?<![\a-zA-Z])tau)` "Tau" Ar
-\tau $0
+\tau`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;W)|((?<![\a-zA-Z])Tau)` "Tau Uppercase" Ar
-\Tau $0
+\Tau`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;v)|((?<![\a-zA-Z])upsilon)` "Upsilon" Ar
-\upsilon $0
+\upsilon`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;V)|((?<![\a-zA-Z])Upsilon)` "Upsilon Uppercase" Ar
-\Upsilon $0
+\Upsilon`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;k)|((?<![\a-zA-Z])kappa)` "Kappa" Ar
-\kappa $0
+\kappa`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;K)|((?<![\a-zA-Z])Kappa)` "Kappa Uppercase" Ar
-\Kappa $0
+\Kappa`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;i)|((?<![\a-zA-Z])iota)` "Iota" Ar
-\iota $0
+\iota`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet `(;I)|((?<![\a-zA-Z])Iota)` "Iota Uppercase" Ar
-\Iota $0
+\Iota`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 ########## Probability ##########
@@ -263,7 +513,12 @@ endsnippet
 
 context "math()"
 snippet `(?<![\\\w])pe` "Expectation" Awr
-\mathbb{E} $0
+\mathbb{E}`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
@@ -272,7 +527,7 @@ snippet `(?<![\\\w])(var|pv)` "Variance" Arw
 endsnippet
 
 context "math()"
-snippet `(?<![\\\w])(cov|pc)` "Covariance" Arw
+snippet `(?<![\\\w])(cov)` "Covariance" Arw
 \operatorname{Cov}[${1:${VISUAL}}]
 endsnippet
 
@@ -283,12 +538,22 @@ endsnippet
 
 context "not_math()"
 snippet wp "with probability" i
-with probability at least \(1 - ${1:delta}\) $0
+with probability at least \(1 - ${1:delta}\)`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 ########## Sets ##########
 context "math()"
 snippet empty "Empty Set" Aw
-\varnothing  $0
+\varnothing `!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 

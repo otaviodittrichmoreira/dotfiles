@@ -469,14 +469,6 @@ require("lazy").setup({
 					--  Symbols are things like variables, functions, types, etc.
 					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 
-					-- Fuzzy find all the symbols in your current workspace.
-					--  Similar to document symbols, except searches over your entire project.
-					map(
-						"<leader>ws",
-						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"[W]orkspace [S]ymbols"
-					)
-
 					-- Rename the variable under your cursor.
 					--  Most Language Servers support renaming across files, etc.
 					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
@@ -660,7 +652,7 @@ require("lazy").setup({
 				-- Disable "format_on_save lsp_fallback" for languages that don't
 				-- have a well standardized coding style. You can add additional
 				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
+				local disable_filetypes = { c = true, cpp = true, python = true }
 				local lsp_format_opt
 				if disable_filetypes[vim.bo[bufnr].filetype] then
 					lsp_format_opt = "never"
@@ -974,6 +966,8 @@ require("lazy").setup({
 						["ii"] = "@conditional.inner",
 						["al"] = "@loop.outer",
 						["il"] = "@loop.inner",
+						["as"] = "@statement.outer", -- around statement
+						["is"] = "@statement.outer", -- inner statement
 					},
 				},
 			},
@@ -1035,6 +1029,7 @@ require("lazy").setup({
 	require("pluggins.neoscroll"),
 	require("pluggins.oil"),
 	require("pluggins.jupytext"),
+	-- require("pluggins.tabout"),
 	-- require 'pluggins.startup',
 	-- require 'kickstart.plugins.neo-tree',
 

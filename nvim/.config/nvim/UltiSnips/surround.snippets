@@ -55,10 +55,15 @@ endsnippet
 
 
 context "math()"
-snippet '(\+|=|-?)(\s*)sp'  "Parentheses" iAr
+snippet '(\+|=|-?)sp'  "Parentheses" iAr
 `!p
-snip.rv = match.group(1) + ' ' if match.group(1) else ' '
-`(${1:${VISUAL}}) $0
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`(${1:${VISUAL}})`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"

@@ -2,31 +2,28 @@ global !p
 def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
+def not_math():
+	return not math()
+
 def comment(): 
 	return vim.eval('vimtex#syntax#in_comment()') == '1'
 
 def env(name):
 	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
 	return x != '0' and y != '0'
-
 endglobal
 
-context "math()"
-snippet dot "center dot" wA
-\cdot $0
+context "not_math()"
+snippet it "Italics" w
+\textit{${1:${VISUAL}}} $0
 endsnippet
 
-context "math()"
-snippet `(otimes|oxx)` "o times" wAr
-\otimes $0
+context "not_math()"
+snippet bf "Bold" w
+\textbf{${1:${VISUAL}}} $0
 endsnippet
 
-context "math()"
-snippet circ "Circ" wA
-\circ $0
-endsnippet
-
-context "math()"
-snippet equiv "Equiv" wA
-\equiv $0
+context "not_math()"
+snippet emph "Emphasize" w
+\emph{${1:${VISUAL}}} $0
 endsnippet

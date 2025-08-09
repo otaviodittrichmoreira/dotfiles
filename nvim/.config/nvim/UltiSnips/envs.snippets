@@ -59,84 +59,87 @@ snippet '(sssec|subsubsec)' "Subsubsection" br
 $0
 endsnippet
 
-snippet `(?<!\\)bthm` "Theorem" bAr
+snippet bthm "Theorem" bA
 \begin{theorem}[${1:Title}]
+	\label{thm:${1/\W+/-/g}}
 	$2
 \end{theorem}
 $0
 endsnippet
 
-snippet `(?<!\\)bprop` "Proposition" bAr
+snippet bprop "Proposition" bA
 \begin{proposition}[${1:Title}]
+	\label{prop:${1/\W+/-/g}}
 	$2
 \end{proposition}
 $0
 endsnippet
 
-snippet `(?<!\\)blemm` "Lemma" bAr
+snippet blemm "Lemma" bA
 \begin{lemma}
 	$1
 \end{lemma}
 $0
 endsnippet
 
-snippet `(?<!\\)bcor` "Corollary" bAr
+snippet bcor "Corollary" bA
 \begin{corollary}
 	$1
 \end{corollary}
 $0
 endsnippet
 
-snippet `(?<!\\)bfa` "Fact" bAr
+snippet bfa "Fact" bA
 \begin{fact}
 	$1
 \end{fact}
 $0
 endsnippet
 
-snippet `(?<!\\)bqu` "Question" bAr
+snippet bqu "Question" bA
 \begin{question}
 	$1
 \end{question}
 $0
 endsnippet
 
-snippet `(?<!\\)bexer` "Exercise" bAr
+snippet bexer "Exercise" bA
 \begin{exercise}
 	$1
 \end{exercise}
 $0
 endsnippet
 
-snippet `(?<!\\)bexam` "Example" bAr
+snippet bexam "Example" bA
 \begin{example}
 	$1
 \end{example}
 $0
 endsnippet
 
-snippet `(?<!\\)bdef` "Definition" bAr
+snippet bdef "Definition" bA
 \begin{definition}[${1:Title}]
+	\label{def:${1/\W+/-/g}}
 	$2
 \end{definition}
 $0
 endsnippet
 
-snippet `(?<!\\)brmk` "Remark" bAr
+snippet brmk "Remark" bA
 \begin{remark}
 	$1
 \end{remark}
 $0
 endsnippet
 
-snippet `(?<!\\)bpf` "Proof" bAr
+snippet bpf "Proof" bA
 \begin{proof}
 	$1
 \end{proof}
 $0
 endsnippet
 
-snippet `(?<!\\)ben` "Enumerate" bAr
+snippet ben "Enumerate" bA
 \begin{enumerate}
 	\item $1
 \end{enumerate}
@@ -160,6 +163,13 @@ priority 100
 context "env('itemize') or env('enumerate')"
 snippet '-\s' "Item" bAr
 \item $0
+endsnippet
+
+snippet beq "Equations" bA
+\begin{equation}
+	\label{eq:$1}
+	${2:${VISUAL}}
+.\end{equation}
 endsnippet
 
 snippet ali "Align" bA

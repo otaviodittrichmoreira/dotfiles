@@ -71,12 +71,12 @@ snippet iff "iff" Ai
 endsnippet
 
 snippet fm "Math" wA
-\(${1}\)`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+\(${1:${VISUAL}}\)`!p
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
-`$2
+`$0
 endsnippet
 
 snippet dm "Math" wA
@@ -238,26 +238,6 @@ snippet `(?<!\\)part|del` "d/dx" wAr
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
 endsnippet
 
-# context "math()"
-# snippet sr "^2" iA
-# ^2 
-# endsnippet
-#
-# context "math()"
-# snippet cb "^3" iA
-# ^3 
-# endsnippet
-#
-# context "math()"
-# snippet td "to the ... power" iA
-# ^{$1} $0
-# endsnippet
-
-# context "math()"
-# snippet rd "to the ... power" iA
-# ^{($1)} $0
-# endsnippet
-
 snippet __ "subscript" iA
 _{$1} $0
 endsnippet
@@ -298,7 +278,6 @@ context "math()"
 snippet ynn "yn" iA
 y_{n} 
 endsnippet
-
 
 context "math()"
 snippet xii "xi" iA
@@ -357,11 +336,6 @@ $0
 endsnippet
 
 context "math()"
-snippet mcal "mathcal" iA
-\mathcal{$1} $0
-endsnippet
-
-context "math()"
 snippet lll "l" iA
 \ell 
 endsnippet
@@ -373,7 +347,7 @@ endsnippet
 
 priority 300
 context "math()"
-snippet xx "cross" iA
+snippet xx "cross" iAw
 \times 
 endsnippet
 
@@ -385,7 +359,7 @@ endsnippet
 
 context "math()"
 snippet `(norm|nrmo|nrom)` "norm" iAr
-\|$1\| $0
+\left\|$1\right\| $0
 endsnippet
 
 priority 100
@@ -447,17 +421,9 @@ snippet << "<<" iA
 \ll 
 endsnippet
 
-
 snippet ~~ "~" iA
 \sim 
 endsnippet
-
-context "math()"
-snippet set "set" wA
-\\{$1\\} $0
-endsnippet
-
-
 
 context "math()"
 snippet cc "subset" Ai
@@ -499,12 +465,17 @@ snippet OO "emptyset" iA
 endsnippet
 
 snippet RR "real" iA
-\R 
+\R`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
 endsnippet
 
 context "math()"
 snippet Rn "Rn" iA
-\Rn 
+\R^{n}
 endsnippet
 
 context "math()"
@@ -518,14 +489,6 @@ endsnippet
 
 snippet ZZ "Z" iA
 \Z 
-endsnippet
-
-snippet <! "normal" iA
-\triangleleft 
-endsnippet
-
-snippet <> "hokje" iA
-\diamond 
 endsnippet
 
 
