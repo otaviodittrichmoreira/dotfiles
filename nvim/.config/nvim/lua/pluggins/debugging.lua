@@ -4,6 +4,7 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"mfussenegger/nvim-dap-python",
 		"nvim-neotest/nvim-nio",
+		"rcarriga/cmp-dap",
 	},
 	config = function()
 		require("dap-python").setup("python3")
@@ -63,12 +64,12 @@ return {
 		end
 
 		-- Keymaps for toggling floats
-		vim.keymap.set("n", "<Leader>dl", function()
-			toggle_float("scopes", { width = 100, height = 20 }, "Scopes")
+		vim.keymap.set("n", "<Leader>ds", function()
+			toggle_float("scopes", { width = 60, height = 20 }, "Scopes")
 		end, { silent = true, desc = "Toggle [S]copes floating window" })
 
 		vim.keymap.set("n", "<Leader>dw", function()
-			toggle_float("watches", { width = 100, height = 20 }, "Watches")
+			toggle_float("watches", { width = 60, height = 10 }, "Watches")
 		end, { silent = true, desc = "Toggle [W]atches floating window" })
 
 		-- Symbols
@@ -80,5 +81,20 @@ return {
 		-- Debugging keymaps
 		vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { silent = true, desc = "Set a [B]reakpoint" })
 		vim.keymap.set("n", "<Leader>dc", dap.continue, { silent = true, desc = "[C]ontinue (or start) debugging" })
+
+		-- Completion
+		local cmp = require("cmp")
+		cmp.setup({
+			-- other settings and stuff
+			enabled = function()
+				return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+			end,
+		})
+
+		cmp.setup.filetype({ "dap-repl", "dapui_watches" }, {
+			sources = {
+				{ name = "dap" },
+			},
+		})
 	end,
 }
