@@ -16,6 +16,15 @@ vim.opt.autoread = true -- Auto reload files changed outside vim
 vim.opt.autowrite = false
 vim.opt.tabstop = 4 -- Number of spaces for a tab
 
+-- Spell Check for .tex files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "tex",
+	callback = function()
+		vim.opt.spell = true
+		vim.opt.spelllang = "en_us"
+	end,
+})
+
 local cmp = require("cmp")
 
 cmp.setup({

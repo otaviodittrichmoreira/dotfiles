@@ -11,7 +11,15 @@ def env(name):
 
 endglobal
 
+priority 100
+snippet ddots "ldots" iA
+\ddots $0
+endsnippet
 
+priority 100
+snippet vdots "ldots" iA
+\vdots $0
+endsnippet
 
 priority 100
 snippet ... "ldots" iA
@@ -55,7 +63,7 @@ snippet pac "Package" b
 endsnippet
 
 context "math()"
-snippet `(=>|implies)` "implies" rAi
+snippet `(=>|implies|then)` "implies" rAi
 \implies $0
 endsnippet
 
@@ -72,11 +80,11 @@ endsnippet
 
 snippet fm "Math" wA
 \(${1:${VISUAL}}\)`!p
-if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+if t[2] and t[2][0] not in [';', ':', ',', '.', '?', '-', ' ']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
-`$0
+`$2
 endsnippet
 
 snippet dm "Math" wA
@@ -168,7 +176,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 context "math()"
@@ -178,7 +186,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet pmat "pmat" iA
@@ -187,7 +195,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet bmat "bmat" iA
@@ -196,7 +204,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 context "math()"
@@ -206,7 +214,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet lr "left( right)" i
@@ -215,7 +223,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet lr( "left( right)" i
@@ -224,7 +232,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet lr| "left| right|" i
@@ -233,7 +241,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet lr{ "left\{ right\}" i
@@ -242,7 +250,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet lrb "left\{ right\}" i
@@ -251,7 +259,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet lr[ "left[ right]" i
@@ -260,7 +268,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet lra "leftangle rightangle" iA
@@ -269,7 +277,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 context "math()"
@@ -279,7 +287,7 @@ if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-$0
+`$0
 endsnippet
 
 snippet taylor "taylor" w
@@ -465,7 +473,12 @@ endsnippet
 
 context "math()"
 snippet invs "inverse" iA
-^{-1} 
+^{-1}`!p
+if t[0] and t[0][0] not in [',', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$0
 endsnippet
 
 context "math()"

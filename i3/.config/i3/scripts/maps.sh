@@ -5,3 +5,6 @@ setxkbmap -option ctrl:nocaps
 
 # make short-pressed Ctrl behave like Escape:
 xcape -e 'Control_L=Escape'
+
+# Make <> behave like \|
+xmodmap -e "keycode 94 = backslash bar"

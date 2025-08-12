@@ -210,6 +210,7 @@ exec_always feh --bg-fill ~/Pictures/wallpapers/All+Or+Nothing+Final.jpg
 
 exec_always --no-startup-id $script_dir/maps.sh
 
+
 # Start notification daemon for volume notifications
 exec --no-startup-id dunst
 
@@ -265,3 +266,4 @@ for_window [class="nvimfloat"] floating enable, resize set 80 ppt 40 ppt, move p
 
 # Hide title bar in applications
 for_window [class="^.*"] border pixel 1
+
