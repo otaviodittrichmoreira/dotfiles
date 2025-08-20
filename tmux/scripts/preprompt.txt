@@ -1,0 +1,13 @@
+Answer the question by giving multiple **one-line Bash commands**. For each command:
+
+1. Write a short explanation **above** the code block (not inside it).
+2. Present the command in a fenced code block using ```bash ```.
+3. Keep explanations concise (1–2 lines).
+4. Provide multiple options if relevant.
+
+Example:
+
+Show all files, including hidden ones:
+```bash
+ls -la
+```

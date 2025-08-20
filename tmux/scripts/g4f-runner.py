@@ -21,14 +21,6 @@ def get_args():
         help="The user's prompt to the model.",
         dest="user",
     )
-    parser.add_argument(
-        "--assistant-prompt",
-        "-a",
-        type=str,
-        default="",
-        help="The assistant response to the model.",
-        dest="assistant",
-    )
     return parser.parse_args()
 
 
@@ -41,11 +33,9 @@ if __name__ == "__main__":
         messages=[
             {"role": "system", "content": args.system},
             {"role": "user", "content": args.user},
-            # {"role": "assistant", "content": args.assistant},
         ],
         web_search=False,
-        provider="OIVSCodeSer2"
+        provider="OIVSCodeSer2",
     )
     content = response.choices[0].message.content
     sys.stdout.write(content)
-    # print(f"Provider: { response.provider }")

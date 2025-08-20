@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-
-preprompt="Answer the question with options of one-line bash code and its explanation right above: "
+preprompt=$(cat preprompt.txt)
 
 read -p "Enter Prompt: " query
 
