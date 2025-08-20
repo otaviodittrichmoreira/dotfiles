@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-preprompt=$(cat preprompt.txt)
+preprompt=$(cat ~/dotfiles/tmux/scripts/preprompt.txt)
 
 read -p "Enter Prompt: " query
 
