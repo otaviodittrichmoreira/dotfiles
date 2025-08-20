@@ -1,0 +1,5 @@
+Prompt: How to list disks in linux?
+```bash
+lsblk
+```
+This command lists all block devices (disks and partitions) in a tree-like format, showing their sizes, types, and mount points.
