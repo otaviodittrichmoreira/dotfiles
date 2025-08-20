@@ -1,6 +1,4 @@
 {
-  "aaa": "",
-  "promtp": "",
-  "ahahaa": "",
-  "\"\"": ""
+  "test": "test answer\nantoherline",
+  "how much free space in disk?": "Check free disk space in human-readable format:\n```bash\ndf -h\n```\n\nDisplay free space on the root filesystem:\n```bash\ndf / --output=avail,human\n```\n\nGet the total, used, and available space for all file systems:\n```bash\ndf -T\n```"
 }
