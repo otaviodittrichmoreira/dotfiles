@@ -1,8 +1,24 @@
 #!/usr/bin/env bash
 
 preprompt=$(cat ~/dotfiles/tmux/g4f/preprompt.txt)
+HISTORY_FILE="$HOME/dotfiles/tmux/g4f/history.json"
 
-read -p "Enter Prompt: " prompt
+mapfile -t history < <(jq -r 'keys[]' "$HISTORY_FILE")
+
+# Temporary file for readline history
+TMP_HISTORY=$(mktemp)
+printf "%s\n" "${history[@]}" > "$TMP_HISTORY"
+
+# Load custom history without recording our commands
+(
+    HISTFILE=$TMP_HISTORY    # use temp history
+    set +o history           # disable writing to global history
+    history -r               # read temp history
+    read -e -p "Enter Prompt: " prompt
+    echo $prompt > tmp.txt
+)
+
+prompt=$(cat tmp.txt)
 
 # Check if prompt is in history and has an answer
 prompt_in_history=$(cat ~/dotfiles/tmux/g4f/history.json | jq --arg q "$prompt" 'has(($q)) and .[($q)] != ""')
