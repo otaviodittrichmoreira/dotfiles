@@ -9,14 +9,18 @@ mapfile -t history < <(jq -r 'keys[]' "$HISTORY_FILE")
 TMP_HISTORY=$(mktemp)
 printf "%s\n" "${history[@]}" > "$TMP_HISTORY"
 
-# Load custom history without recording our commands
-(
-    HISTFILE=$TMP_HISTORY    # use temp history
-    set +o history           # disable writing to global history
-    history -r               # read temp history
+# Run an interactive subshell with custom history
+bash --rcfile <( 
+    # Minimal rcfile for the subshell
+    echo "HISTFILE=$TMP_HISTORY"
+    echo "set -o emacs"               # enable Readline
+    echo "[ -f ~/.bashrc ] && source ~/.bashrc"  # load fzf bindings
+) -i -c '
+    set +o history   # do not save commands to global history
+    history -r       # read temp history
     read -e -p "Enter Prompt: " prompt
-    echo $prompt > tmp.txt
-)
+    echo "$prompt" > tmp.txt
+'
 
 prompt=$(cat tmp.txt)
 
