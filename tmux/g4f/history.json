@@ -1,4 +1,5 @@
 {
-  "test": "test answer\nantoherline",
-  "how much free space in disk?": "Check free disk space in human-readable format:\n```bash\ndf -h\n```\n\nDisplay free space on the root filesystem:\n```bash\ndf / --output=avail,human\n```\n\nGet the total, used, and available space for all file systems:\n```bash\ndf -T\n```"
+  "how much free space?": "To check total and available disk space in a human-readable format:\n```bash\ndf -h\n```\n\nTo display free space on the specified filesystem (e.g., `/dev/sda1`):\n```bash\ndf -h /dev/sda1\n```\n\nTo get a summary of free and used memory (not disk space, but related):\n```bash\nfree -h\n```",
+  "list all directories": "List all directories in the current path:\n```bash\nls -d */\n```\n\nList all directories including hidden ones:\n```bash\nls -d .*/ */\n```\n\nUsing `find` to list all directories recursively:\n```bash\nfind . -type d\n```",
+  "numbers from 1 to 10": "Print numbers from 1 to 10 using `seq`:\n```bash\nseq 1 10\n```\n\nPrint numbers from 1 to 10 using a for loop:\n```bash\nfor i in {1..10}; do echo $i; done\n```\n\nPrint numbers from 1 to 10 using `printf`:\n```bash\nprintf \"%s\\n\" {1..10}\n```"
 }
