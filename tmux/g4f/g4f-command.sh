@@ -3,7 +3,7 @@
 preprompt=$(cat ~/dotfiles/tmux/g4f/preprompt.txt)
 HISTORY_FILE="$HOME/dotfiles/tmux/g4f/history.json"
 
-mapfile -t history < <(jq -r 'keys[]' "$HISTORY_FILE")
+mapfile -t history < <(jq -r 'keys_unsorted[]' "$HISTORY_FILE")
 
 # Temporary file for readline history
 TMP_HISTORY=$(mktemp)
@@ -13,7 +13,9 @@ printf "%s\n" "${history[@]}" > "$TMP_HISTORY"
 bash --rcfile <( 
     # Minimal rcfile for the subshell
     echo "HISTFILE=$TMP_HISTORY"
-    echo "set -o emacs"               # enable Readline
+    echo 'bind -m vi-insert "\"\C-p\": previous-history"'
+    echo 'bind -m vi-insert "\"\C-n\": next-history"'
+    echo "set -o vi"               # enable Readline
     echo "[ -f ~/.bashrc ] && source ~/.bashrc"  # load fzf bindings
 ) -i -c '
     set +o history   # do not save commands to global history
