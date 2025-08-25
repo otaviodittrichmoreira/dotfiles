@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=feh (scaled)
+Exec=/home/otavio/bin/feh-viewer.sh %F
+Icon=feh
+Terminal=false
+Categories=Graphics;Viewer;
+MimeType=image/png;image/jpeg;image/jpg;image/gif;image/webp;

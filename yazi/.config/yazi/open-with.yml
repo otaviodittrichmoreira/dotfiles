@@ -1,0 +1,12 @@
+rules:
+  - mime: video/*
+    run: mpv "$1"
+    orphan: true
+
+  - mime: audio/*
+    run: mpv "$1"
+    orphan: true
+
+  - ext: [mp4, mkv, webm, mp3, flac, wav, mov, avi]
+    run: mpv "$1"
+    orphan: true

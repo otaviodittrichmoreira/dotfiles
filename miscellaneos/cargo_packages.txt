@@ -1,0 +1,12 @@
+alacritty v0.15.1:
+    alacritty
+harper-ls v0.56.0:
+    harper-ls
+resvg v0.45.1:
+    resvg
+yazi-build v0.1.8:
+    yazi-build
+yazi-cli v25.4.8:
+    ya
+yazi-fm v25.5.31:
+    yazi
