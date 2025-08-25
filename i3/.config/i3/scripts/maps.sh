@@ -8,3 +8,5 @@ xcape -e 'Control_L=Escape'
 
 # Make <> behave like \|
 xmodmap -e "keycode 94 = backslash bar"
+xmodmap -e "keycode 133 = Alt_L"
+xmodmap -e "keycode 134 = Alt_R"

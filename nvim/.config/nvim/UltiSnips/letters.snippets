@@ -549,7 +549,7 @@ endsnippet
 ########## Sets ##########
 context "math()"
 snippet empty "Empty Set" Aw
-\varnothing `!p
+\varnothing`!p
 if t[0] and t[0][0] not in [',',' ']:
 	snip.rv = ' '
 else:
@@ -557,3 +557,64 @@ else:
 `$0
 endsnippet
 
+######## Linear Algebra ########
+
+context "math()"
+snippet `(\w)tn` "Tensor" Ar
+\Tn{`!p snip.rv=match.group(1).upper()`}`!p
+if t[0] and t[0][0] not in [',',' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "math()"
+snippet tn "Tensor" Aw
+\Tn{${1:${VISUAL}}}`!p
+if t[0] and t[0][0] not in [',',' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "math()"
+snippet `(\w)mx` "Matrix" Ar
+\Mx{`!p snip.rv=match.group(1).upper()`}`!p
+if t[0] and t[0][0] not in [',',' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "math()"
+snippet mx "Matrix" Aw
+\Mx{${1:${VISUAL}}}`!p
+if t[0] and t[0][0] not in [',',' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "math()"
+snippet `(\w)vc` "Vector" Ar
+\Vc{`!p snip.rv=match.group(1).lower()`}`!p
+if t[0] and t[0][0] not in [',',' ', '\'']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "math()"
+snippet vc "Vector" Aw
+\Vc{${1:${VISUAL}}}`!p
+if t[0] and t[0][0] not in [',',' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet

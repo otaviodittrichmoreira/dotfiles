@@ -1,0 +1,7 @@
+https://github.com/alacritty/alacritty.git
+git@github.com:typecraft-dev/dotfiles.git
+https://github.com/rjekker/i3-battery-popup.git
+https://github.com/Raymo111/i3lock-color.git
+https://github.com/hakimel/reveal.js.git
+https://github.com/gdh1995/vimium-c.wiki.git
+https://github.com/adi1090x/rofi.git

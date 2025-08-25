@@ -1,23 +1,16 @@
 require("kickstart")
-require("settings")
 require("pluggins.ultisnips")
--- require("pluggins.rainbow_setting")
--- require 'pluggins.rainbow_delimiter'
--- require 'cmp_setup'
 require("mini.align").setup()
 require("mini.surround").setup()
 require("mini.jump").setup()
 require("mini.move").setup()
 require("mini.operators").setup()
 require("mini.splitjoin").setup()
--- require("mini.jump2d").setup()
 require("mini.icons").setup()
 require("mini.starter").setup()
--- require("mini.git").setup()
 require("keymaps")
 require("ruff")
-
--- vim.opt.relativenumber = true
+require("settings")
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "tex",

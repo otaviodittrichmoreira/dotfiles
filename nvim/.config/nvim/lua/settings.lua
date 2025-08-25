@@ -56,3 +56,14 @@ vim.cmd("Copilot disable")
 -- 		vim.cmd("Copilot disable")
 -- 	end,
 -- })
+
+-- Wrap REPL terminal lines
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "dap-repl",
+	callback = function()
+		vim.opt_local.wrap = true -- enable line wrap
+		vim.opt_local.linebreak = true -- break lines at word boundaries
+		vim.opt_local.number = false -- disable line numbers in REPL
+		vim.opt_local.relativenumber = false
+	end,
+})

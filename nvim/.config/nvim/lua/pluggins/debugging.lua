@@ -64,7 +64,7 @@ return {
 		end
 
 		-- Keymaps for toggling floats
-		vim.keymap.set("n", "<Leader>ds", function()
+		vim.keymap.set("n", "<Leader>dv", function()
 			toggle_float("scopes", { width = 60, height = 20 }, "Scopes")
 		end, { silent = true, desc = "Toggle [S]copes floating window" })
 
@@ -79,8 +79,67 @@ return {
 		vim.fn.sign_define("DapStopped", { text = "▶", texthl = "Title", linehl = "CursorLine" })
 
 		-- Debugging keymaps
+		local first_run_done = false
+
 		vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { silent = true, desc = "Set a [B]reakpoint" })
-		vim.keymap.set("n", "<Leader>dc", dap.continue, { silent = true, desc = "[C]ontinue (or start) debugging" })
+		vim.keymap.set("n", "<Leader>dc", function()
+			-- Zoom the pane if not already
+			vim.fn.system("tmux if -F '#{window_zoomed_flag}' '' 'resize-pane -Z'")
+			vim.cmd("write")
+			first_run_done = true
+			dap.continue()
+		end, { silent = true, desc = "[C]ontinue (or start) debugging" })
+		vim.keymap.set("n", "<Leader>dr", function()
+			vim.fn.system("tmux if -F '#{window_zoomed_flag}' '' 'resize-pane -Z'")
+			vim.cmd("write")
+			dap.restart()
+		end, { silent = true, desc = "[R]estart debugging" })
+		vim.keymap.set("n", "<Leader>dt", dap.terminate, { silent = true, desc = "[T]erminate debugging" })
+		vim.keymap.set("n", "<Leader>do", dap.step_over, { silent = true, desc = "[D]ebugging Step [O]ver" })
+		vim.keymap.set("n", "<Leader>di", dap.step_into, { silent = true, desc = "[D]ebugging Step [I]nto" })
+		vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
+			require("dap.ui.widgets").hover()
+		end, { silent = true, desc = "[H]over" })
+
+		vim.keymap.set("n", "<Leader>dl", function()
+			vim.fn.system("tmux if -F '#{window_zoomed_flag}' '' 'resize-pane -Z'")
+			vim.cmd("write")
+			if not first_run_done then
+				dap.continue()
+				first_run_done = true
+			else
+				dap.run_last()
+			end
+		end, { silent = true, desc = "[D]ebug: Run [L]ast or start new" })
+
+		-- vim.keymap.set("n", "<Leader>dg", dap.run_to_cursor, { silent = true, desc = "[D]ebugging [G]o to cursor" })
+
+		vim.keymap.set("n", "<Leader>dg", function()
+			vim.fn.system("tmux if -F '#{window_zoomed_flag}' '' 'resize-pane -Z'")
+			vim.cmd("write")
+			if dap.session() == nil then
+				-- no active session, so start debugging first
+				dap.clear_breakpoints()
+				dap.toggle_breakpoint()
+				if first_run_done then
+					dap.run_last()
+				else
+					dap.continue()
+				end
+			else
+				-- session active, just run to cursor
+				dap.run_to_cursor()
+			end
+			first_run_done = true
+		end, { silent = true, desc = "[D]ebugging [G]o to cursor (start if needed)" })
+
+		-- Esc closes dap float
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "dap-float",
+			callback = function()
+				vim.keymap.set("n", "<Esc>", "<Cmd>close!<CR>", { buffer = true, silent = true })
+			end,
+		})
 
 		-- Completion
 		local cmp = require("cmp")

@@ -2,6 +2,9 @@ global !p
 def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
+def not_math():
+	return not math()
+
 def comment(): 
 	return vim.eval('vimtex#syntax#in_comment()') == '1'
 
@@ -78,6 +81,7 @@ snippet iff "iff" Ai
 \iff $0
 endsnippet
 
+context "not_math()"
 snippet fm "Math" wA
 \(${1:${VISUAL}}\)`!p
 if t[2] and t[2][0] not in [';', ':', ',', '.', '?', '-', ' ']:
@@ -87,6 +91,7 @@ else:
 `$2
 endsnippet
 
+context "not_math()"
 snippet dm "Math" wA
 \[
 ${1:${VISUAL}}

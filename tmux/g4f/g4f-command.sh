@@ -21,10 +21,10 @@ bash --rcfile <(
     set +o history   # do not save commands to global history
     history -r       # read temp history
     read -e -p "Enter Prompt: " prompt
-    echo "$prompt" > tmp.txt
+    echo "$prompt" > $HOME/dotfiles/tmux/g4f/tmp.txt
 '
 
-prompt=$(cat tmp.txt)
+prompt=$(cat $HOME/dotfiles/tmux/g4f/tmp.txt)
 
 # Check if prompt is in history and has an answer
 prompt_in_history=$(cat ~/dotfiles/tmux/g4f/history.json | jq --arg q "$prompt" 'has(($q)) and .[($q)] != ""')
@@ -34,7 +34,7 @@ if [[ $prompt_in_history == "true" ]]; then
     answer=$(cat ~/dotfiles/tmux/g4f/history.json | jq -r --arg q "$prompt" '.[($q)]')
 
 else
-    answer=$(python ~/dotfiles/tmux/g4f/g4f-runner.py -s "$preprompt" -u "$prompt")
+    answer=$($HOME/dotfiles/tmux/g4f/g4f-runner.py -s "$preprompt" -u "$prompt" -m -p)
 
     # Save answer in history
     cat ~/dotfiles/tmux/g4f/history.json | jq --arg q "$prompt" --arg a "$answer" '.[ $q ] = $a' > ~/dotfiles/tmux/g4f/tmp_history.json

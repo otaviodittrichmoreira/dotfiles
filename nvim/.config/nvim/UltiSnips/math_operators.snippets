@@ -14,7 +14,7 @@ endglobal
 
 context "math()"
 snippet `(\s?)jv` "subscript" iAr
-_{$1}`!p
+_{${1:${VISUAL}}}`!p
 if t[0] and t[0][0] not in [',', ' ']:
 	snip.rv = ' '
 else:

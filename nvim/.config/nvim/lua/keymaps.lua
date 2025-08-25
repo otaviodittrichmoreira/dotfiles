@@ -32,7 +32,8 @@ vim.api.nvim_create_autocmd("FileType", {
 			0,
 			"n",
 			"<Leader>r",
-			[[:up<CR>:execute "silent !tmux send-keys -t top-right -X cancel; tmux send-keys -t top-right C-u 'python3 %:p' C-m" <CR>]],
+			[[:up<CR>:lua require("tmux_runner")._send_tmux_exec("python3 %:p")<CR>]],
+			-- [[:up<CR>:execute "silent !tmux send-keys -t top-right -X cancel; tmux send-keys -t top-right C-u 'python3 %:p' C-m" <CR>]],
 			{ noremap = true, silent = true, desc = "Run python file in a tmux pane" }
 		)
 	end,
@@ -99,6 +100,7 @@ vim.fn.setreg("p", [[^"vyinviv]] .. esc .. [[oprint(f"{ = }")]] .. esc .. [[6h"v
 
 vim.keymap.set("n", "<Leader>p", "@p", { desc = "Print defined variable" })
 
+-- Run custom command from buffer
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	callback = function()
@@ -107,6 +109,20 @@ vim.api.nvim_create_autocmd("FileType", {
 			"n",
 			"<Leader>a",
 			[[:up<CR>:lua require("tmux_runner").run_in_tmux()<CR>]],
+			{ noremap = true, silent = true, desc = "Run file in a tmux pane" }
+		)
+	end,
+})
+
+-- Edit custom command from buffer
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(
+			0,
+			"n",
+			"<Leader>ta",
+			[[:up<CR>:lua require("tmux_runner").run_in_tmux(true)<CR>]],
 			{ noremap = true, silent = true, desc = "Run file in a tmux pane" }
 		)
 	end,
@@ -165,7 +181,7 @@ local function scroll_repl_to_bottom()
 	end
 end
 
-vim.keymap.set("v", "<Leader>dr", function()
+vim.keymap.set("v", "<Leader>dp", function()
 	ensure_repl_open()
 
 	local start_pos = vim.fn.getpos("'<")
@@ -184,7 +200,7 @@ vim.keymap.set("v", "<Leader>dr", function()
 	scroll_repl_to_bottom()
 end, { silent = true, desc = "[D]ebug: Send selection to [R]EPL" })
 
-vim.keymap.set("n", "<Leader>dr", function()
+vim.keymap.set("n", "<Leader>dp", function()
 	ensure_repl_open()
 
 	local line = vim.api.nvim_get_current_line()

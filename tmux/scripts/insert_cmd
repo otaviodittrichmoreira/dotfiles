@@ -1,0 +1,5 @@
+insert_cmd() {
+    READLINE_LINE="$(cat)"
+    READLINE_POINT=${#READLINE_LINE}
+}
+bind -x '"\C-x\C-i": insert_cmd'

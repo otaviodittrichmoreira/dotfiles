@@ -93,7 +93,7 @@ return {
 						return select.visual(source)
 					end,
 					system_prompt = "COPILOT_FIX",
-					context = "register:d",
+					context = { "register:d", "#buffer" },
 				},
 			},
 		},
