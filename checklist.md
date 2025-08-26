@@ -7,3 +7,4 @@
 - [ ] i3 -> i3
 - [ ] Power button, lock screen  -> miscellaneos/repos.txt
 - [ ] desktop icons (yazi, feh scaled, obsidian, heroic) -> desktop (stow)
+- [ ] yazi, fzf, picom, polybar, i3, neovim, latex, pipx, rich, zoxide
