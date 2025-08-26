@@ -65,7 +65,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-2/launcher.sh
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/files/launchers/type-2/launcher.sh
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -235,7 +235,7 @@ exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
 
 exec_always --no-startup-id picom
 
-bindsym $mod+Shift+p exec --no-startup-id ~/.config/rofi/powermenu/type-1/powermenu.sh
+bindsym $mod+Shift+p exec --no-startup-id ~/.config/rofi/files/powermenu/type-1/powermenu.sh
 
 # # Autotiling
 # exec_always --no-startup-id $script_dir/autotiling.sh
