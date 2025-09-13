@@ -20,7 +20,7 @@ snippet ddots "ldots" iA
 endsnippet
 
 priority 100
-snippet vdots "ldots" iA
+snippet `(?<![\a-zA-Z])vdots` "ldots" rA
 \vdots $0
 endsnippet
 
@@ -195,7 +195,9 @@ else:
 endsnippet
 
 snippet pmat "pmat" iA
-\begin{pmatrix} $1 \end{pmatrix}`!p
+\begin{pmatrix}
+$1
+\end{pmatrix}`!p
 if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
@@ -204,7 +206,9 @@ else:
 endsnippet
 
 snippet bmat "bmat" iA
-\begin{bmatrix} $1 \end{bmatrix}`!p
+\begin{bmatrix}
+$1
+\end{bmatrix}`!p
 if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
 else:
