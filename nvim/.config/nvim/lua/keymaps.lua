@@ -39,6 +39,21 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Run R file in a tmux pane
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "r",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(
+			0,
+			"n",
+			"<Leader>r",
+			[[:up<CR>:lua require("tmux_runner")._send_tmux_exec("Rscript %:p")<CR>]],
+			-- [[:up<CR>:execute "silent !tmux send-keys -t top-right -X cancel; tmux send-keys -t top-right C-u 'python3 %:p' C-m" <CR>]],
+			{ noremap = true, silent = true, desc = "Run python file in a tmux pane" }
+		)
+	end,
+})
+
 -- Window key
 vim.keymap.set("n", "<Leader>w", "<C-w>")
 
@@ -97,6 +112,20 @@ end, { desc = "Save current line's diagnostics to register +" })
 -- Print defined variable
 local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
 vim.fn.setreg("p", [[^"vyinviv]] .. esc .. [[oprint(f"{ = }")]] .. esc .. [[6h"vp]])
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		vim.fn.setreg("p", [[^"vyinviv]] .. esc .. [[oprint(f"{ = }")]] .. esc .. [[6h"vp]])
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "r",
+	callback = function()
+		vim.fn.setreg("p", [[^"vyinviv]] .. esc .. [[ocat(" =", ,"\n")]] .. esc .. [[11h"vp5l"vp]])
+	end,
+})
 
 vim.keymap.set("n", "<Leader>p", "@p", { desc = "Print defined variable" })
 
@@ -211,3 +240,49 @@ vim.keymap.set("n", "<Leader>dp", function()
 	vim.cmd("redraw")
 	scroll_repl_to_bottom()
 end, { silent = true, desc = "[D]ebug: Send line to [R]EPL" })
+
+-- ===============================
+-- Spell Check Shortcuts in Insert Mode
+-- ===============================
+
+-- Auto-correct previous misspelled word and restore cursor position
+function CorrectLastMisspelledInsert()
+	-- Exit insert mode temporarily
+	vim.cmd("stopinsert")
+
+	-- Jump to previous misspelled word
+	vim.cmd("normal! [s")
+
+	-- Get current word under cursor
+	local word = vim.fn.expand("<cword>")
+	local suggestions = vim.fn.spellsuggest(word)
+
+	-- Replace with first suggestion if available
+	if #suggestions > 0 then
+		vim.cmd("normal! ciw" .. suggestions[1])
+	end
+
+	-- Move cursor to the end of the line
+	vim.cmd("normal! $")
+
+	-- Return to insert mode
+	vim.cmd("startinsert")
+end
+
+-- Keymaps for Insert mode
+vim.api.nvim_set_keymap("i", "<C-f>", "<C-o>:lua CorrectLastMisspelledInsert()<CR>", { noremap = true, silent = true })
+
+-- Open Texpresso
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "tex",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(
+			0,
+			"n",
+			"<Leader>r",
+			[[:TeXpresso %<CR>]],
+			-- [[:up<CR>:execute "silent !tmux send-keys -t top-right -X cancel; tmux send-keys -t top-right C-u 'python3 %:p' C-m" <CR>]],
+			{ noremap = true, silent = true, desc = "Run python file in a tmux pane" }
+		)
+	end,
+})

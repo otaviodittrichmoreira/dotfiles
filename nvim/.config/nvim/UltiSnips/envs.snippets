@@ -14,8 +14,31 @@ def env(name):
 
 endglobal
 
-snippet newdoc "New Document" b
+snippet newhomework "New Homework Document" bA
+\documentclass[12pt, answers]{exam}
+\def\showsolution{1}  % Comment to hide solutions
+\def\showcomment{1}  % Comment to hide question comments
+\input{"~/.config/latex/preamble/homework.tex"}
+
+\title{${1:Title}}
+\author{Ot\'avio Dittrich Moreira}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\clearpage 
+$0
+
+\end{document}
+endsnippet
+
+snippet newdoc "New Document" bA
 \documentclass{article}
+\def\showsolution{1}  % Comment to hide solutions
+\def\showcomment{1}  % Comment to hide question comments
 \input{"~/.config/latex/preamble/classnote.tex"}
 
 \title{${1:Title}}
@@ -76,42 +99,56 @@ endsnippet
 
 snippet blemm "Lemma" bA
 \begin{lemma}
-	$1
+	${1:${VISUAL}}
 \end{lemma}
 $0
 endsnippet
 
 snippet bcor "Corollary" bA
 \begin{corollary}
-	$1
+	${1:${VISUAL}}
 \end{corollary}
 $0
 endsnippet
 
 snippet bfa "Fact" bA
 \begin{fact}
-	$1
+	${1:${VISUAL}}
 \end{fact}
 $0
 endsnippet
 
 snippet bqu "Question" bA
 \begin{question}
-	$1
+	${1:${VISUAL}}
 \end{question}
+$0
+endsnippet
+
+snippet bpar "Parts" bA
+\begin{parts}
+	\part ${1:${VISUAL}}
+\end{parts}
+$0
+endsnippet
+
+snippet bsol "Solution" bA
+\begin{solution}
+	${1:${VISUAL}}
+\end{solution}
 $0
 endsnippet
 
 snippet bexer "Exercise" bA
 \begin{exercise}
-	$1
+	${1:${VISUAL}}
 \end{exercise}
 $0
 endsnippet
 
 snippet bexam "Example" bA
 \begin{example}
-	$1
+	${1:${VISUAL}}
 \end{example}
 $0
 endsnippet
@@ -126,21 +163,21 @@ endsnippet
 
 snippet brmk "Remark" bA
 \begin{remark}
-	$1
+	${1:${VISUAL}}
 \end{remark}
 $0
 endsnippet
 
 snippet bpf "Proof" bA
 \begin{proof}
-	$1
+	${1:${VISUAL}}
 \end{proof}
 $0
 endsnippet
 
 snippet ben "Enumerate" bA
 \begin{enumerate}
-	\item $1
+	\item ${1:${VISUAL}}
 \end{enumerate}
 $0
 endsnippet
@@ -224,4 +261,8 @@ snippet fig2side "Two side-by-side figures" b
 \includegraphics[width=\linewidth]{${4:fig2.png}}\\
 {\footnotesize ${5:Caption 2}}
 \end{columns}
+endsnippet
+
+snippet par "Paragraph" bA
+\paragraph{${1:${VISUAL}}} $0
 endsnippet

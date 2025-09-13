@@ -67,3 +67,29 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.relativenumber = false
 	end,
 })
+
+-- Use python3 to run the current file with :make
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "r",
+	callback = function()
+		vim.bo.makeprg = "Rscript %"
+	end,
+})
+
+-- Use python3 to run the current file with :make
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		vim.bo.makeprg = "python3 %"
+	end,
+})
+
+-- Remove <Space>, keymap from r
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "r",
+	callback = function(args)
+		-- make sure we’re in insert mode keymaps
+		pcall(vim.keymap.del, "i", "<Space>,", { buffer = args.buf })
+		pcall(vim.keymap.del, "n", "<Space>m", { buffer = args.buf })
+	end,
+})

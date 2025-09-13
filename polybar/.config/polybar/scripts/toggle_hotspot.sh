@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 IFACE="wlo1"
 SSID="wifidootavio"
-PASSWORD="automaker-gurgle-proven"
+PASSWORD="prevalent-passenger-quickstep"
 CON_NAME="Hotspot"
 
 # Check if hotspot is running (interface in AP mode)

@@ -41,7 +41,9 @@ function M._send_tmux_exec(cmd)
 		vim.cmd("up") -- save buffer
 		vim.cmd(vim_cmd)
 	else
-		print("Target pane not found.")
+		-- print("Target pane not found.")
+		vim.cmd("up") -- save buffer
+		vim.cmd(":make")
 	end
 end
 

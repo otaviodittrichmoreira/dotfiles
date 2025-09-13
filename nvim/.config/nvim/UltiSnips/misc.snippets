@@ -79,6 +79,29 @@ ${1:x}_`!p snip.rv = match.group(1)`, \ldots, $1_`!p snip.rv = match.group(2)` $
 endsnippet
 
 context "math()"
+snippet ja "Open sequence block" wA
+[SEQ] ${1:${VISUAL}} [SEQ]$0
+endsnippet
+
+context "math()"
+snippet `\[SEQ\]\s(.*)\s\[SEQ\](\S)(\W)(\S)` "Open sequence block" Ar
+`!p
+pattern = match.group(1)
+idx1 = match.group(2)
+operator = " " + match.group(3) + " "
+idx2 = match.group(4)
+term1 = pattern.replace("id", idx1)
+try:
+    inter_idx = str(eval(idx1+"+1"))
+except(NameError, SyntaxError):
+    inter_idx = idx1+"+1"
+inter_term = pattern.replace("id", inter_idx)
+term2 = pattern.replace("id", idx2)
+snip.rv = term1 + operator + inter_term + operator + "\ldots" + operator + term2
+`
+endsnippet
+
+context "math()"
 snippet under "Underbrace" iA
 \underbrace{${1:expression}}_{\text{${2:label}}}$0
 endsnippet

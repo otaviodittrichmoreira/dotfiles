@@ -3,12 +3,19 @@
 # Configuration
 IFACE="wlo1"
 SSID="wifidootavio"
-PASSWORD="automaker-gurgle-proven"
-TERMINAL="alacritty"  # Can be kitty, urxvt, etc.
-CON_NAME="Hotspot"
+PASSWORD="prevalent-passenger-quickstep"
+TERMINAL="alacritty"
+CON_NAME="HotspotQR"  # Unique title for the terminal
 
-# Generate QR code command
-QR_CMD="qrencode -t ansiutf8 \"WIFI:T:WPA;S:$SSID;P:$PASSWORD;;\""
+# Check if terminal with this title is running
+PID=$(pgrep -f "$TERMINAL.*$CON_NAME")
 
-# Open a new terminal and run the QR code
-$TERMINAL --title "$CON_NAME" -e bash -c "$QR_CMD; echo; read -p 'Press enter to close...'"
+if [ -n "$PID" ]; then
+    # If running, kill it
+    kill "$PID"
+    echo "Closed existing QR terminal."
+else
+    # If not running, open new terminal with QR code
+    $TERMINAL --title "$CON_NAME" -e bash -c "qrencode -t ansiutf8 \"WIFI:T:WPA;S:$SSID;P:$PASSWORD;;\"; read -p ''" &
+    echo "Opened QR terminal."
+fi

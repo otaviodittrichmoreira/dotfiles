@@ -15,7 +15,7 @@ endglobal
 
 ########## Functions ##########
 context "math()"
-snippet `([a-zA-Z1-9])(b|B)f` "Mathbf" Ar
+snippet `([a-zA-Z0-9])(b|B)f` "Mathbf" Ar
 \mathbf{`!p snip.rv=match.group(1)`}`!p
 if t[0] and t[0][0] not in [',',' ']:
 	snip.rv = ' '
@@ -305,15 +305,15 @@ else:
 `$0
 endsnippet
 
-# context "math()"
-# snippet `(;x)|((?<![\a-zA-Z])xi)` "Xi" Ar
-# \xi`!p
-# if t[0] and t[0][0] not in [',',' ']:
-# 	snip.rv = ' '
-# else:
-# 	snip.rv = ''
-# `$0
-# endsnippet
+context "math()"
+snippet `(;x)|((?<![\a-zA-Z])xi)` "Xi" Ar
+\xi`!p
+if t[0] and t[0][0] not in [',',' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
 
 context "math()"
 snippet `(;X)|((?<![\a-zA-Z])Xi)` "Xi Uppercase" Ar
@@ -506,14 +506,18 @@ else:
 endsnippet
 
 ########## Probability ##########
+snippet wp "with probability" i
+with probability at least \(1 - ${1:delta}\)$0
+endsnippet
+
 context "math()"
 snippet `(?<![\\\w])(pb|prob)` "Probability" Arw
-\mathbb{P}[${1:${VISUAL}}]
+\mathbb{P}\left[ ${1:${VISUAL}} \right]
 endsnippet
 
 context "math()"
 snippet `(?<![\\\w])pe` "Expectation" Awr
-\mathbb{E}`!p
+\mathbb{E}\left[ $1 \right]`!p
 if t[0] and t[0][0] not in [',',' ']:
 	snip.rv = ' '
 else:
@@ -532,8 +536,28 @@ snippet `(?<![\\\w])(cov)` "Covariance" Arw
 endsnippet
 
 context "math()"
-snippet `pid` "iid" Arw
+snippet iid "iid" Aw
 \stackrel{\text{iid}}{\sim}
+endsnippet
+
+context "math()"
+snippet indic "Indicator" Aw
+\mathbf{1}_{${1:${VISUAL}}} $0
+endsnippet
+
+context "math()"
+snippet \top "iid" A
+\stackrel{\text{p}}{\to}
+endsnippet
+
+context "math()"
+snippet \tod "iid" A
+\stackrel{\text{d}}{\to}
+endsnippet
+
+context "math()"
+snippet deq "Equal in distribution" A
+ \stackrel{\text{d}}{=} 
 endsnippet
 
 context "not_math()"

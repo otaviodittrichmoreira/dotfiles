@@ -5,20 +5,20 @@ IFACE="wlo1"
 # 1. Check if interface exists
 if ! ip link show "$IFACE" &>/dev/null; then
     echo " 󰘊 "
-    exit 1
+    exit 0
 fi
 
 # 2. Check if interface is in AP mode
 MODE=$(/usr/sbin/iw dev "$IFACE" info | grep type | awk '{print $2}')
 if [ "$MODE" != "AP" ]; then
     echo " 󰘊 "
-    exit 1
+    exit 0
 fi
 
 # 3. Check if NetworkManager reports Hotspot active
 if ! nmcli -t -f NAME connection show --active | grep -q "Hotspot"; then
     echo " 󰘊 "
-    exit 1
+    exit 0
 fi
 
 # 4. Count connected clients

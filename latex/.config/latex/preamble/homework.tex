@@ -1,0 +1,163 @@
+%%% PACKAGES %%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{microtype}
+\usepackage{lmodern}
+\usepackage[mathscr]{eucal}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[portuguese]{babel}
+\usepackage{hyperref}
+\usepackage[affil-it]{authblk} % para afiliação
+\usepackage{makeidx} % para índice remissivo
+\usepackage{import} % para importar arquivos
+%\usepackage{makecell}
+%\usepackage{colortbl}
+%\usepackage[dvipsnames]{xcolor}
+
+
+%%% MACROS %%%
+\def\R{\mathbb{R}}
+\def\C{\mathscr{C}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\def\Q{\mathbb{Q}}
+\def\V{\mathcal{V}}
+\def\U{\mathscr{U}}
+\def\B{\mathcal{B}}
+\def\P{\mathbb{P}}
+\def\Pcal{\mathcal{P}}
+\def\H{\mathbb{H}}
+\def\X{\mathscr{X}}
+\def\inv{^{-1}}
+\def\spam{\operatorname{spam}}
+\def\ans{\textnormal{\textbf{Solução: }}}
+\def\Id{\operatorname{Id}}
+\def\limn{\lim_{n\rightarrow \infty}}
+\def\e{\quad\text{e}\quad}
+\def\opt{{\operatorname{opt}}}
+\def\sign{{\operatorname{sign}}}
+\def\pto{\stackrel{p}{\to}}
+\def\dto{\stackrel{d}{\to}}
+\def\iid{\stackrel{\text{iid}}{\sim}}
+\newcommand{\normal}[1]{\mathcal{N}\left(#1\right)}
+\newcommand{\ntexttt}[1]{\texttt{\textup{#1}}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\inner}[1]{\left\langle #1\right\rangle}
+\newcommand{\re}[1]{\operatorname{Re}(#1)}
+\newcommand{\im}[1]{\operatorname{Im}(#1)}
+\newcommand{\sgn}[1]{\operatorname{sgn}(#1)}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normp}[2][p]{\parent{\int |#2|^#1}^{1/#1}}
+\newcommand{\del}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\deldel}[3]{\dfrac{\partial^2 #1}{\partial #3\partial #2}}
+\newcommand{\indicadora}[1]{\mathbf{1}_{\left[ #1 \right]}}
+\newcommand{\E}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\var}[1]{\mathbb{V}\left[#1\right]}
+\newcommand{\cov}[1]{\text{Cov}\left[#1\right]}
+\newcommand{\EP}[2]{{\mathbb{E}}_{#1}\left[#2\right]}
+\newcommand{\seq}[1]{(#1_n)_{n\in\N}}
+\newcommand{\under}[2]{\underset{#2}{{\underbrace{#1}}}} % para escrever texto embaixo de um brace.
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+
+
+% %%% SETTINGS %%%
+% \setlist[enumerate,1]{label=\textnormal{(\alph*)}}
+% \setlist[enumerate,2]{label=\textnormal{(\roman*)}}
+% %\renewcommand{\thesubsection}{\arabic{subsection}}
+% %\renewcommand{\thesection}{}
+% \renewcommand{\contentsname}{Exercícios}
+% \renewcommand{\solutiontitle}{\noindent\textnormal{\textbf{Solução:}}\nopagebreak\par\noindent}
+% \renewcommand\partlabel{\textnormal{(\alph{partno})}}
+% \graphicspath{ {./images/} }
+% \usepackage[margin=1.0in]{geometry}
+% \pagestyle{plain}
+% \renewcommand{\clearpage}{}
+
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large\bfseries \@title \par}%
+    \vskip 1.5em%
+    {\normalsize
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\normalsize \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
+
+%%% LISTINGS %%%
+\usepackage{listings}
+\lstset{ 
+  language=Python,
+  basicstyle=\normalfont\ttfamily\small,
+  numbers=none,
+  frame=lines,
+  framexleftmargin=0.5em,
+  xleftmargin=0.5em,
+  framexrightmargin=0.5em,
+  rulecolor=\color{black},
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  showstringspaces=false,
+  belowskip=1em,
+  aboveskip=1em,
+  linewidth=\linewidth,
+  float=htb
+  captionpos=b
+  morekeywords={as}, % Add 'as' as an additional keyword
+  keywordstyle=\color{blue}\textbf, % Set the color for keywords
+   literate={á}{{\'a}}1
+           {â}{{\^a}}1
+           {ã}{{\~a}}1
+           {à}{{\`a}}1
+           {é}{{\'e}}1
+           {ê}{{\^e}}1
+           {í}{{\'i}}1
+           {ó}{{\'o}}1
+           {ô}{{\^o}}1
+           {õ}{{\~o}}1
+           {ú}{{\'u}}1
+           {ü}{{\"u}}1
+           {ç}{{\c{c}}}1
+}
+
+
+
+% % Questions in italic
+% \let\oldquestions\questions
+% \let\endoldquestions\endquestions
+% \renewenvironment{questions}
+%   {\oldquestions\itshape}
+%   {\endoldquestions}
+  
+% % Solutions not in italic
+% \let\oldsolution\solution
+% \let\endoldsolution\endsolution
+% \renewenvironment{solution}{%
+%   \begin{oldsolution}%
+%   \normalshape% Make the text inside italic
+% }{%
+%   \end{oldsolution}%
+% }
+
+
+% bibliography
+\usepackage[numbers,sort,compress]{natbib}

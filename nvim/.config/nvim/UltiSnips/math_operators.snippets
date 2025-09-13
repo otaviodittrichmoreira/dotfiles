@@ -37,9 +37,25 @@ snippet '(\s*)je' "Equal Symbol" riA
  = $0
 endsnippet
 
+context "math()"
+snippet `(?<!\\)\bsum` "sum" Ar
+\sum_{$1} $0
+endsnippet
+
 priority 300
 context "math()"
 snippet '\\sum_\{([^}]*)je' "equal in sum" Ar
+\sum_{`!p snip.rv = match.group(1)` = ${1:1}}^{${0:n}
+endsnippet 
+
+context "math()"
+snippet `(?<!\\)\bprod` "product" Ar
+\prod_{$1} $0
+endsnippet
+
+priority 300
+context "math()"
+snippet '\\prod_\{([^}]*)je' "equal in sum" Ar
 \sum_{`!p snip.rv = match.group(1)` = ${1:1}}^{${0:n}
 endsnippet 
 
@@ -81,11 +97,6 @@ endsnippet
 context "math()"
 snippet `(?<!\\)\b(gq|geq)` "Greater than or equal to" rA
 \geq $0
-endsnippet
-
-context "math()"
-snippet `(?<!\\)\bsum` "sum" Ar
-\sum_{$1} $0
 endsnippet
 
 priority 100

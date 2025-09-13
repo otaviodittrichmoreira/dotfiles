@@ -679,7 +679,7 @@ require("lazy").setup({
 
 	{ -- Autocompletion
 		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
+		-- event = "InsertEnter",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
 			{
@@ -716,6 +716,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-cmdline",
 			"quangnguyen30192/cmp-nvim-ultisnips",
 			"micangl/cmp-vimtex",
+			"R-nvim/cmp-r",
 		},
 		config = function()
 			-- See `:help cmp`
@@ -826,8 +827,10 @@ require("lazy").setup({
 					{ name = "vimtex" },
 					{ name = "path" },
 					{ name = "render-markdown" },
+					{ name = "cmp_r" },
 				},
 			})
+			require("cmp_r").setup({})
 		end,
 	},
 	{
@@ -932,6 +935,11 @@ require("lazy").setup({
 				"vim",
 				"vimdoc",
 				"python",
+				"r",
+				"rnoweb",
+				"yaml",
+				"latex",
+				"csv",
 			}, -- TOOLING: COMPLETION, DIAGNOSTICS, FORMATTING
 
 			-- MASON
@@ -1029,6 +1037,8 @@ require("lazy").setup({
 	require("pluggins.neoscroll"),
 	require("pluggins.oil"),
 	require("pluggins.jupytext"),
+	require("pluggins.R"),
+	require("pluggins.texpresso"),
 	-- require("pluggins.tabout"),
 	-- require 'pluggins.startup',
 	-- require 'kickstart.plugins.neo-tree',
