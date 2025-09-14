@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+
+%%% PACKAGES %%%
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems,skins,breakable}
+
+%%% COLORS %%%
+\definecolor{greentheorembg}{HTML}{E8F5E9}
+\definecolor{greentheoremborder}{HTML}{2E7D32}
+\definecolor{myb}{HTML}{1E88E5} % for exercises
+
+%%% THEOREM ENVIRONMENTS %%%
+\newtcbtheorem[number within=section]{greentheorem}{Theorem}{%
+  enhanced,
+  breakable,
+  colback=greentheorembg,
+  colframe=greentheoremborder,
+  boxrule=0.6pt,
+  arc=6pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,
+  detach title,
+  before upper={\textbf{\tcbname~\thetcbcounter.}\ },
+}{th}
+
+\newtcbtheorem[number within=section]{plain}{Plain}{
+  theorem style=plain,
+  coltitle=black,
+  colback=white,
+  colframe=white,
+  fonttitle=\bfseries,
+  left=0mm
+}{te}
+
+%%% EXERCISE ENVIRONMENT %%%
+\makeatletter
+\newtcbtheorem{question}{Question}{%
+  enhanced,
+  breakable,
+  colback=white,
+  colframe=myb!80!black,
+  attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+  fonttitle=\bfseries,
+  title={#2},
+  boxed title size=title,
+  boxed title style={%
+    sharp corners,
+    rounded corners=northwest,
+    colback=tcbcolframe,
+    boxrule=0pt,
+  },
+  underlay boxed title={%
+    \path[fill=tcbcolframe] (title.south west)--(title.south east)
+    to[out=0, in=180] ([xshift=5mm]title.east)--
+    (title.center-|frame.east)
+    [rounded corners=\kvtcb@arc] |-
+    (frame.north) -| cycle;
+  },
+}{def}
+\makeatother
+
+\begin{document}
+
+\section{Examples}
+
+\begin{greentheorem}{}{}
+For any $a,b \in \mathbb{R}$,
+\[
+(a+b)^2 = a^2 + 2ab + b^2.
+\]
+\end{greentheorem}
+
+\begin{question}{}{}
+Prove that the sum of two even numbers is even.
+\end{question}
+
+\begin{plain}{Title}{mark}
+  heres
+\end{plain}
+
+\end{document}

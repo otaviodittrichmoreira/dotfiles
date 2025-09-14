@@ -144,14 +144,51 @@ snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
 endsnippet
 
 priority 10000
-snippet 'sympy(.*)sympy' "sympy" wr
+snippet 'simplify(.*)simplify' "simplify expression" wr
 `!p
+from sympy.parsing.latex import parse_latex
 from sympy import *
 x, y, z, t = symbols('x y z t')
 k, m, n = symbols('k m n', integer=True)
 f, g, h = symbols('f g h', cls=Function)
 init_printing()
-snip.rv = eval('latex(' + match.group(1).replace('\\', '').replace('^', '**').replace('{', '(').replace('}', ')') + ')')
+latex_exp = match.group(1)
+parsed_latex = parsing.latex.parse_latex(latex_exp)
+simplified = simplify(parsed_latex)
+snip.rv = latex(simplified)
+`
+endsnippet
+
+priority 10000
+snippet '(.*)(&?=&?\s*)jk' "simplify expression" Ar
+`!p
+from sympy.parsing.latex import parse_latex
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+latex_exp = match.group(1)
+parsed_latex = parsing.latex.parse_latex(latex_exp)
+simplified = simplify(parsed_latex)
+snip.rv = latex_exp + match.group(2) + latex(simplified)
+`
+endsnippet
+
+priority 10000
+snippet 'diff(.*)diff(\w)' "differentiate expression" wr
+`!p
+from sympy.parsing.latex import parse_latex
+from sympy import *
+diff_symbol = symbols(match.group(2))
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+latex_exp = match.group(1)
+parsed_latex = parsing.latex.parse_latex(latex_exp)
+simplified = simplify(diff(parsed_latex, diff_symbol))
+snip.rv = latex(simplified)
 `
 endsnippet
 

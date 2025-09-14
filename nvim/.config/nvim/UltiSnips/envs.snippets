@@ -82,44 +82,42 @@ $0
 endsnippet
 
 snippet bthm "Theorem" bA
-\begin{theorem}[${1:Title}]
-	\label{thm:${1/\W+/-/g}}
+\begin{theorem}{${1:Title}}{`!p snip.rv = re.sub(r'\W+', '-', t[1]).lower()`}
 	$2
 \end{theorem}
 $0
 endsnippet
 
 snippet bprop "Proposition" bA
-\begin{proposition}[${1:Title}]
-	\label{prop:${1/\W+/-/g}}
+\begin{proposition}{${1:Title}}{`!p snip.rv = re.sub(r'\W+', '-', t[1]).lower()`}
 	$2
 \end{proposition}
 $0
 endsnippet
 
 snippet blemm "Lemma" bA
-\begin{lemma}
+\begin{lemma}{}{}
 	${1:${VISUAL}}
 \end{lemma}
 $0
 endsnippet
 
 snippet bcor "Corollary" bA
-\begin{corollary}
+\begin{corollary}{}{}
 	${1:${VISUAL}}
 \end{corollary}
 $0
 endsnippet
 
 snippet bfa "Fact" bA
-\begin{fact}
+\begin{fact}{}{}
 	${1:${VISUAL}}
 \end{fact}
 $0
 endsnippet
 
 snippet bqu "Question" bA
-\begin{question}
+\begin{question}{}{}
 	${1:${VISUAL}}
 \end{question}
 $0
@@ -133,43 +131,42 @@ $0
 endsnippet
 
 snippet bsol "Solution" bA
-\begin{solution}
+\begin{solution}{}{}
 	${1:${VISUAL}}
 \end{solution}
 $0
 endsnippet
 
 snippet bexer "Exercise" bA
-\begin{exercise}
+\begin{exercise}{}{}
 	${1:${VISUAL}}
 \end{exercise}
 $0
 endsnippet
 
 snippet bexam "Example" bA
-\begin{example}
+\begin{example}{}{}
 	${1:${VISUAL}}
 \end{example}
 $0
 endsnippet
 
 snippet bdef "Definition" bA
-\begin{definition}[${1:Title}]
-	\label{def:${1/\W+/-/g}}
+\begin{definition}{${1:Title}}{`!p snip.rv = re.sub(r'\W+', '-', t[1]).lower()`}
 	$2
 \end{definition}
 $0
 endsnippet
 
 snippet brmk "Remark" bA
-\begin{remark}
+\begin{remark}{}{}
 	${1:${VISUAL}}
 \end{remark}
 $0
 endsnippet
 
 snippet bpf "Proof" bA
-\begin{proof}
+\begin{proof}{}{}
 	${1:${VISUAL}}
 \end{proof}
 $0

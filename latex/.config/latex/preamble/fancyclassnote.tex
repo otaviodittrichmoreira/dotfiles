@@ -1,35 +1,164 @@
-\documentclass[12pt]{article}
+%%% PACKAGES %%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{color}
+\usepackage{microtype}
+\usepackage{lmodern}
+\usepackage[mathscr]{eucal}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage[a4paper,margin=1in]{geometry}
+
+
+
+%%% MACROS %%%
+\def\spam{\operatorname{spam}}
+\def\Id{\operatorname{Id}}
+\def\sign{{\operatorname{sign}}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\inner}[1]{\left\langle #1\right\rangle}
+\newcommand{\re}[1]{\operatorname{Re}(#1)}
+\newcommand{\im}[1]{\operatorname{Im}(#1)}
+\newcommand{\sgn}[1]{\operatorname{sgn}(#1)}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normp}[2][p]{\parent{\int |#2|^#1}^{1/#1}}
+\newcommand{\del}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\deldel}[3]{\dfrac{\partial^2 #1}{\partial #3\partial #2}}
+\newcommand{\indicator}[1]{\mathbf{1}_{(#1)}}
+\newcommand{\E}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\var}[1]{\mathbb{V}\left[#1\right]}
+\newcommand{\cov}[1]{\text{Cov}\left[#1\right]}
+%\newcommand{\EP}[2]{\underset{#1}{\mathbb{E}}\left[#2\right]}
+\newcommand{\EP}[2]{\mathbb{E}_{#1}\left[#2\right]}
+\newcommand{\under}[2]{\underset{#2}{{\underbrace{#1}}}} % para escrever texto embaixo de um brace.
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+
+%%% SETTINGS %%%
+% \usepackage{fullpage}  % full page style
+\graphicspath{{figures/}}  %  add figures to graphics path
+\graphicspath{{../figures/}}  %  add upper figures folder to graphics path
+
+
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+%%% COMMANDS %%%
+
+%%% CODING %%%
+\usepackage{listings}
+\newcommand\pythonstyle{\lstset{ 
+  language=Python,
+  basicstyle=\normalfont\ttfamily\small,
+  numbers=none,
+  frame=lines,
+  framexleftmargin=0.5em,
+  xleftmargin=0.5em,
+  keywordstyle=\ttb\color{deepblue},
+  emphstyle=\ttb\color{deepred},    % Custom highlighting style
+  stringstyle=\color{deepgreen},
+  commentstyle=\ttfamily\small\color{deepred},
+  framexrightmargin=0.5em,
+  rulecolor=\color{black},
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  showstringspaces=false,
+  belowskip=1em,
+  aboveskip=1em,
+  linewidth=\linewidth,
+  captionpos=b
+  morekeywords={as}, % Add 'as' as an additional keyword
+  keywordstyle=\color{blue}\textbf, % Set the color for keywords
+   literate={á}{{\'a}}1 {â}{{\^a}}1 {ã}{{\~a}}1 {à}{{\`a}}1 {é}{{\'e}}1 {ê}{{\^e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1 {ú}{{\'u}}1 {ü}{{\"u}}1 {ç}{{\c{c}}}1
+}}
+
+% Custom colors
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
 
 %%% PACKAGES %%%
-\usepackage[a4paper,margin=1in]{geometry}
-\usepackage{lmodern}
-\renewcommand{\familydefault}{\sfdefault}
-\usepackage{amsmath,amssymb}
-\usepackage[dvipsnames]{xcolor}
 \usepackage{tcolorbox}
-\tcbuselibrary{theorems,skins,breakable}
+\tcbuselibrary{theorems,skins,breakable, hooks}
 
 %%% COLORS %%%
 \definecolor{greentheorembg}{HTML}{E8F5E9}
 \definecolor{greentheoremborder}{HTML}{2E7D32}
 \definecolor{myb}{HTML}{1E88E5} % for exercises
+\definecolor{myp}{RGB}{197, 92, 212}
 
 %%% THEOREM ENVIRONMENTS %%%
-\newtcbtheorem[number within=section]{greentheorem}{Theorem}{%
-  enhanced,
-  breakable,
-  colback=greentheorembg,
-  colframe=greentheoremborder,
-  boxrule=0.6pt,
-  arc=6pt,
-  left=8pt,right=8pt,top=6pt,bottom=6pt,
-  detach title,
-  before upper={\textbf{\tcbname~\thetcbcounter.}\ },
-}{th}
+
+\tcbset{
+  plainstyle/.style={
+    theorem style=plain,
+    coltitle=black,
+    colback=white,
+    colframe=white,
+    fonttitle=\bfseries,
+    left=-2mm,
+    description font=\normalfont,
+  }
+}
+
+\tcbset{
+  plaingreen/.style={
+    enhanced,
+    breakable,
+    colback=greentheorembg,
+    colframe=greentheoremborder,
+    coltitle=black,
+    fonttitle=\bfseries,
+    boxrule=0.6pt,
+    arc=6pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt,
+    theorem style=plain,
+    grow to left by=3mm,
+    grow to right by=3mm,
+  }
+}
+
+\newtcbtheorem[number within=section]{theorem}{Theorem}{plaingreen}{thm}
+\newtcbtheorem[number within=section]{proposition}{Proposition}{plaingreen}{prop}
+\newtcbtheorem[number within=section]{lemma}{Lemma}{plainstyle}{lem}
+\newtcbtheorem[number within=section]{corollary}{Corollary}{plainstyle}{cor}
+\newtcbtheorem[number within=section]{problem}{Problem}{plainstyle}{prob}
+\newtcbtheorem[number within=section]{question}{Question}{plainstyle}{prob}
+\newtcbtheorem[number within=section]{fact}{Fact}{plainstyle}{fact}
+\newtcbtheorem[number within=section]{example}{Example}{plainstyle}{eg}
+\newtcbtheorem[number within=section]{definition}{Definition}{plainstyle}{def}
+\newtcbtheorem[number within=section]{remark}{Remark}{plainstyle}{rmk}
+\newtcbtheorem[number within=section]{solution}{Solution}{plainstyle}{sol}
 
 %%% EXERCISE ENVIRONMENT %%%
 \makeatletter
-\newtcbtheorem{question}{Question}{%
+\newtcbtheorem[number from=section]{exercise}{Exercise}{%
   enhanced,
   breakable,
   colback=white,
@@ -52,21 +181,23 @@
     (frame.north) -| cycle;
   },
 }{def}
-\makeatother
 
-\begin{document}
-
-\section{Examples}
-
-\begin{greentheorem}{}{}
-For any $a,b \in \mathbb{R}$,
-\[
-(a+b)^2 = a^2 + 2ab + b^2.
-\]
-\end{greentheorem}
-
-\begin{question}{}{}
-Prove that the sum of two even numbers is even.
-\end{question}
-
-\end{document}
+% Corollary
+\newtcbtheorem[number within=chapter]{pretty}{Pretty}
+{%
+	enhanced
+	,breakable
+	,colback = myp!10
+	,frame hidden
+	,boxrule = 0sp
+	,borderline west = {2pt}{0pt}{myp!85!black}
+	,sharp corners
+	,detach title
+	,before upper = \tcbtitle\par\smallskip
+	,coltitle = myp!85!black
+	,fonttitle = \bfseries\sffamily
+	,description font = \mdseries
+	,separator sign none
+	,segmentation style={solid, myp!85!black}
+}
+{th}
