@@ -1,0 +1,243 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def not_math():
+	return not math()
+
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+endglobal
+
+priority 10000
+context "math()"
+snippet 'simplify(.*)simplify' "simplify expression" wr
+`!p
+from sympy.parsing.latex import parse_latex
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+latex_exp = match.group(1)
+parsed_latex = parse_latex(latex_exp)
+simplified = simplify(parsed_latex)
+snip.rv = latex(simplified)
+`
+endsnippet
+
+
+priority 10000
+context "math()"
+snippet '(.*)(&?=&?\s*)jk' "simplify expression" Ar
+`!p
+from sympy.parsing.latex import parse_latex
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+latex_exp = match.group(1)
+parsed_latex = parse_latex(latex_exp)
+simplified = simplify(parsed_latex)
+snip.rv = latex_exp + match.group(2) + latex(simplified)
+`
+endsnippet
+
+##############################
+######     SIMPLIFY     ######
+##############################
+context "math()"
+snippet sysim "simplify expression" Aw
+`!p
+if snip.v.text:
+	import sys
+	# Add your Neovim config folder to sys.path
+	sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+	from parse_equal import parse_equation
+	from sympy import *
+	x, y, z, t = symbols('x y z t')
+	k, m, n = symbols('k m n', integer=True)
+	f, g, h = symbols('f g h', cls=Function)
+	init_printing()
+	latex_exp = snip.v.text
+	parsed_latex = parse_equation(latex_exp)
+	if isinstance(parsed_latex, list):
+		parsed_latex = parsed_latex[0]
+	simplified = simplify(parsed_latex)
+	snip.rv = latex(simplified)
+`
+endsnippet
+
+##############################
+#######     EXPAND     #######
+##############################
+context "math()"
+priority 10000
+snippet syexp "expand expression" Aw
+`!p
+if snip.v.text:
+	import sys
+	# Add your Neovim config folder to sys.path
+	sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+	from parse_equal import parse_equation as parse_latex
+	from sympy import *
+	x, y, z, t = symbols('x y z t')
+	k, m, n = symbols('k m n', integer=True)
+	f, g, h = symbols('f g h', cls=Function)
+	init_printing()
+	latex_exp = snip.v.text
+	parsed_latex = parse_latex(latex_exp)
+	expanded = expand(parsed_latex)
+	snip.rv = latex(expanded)
+`
+endsnippet
+
+##############################
+#######     FACTOR     #######
+##############################
+context "math()"
+priority 10000
+snippet syfac "factor expression" Aw
+`!p
+if snip.v.text:
+	import sys
+	# Add your Neovim config folder to sys.path
+	sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+	from parse_equal import parse_equation as parse_latex
+	from sympy import *
+	x, y, z, t = symbols('x y z t')
+	k, m, n = symbols('k m n', integer=True)
+	f, g, h = symbols('f g h', cls=Function)
+	init_printing()
+	latex_exp = snip.v.text
+	parsed_latex = parse_latex(latex_exp)
+	expanded = factor(parsed_latex)
+	snip.rv = latex(expanded)
+`
+endsnippet
+
+##############################
+#######     COLLECT     ######
+##############################
+context "math()"
+priority 10000
+snippet `sycol\{(.*)\}` "collect expression" r
+`!p
+if snip.v.text:
+	import sys
+	# Add your Neovim config folder to sys.path
+	sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+	from parse_equal import parse_equation as parse_latex
+	from sympy import *
+	x, y, z, t = symbols('x y z t')
+	k, m, n = symbols('k m n', integer=True)
+	f, g, h = symbols('f g h', cls=Function)
+	init_printing()
+	latex_exp = snip.v.text
+	parsed_latex = parse_latex(latex_exp)
+	col_var = parse_latex(match.group(1))
+	snip.rv = latex(collect(parsed_latex, col_var))
+`
+endsnippet
+
+##############################
+#######     APART     #######
+##############################
+context "math()"
+priority 10000
+snippet syapa "apart fraction" Aw
+`!p
+if snip.v.text:
+	import sys
+	# Add your Neovim config folder to sys.path
+	sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+	from parse_equal import parse_equation as parse_latex
+	from sympy import *
+	x, y, z, t = symbols('x y z t')
+	k, m, n = symbols('k m n', integer=True)
+	f, g, h = symbols('f g h', cls=Function)
+	init_printing()
+	latex_exp = snip.v.text
+	parsed_latex = parse_latex(latex_exp)
+	snip.rv = latex(apart(parsed_latex))
+`
+endsnippet
+
+##############################
+########     DIFF     ########
+##############################
+context "math()"
+snippet sydif "init diff expression" A
+[DIFF]{${1:${VISUAL}}}{${2:var}}[DIFF]
+endsnippet
+
+context "math()"
+snippet `\[DIFF\]\{(.*)\}\{(.*)\}\[DIFF\]` "differentiate expression" Ar
+`!p
+import sys
+# Add your Neovim config folder to sys.path
+sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+from parse_equal import diff_equation
+from sympy import latex
+snip.rv = latex(diff_equation(match.group(1), match.group(2)))
+`
+endsnippet
+
+##############################
+######     INTEGRATE     #####
+##############################
+context "math()"
+snippet syint "init integrate expression" A
+[INT]{${1:${VISUAL}}}{${2:var}}[INT]
+endsnippet
+
+context "math()"
+snippet `\[INT\]\{(.*)\}\{(.*)\}\[INT\]` "integrate expression" Ar
+`!p
+import sys
+# Add your Neovim config folder to sys.path
+sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+from parse_equal import parse_equation
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+latex_exp = parse_equation(match.group(1))
+int_var = parse_equation(match.group(2))
+snip.rv = latex(integrate(latex_exp, int_var))
+`
+endsnippet
+
+##############################
+########     SUBS     ########
+##############################
+context "math()"
+snippet sysub "init sympy sub" Aw
+[SUB]{${1:${VISUAL}}}{${2:old}}{${3:new}}[SUB]
+endsnippet
+
+context "math()"
+priority 10000
+snippet `\[SUB\]\{(.*)\}\{(.*)\}\{(.*)\}\[SUB\]` "simplify expression" Ar
+`!p
+import sys
+# Add your Neovim config folder to sys.path
+sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+from parse_equal import parse_equation
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+latex_exp = parse_equation(match.group(1).replace("&", ""))
+old_var = parse_equation(match.group(2))
+new_var = parse_equation(match.group(3))
+snip.rv = latex(latex_exp.subs(old_var, new_var))
+`
+endsnippet
