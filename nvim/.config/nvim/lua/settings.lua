@@ -15,6 +15,8 @@ vim.opt.ttimeoutlen = 0 -- Key code timeout
 vim.opt.autoread = true -- Auto reload files changed outside vim
 vim.opt.autowrite = false
 vim.opt.tabstop = 4 -- Number of spaces for a tab
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 
 -- Spell Check for .tex files
 vim.api.nvim_create_autocmd("FileType", {

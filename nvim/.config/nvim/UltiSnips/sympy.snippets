@@ -241,3 +241,29 @@ new_var = parse_equation(match.group(3))
 snip.rv = latex(latex_exp.subs(old_var, new_var))
 `
 endsnippet
+
+
+##############################
+########     EVALF     ########
+##############################
+context "math()"
+snippet syeval "eval expression" Aw
+`!p
+if snip.v.text:
+	import sys
+	# Add your Neovim config folder to sys.path
+	sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+	from parse_equal import parse_equation
+	from sympy import *
+	x, y, z, t = symbols('x y z t')
+	k, m, n = symbols('k m n', integer=True)
+	f, g, h = symbols('f g h', cls=Function)
+	init_printing()
+	latex_exp = snip.v.text
+	parsed_latex = parse_equation(latex_exp)
+	if isinstance(parsed_latex, list):
+		parsed_latex = parsed_latex[0]
+	evaled = parsed_latex.evalf()
+	snip.rv = latex(evaled)
+`
+endsnippet

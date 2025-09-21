@@ -19,6 +19,8 @@ snippet newhomework "New Homework Document" bA
 \def\showsolution{1}  % Comment to hide solutions
 \def\showcomment{1}  % Comment to hide question comments
 \input{"~/.config/latex/preamble/homework.tex"}
+% Remove labels from questions
+% \qformat{} 
 
 \title{${1:Title}}
 \author{Ot\'avio Dittrich Moreira}
@@ -56,7 +58,7 @@ $0
 \end{document}
 endsnippet
 
-snippet '\\input\{([^\}]*)\}' "Create file input" br
+snippet '\\input\{(.*)\}' "Create file input" r
 `!p import os; filename = match.group(1); os.makedirs(os.path.dirname(filename), exist_ok=True) if '/' in filename else None; open(filename, "a").close(); snip.rv = match.group(0)`
 endsnippet
 

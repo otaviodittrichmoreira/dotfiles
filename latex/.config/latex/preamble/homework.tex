@@ -44,6 +44,8 @@
 \def\pto{\stackrel{p}{\to}}
 \def\dto{\stackrel{d}{\to}}
 \def\iid{\stackrel{\text{iid}}{\sim}}
+\def\d{\operatorname{d}}
+\def\std{\operatorname{std}}
 \newcommand{\normal}[1]{\mathcal{N}\left(#1\right)}
 \newcommand{\ntexttt}[1]{\texttt{\textup{#1}}}
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
@@ -58,7 +60,7 @@
 \newcommand{\indicadora}[1]{\mathbf{1}_{\left[ #1 \right]}}
 \newcommand{\E}[1]{\mathbb{E}\left[#1\right]}
 \newcommand{\var}[1]{\mathbb{V}\left[#1\right]}
-\newcommand{\cov}[1]{\text{Cov}\left[#1\right]}
+\newcommand{\cov}[1]{\operatorname{Cov}\left[#1\right]}
 \newcommand{\EP}[2]{{\mathbb{E}}_{#1}\left[#2\right]}
 \newcommand{\seq}[1]{(#1_n)_{n\in\N}}
 \newcommand{\under}[2]{\underset{#2}{{\underbrace{#1}}}} % para escrever texto embaixo de um brace.
@@ -161,3 +163,108 @@
 
 % bibliography
 \usepackage[numbers,sort,compress]{natbib}
+
+%%% Algorithms
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\usepackage{listings}
+
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10}  % for normal
+
+% Custom colors
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+commentstyle=\ttfamily\small\color{deepred},
+frame=tb,                         % Any extra options here
+showstringspaces=false,            % 
+extendedchars=true,
+literate={á}{{\'a}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ú}{{\'u}}1 {*}{{*}}1,
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+
+% R style for highlighting
+\newcommand\Rstyle{\lstset{
+language=R,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            % 
+}}
+
+% Python environment
+\lstnewenvironment{Rcode}[1][]
+{
+\Rstyle
+\lstset{#1}
+}
+{}
+
+% R for external files (always .R)
+\newcommand\Rexternal[2][]{{
+  \Rstyle
+  \lstinputlisting[#1]{#2} % always add .R extension
+}}
+
+% remove o label das questões
+% \qformat{} 
+
+
+%%% COMMANDS %%%
+% To add a section to the table of contents without numbering it
+\newcommand*\silentsection[1]{%
+\addtocounter{section}{1}
+\addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}
+\sectionmark{#1}
+}
+
+% To add a subsection to the table of contents without numbering it
+\newcommand*\silentsubsection[1]{%
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1}
+  \subsectionmark{#1}
+}
+
+
+% Save the original definition of \question
+% \let\oldquestion\question
+
+\newcommand*{\ssquestion}{%
+  \par                % <<-- ensure vertical mode
+  \question
+  \phantomsection
+  \silentsubsection{Question \thequestion}%
+}

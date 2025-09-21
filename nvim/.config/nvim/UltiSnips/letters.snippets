@@ -306,7 +306,8 @@ else:
 endsnippet
 
 context "math()"
-snippet `(;x)|((?<![\a-zA-Z])xi)` "Xi" Ar
+#snippet `(;x)|((?<![\a-zA-Z])xi)` "Xi" Ar
+snippet `(;x)` "Xi" Ar
 \xi`!p
 if t[0] and t[0][0] not in [',',' ']:
 	snip.rv = ' '
@@ -316,7 +317,7 @@ else:
 endsnippet
 
 context "math()"
-snippet `(;X)|((?<![\a-zA-Z])Xi)` "Xi Uppercase" Ar
+snippet `(;X)` "Xi Uppercase" Ar
 \Xi`!p
 if t[0] and t[0][0] not in [',',' ']:
 	snip.rv = ' '
@@ -526,8 +527,23 @@ else:
 endsnippet
 
 context "math()"
+snippet `(?<![\\\w])pr` "Expectation" Awr
+\mathbb{E}_{$1}\left[ $2 \right]`!p
+if t[0] and t[0][0] not in [',',' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "math()"
 snippet `(?<![\\\w])(var|pv)` "Variance" Arw
 \mathbb{V}[${1:${VISUAL}}]
+endsnippet
+
+context "math()"
+snippet `(?<![\\\w])std` "Variance" Arw
+\std ($1) $0
 endsnippet
 
 context "math()"

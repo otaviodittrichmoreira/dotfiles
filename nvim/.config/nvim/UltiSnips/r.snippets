@@ -1,0 +1,35 @@
+snippet for "for loop" Ab
+for (${1:i} in ${2:start}:${3:end}) {
+	$0
+}
+endsnippet
+
+snippet while "while loop" Ab
+while (${1:condition}) {
+	$0
+}
+endsnippet
+
+snippet if "if statement" Ab
+if (${1:condition}) {
+	$0
+}
+endsnippet
+
+snippet print "Print" bA
+print(${1:${VISUAL}})
+endsnippet
+
+snippet pf "Print format" bA
+cat("$1 =", ${1:${VISUAL}}, "\n")
+endsnippet
+
+snippet `^(\s*[^(]*\s*)=` "Replace = by <-" Ar
+`!p snip.rv = match.group(1) + "<-"`
+endsnippet
+
+snippet exit "Exit" bA
+quit(status=0)
+endsnippet
+
+

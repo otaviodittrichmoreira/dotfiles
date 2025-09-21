@@ -81,6 +81,12 @@ snippet iff "iff" Ai
 \iff $0
 endsnippet
 
+priority 1000
+context "not_math()"
+snippet iff "not math iff" w
+if and only if $0
+endsnippet
+
 context "not_math()"
 snippet fm "Math" wA
 \(${1:${VISUAL}}\)`!p
@@ -502,6 +508,7 @@ snippet cc "subset" Ai
 \subset 
 endsnippet
 
+
 snippet notin "not in " iA
 \not\in 
 endsnippet
@@ -515,22 +522,6 @@ snippet NN "n" iA
 \N 
 endsnippet
 
-context "math()"
-snippet `(Nn|cap)` "cap" iAr
-\cap 
-endsnippet
-
-snippet UU "cup" iA
-\cup 
-endsnippet
-
-snippet uuu "bigcup" iA
-\bigcup_{${1:i \in ${2: I}}} $0
-endsnippet
-
-snippet nnn "bigcap" iA
-\bigcap_{${1:i \in ${2: I}}} $0
-endsnippet
 
 snippet OO "emptyset" iA
 \O 
@@ -599,7 +590,7 @@ endsnippet
 priority 10
 context "math()"
 snippet "bar" "bar" riA
-\overline{$1} $0
+\overline{${1:${VISUAL}}} $0
 endsnippet
 
 priority 100
