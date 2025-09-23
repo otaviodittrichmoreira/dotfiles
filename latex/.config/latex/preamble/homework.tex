@@ -44,7 +44,7 @@
 \def\pto{\stackrel{p}{\to}}
 \def\dto{\stackrel{d}{\to}}
 \def\iid{\stackrel{\text{iid}}{\sim}}
-\def\d{\operatorname{d}}
+\def\d{\text{d}}
 \def\std{\operatorname{std}}
 \newcommand{\normal}[1]{\mathcal{N}\left(#1\right)}
 \newcommand{\ntexttt}[1]{\texttt{\textup{#1}}}
@@ -267,4 +267,11 @@ showstringspaces=false            %
   \question
   \phantomsection
   \silentsubsection{Question \thequestion}%
+}
+
+\newcommand*{\squestion}{%
+  \par                % <<-- ensure vertical mode
+  \question
+  \phantomsection
+  \silentsection{Question \thequestion}%
 }

@@ -21,7 +21,7 @@ endsnippet
 
 context "math()"
 snippet `(?<!\\)by` "Justification" riA
- \quad \text{(By $1)}$0
+\tag{(By $1)}$0
 endsnippet
 
 context "math()"
@@ -47,6 +47,11 @@ endsnippet
 context "math()"
 snippet `(?<![\\\w])not` "not" Ar
 \not $0
+endsnippet
+
+context "math()"
+snippet `(?<![\\\w])neq` "not equal" Ar
+\not = $0
 endsnippet
 
 context "math()"

@@ -18,7 +18,7 @@ snippet newhomework "New Homework Document" bA
 \documentclass[12pt, answers]{exam}
 \def\showsolution{1}  % Comment to hide solutions
 \def\showcomment{1}  % Comment to hide question comments
-\input{"~/.config/latex/preamble/homework.tex"}
+\input{homework}
 % Remove labels from questions
 % \qformat{} 
 
@@ -35,6 +35,7 @@ snippet newhomework "New Homework Document" bA
 $0
 
 \end{document}
+`ln -s ~/.config/latex/preamble/homework.tex`
 endsnippet
 
 snippet newdoc "New Document" bA

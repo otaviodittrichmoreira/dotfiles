@@ -14,61 +14,61 @@ endglobal
 priority 200
 context "env('align*')"
 snippet '^(\s*)je'  "Equal align beggining of the line" Ar
-`!p snip.rv=match.group(1)`=& $0
+`!p snip.rv=match.group(1)`=&\ $0
 endsnippet
 
 priority 200
 context "env('align*')"
 snippet '^((?!.*&).*\S)(\s*)je'  "Equal align" iAr
-`!p snip.rv=match.group(1)` =& $0
+`!p snip.rv=match.group(1)` =&\ $0
 endsnippet
 
 priority 1000
 context "env('align*')"
 snippet '(leq|lq)'  "Leq align beggining of the line" Arb
-\leq& $0
+\leq&\ $0
 endsnippet
 
-priority 200
+priority 20000
 context "env('align*')"
 snippet '^((?!.*&).*\S)(\s*)(leq|lq)'  "Leq align" iAr
-`!p snip.rv=match.group(1)` \leq & $0
+`!p snip.rv=match.group(1)` \leq&\ $0
 endsnippet
 
 priority 1000
 context "env('align*')"
 snippet '(geq|gq)'  "Geq align beggining of the line" Arb
-\geq& $0
+\geq&\ $0
 endsnippet
 
 priority 200
 context "env('align*')"
 snippet '^((?!.*&).*\S)(\s*)(geq|gq)'  "geq align" iAr
-`!p snip.rv=match.group(1)` \geq & $0
+`!p snip.rv=match.group(1)` \geq&\ $0
 endsnippet
 
 priority 200
 context "env('align*')"
 snippet '^(\s*)>'  "> align beggining of the line" Ar
-`!p snip.rv=match.group(1)`>& $0
+`!p snip.rv=match.group(1)`>&\ $0
 endsnippet
 
 priority 200
 context "env('align*')"
 snippet '^((?!.*&).*\S)(\s*)>'  "> align" iAr
-`!p snip.rv=match.group(1)` >& $0
+`!p snip.rv=match.group(1)` >&\ $0
 endsnippet
 
 priority 200
 context "env('align*')"
 snippet '^(\s*)<'  "< align beggining of the line" Ar
-`!p snip.rv=match.group(1)`<& $0
+`!p snip.rv=match.group(1)`<&\ $0
 endsnippet
 
 priority 200
 context "env('align*')"
 snippet '^((?!.*&).*\S)(\s*)<'  "< align" iAr
-`!p snip.rv=match.group(1)` &< $0
+`!p snip.rv=match.group(1)` <&\ $0
 endsnippet
 
 priority 200

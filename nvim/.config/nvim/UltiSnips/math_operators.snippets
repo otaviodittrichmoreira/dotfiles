@@ -15,7 +15,7 @@ endglobal
 context "math()"
 snippet `(\s?)jv` "subscript" iAr
 _{${1:${VISUAL}}}`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -51,7 +51,7 @@ priority 300
 context "math()"
 snippet '\\(prod|sum|cup|bigcup|cap|bigcap)_\{([^}]*)je' "equal in sum" Ar
 `!p
-snip.rv = '\\' + match.group(1) + "_{" + match.group(2)` = ${1:1}}^{${2:n}$0
+snip.rv = '\\' + match.group(1) + "_{" + match.group(2)` = ${1:1}`!p snip.rv = "}^{"`${0:n}
 endsnippet 
 
 context "math()"
@@ -142,7 +142,7 @@ endsnippet
 context "math()"
 snippet '([A-Za-z])(\d)' "auto subscript" wrA
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)``!p
-if t[0] and t[0][0] not in [',', ' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -152,7 +152,7 @@ endsnippet
 context "math()"
 snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''

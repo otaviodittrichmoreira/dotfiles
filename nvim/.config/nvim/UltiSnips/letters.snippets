@@ -518,7 +518,7 @@ endsnippet
 
 context "math()"
 snippet `(?<![\\\w])pe` "Expectation" Awr
-\mathbb{E}\left[ $1 \right]`!p
+\mathbb{E}\left[ ${1:${VISUAL}} \right]`!p
 if t[0] and t[0][0] not in [',',' ']:
 	snip.rv = ' '
 else:
@@ -528,7 +528,7 @@ endsnippet
 
 context "math()"
 snippet `(?<![\\\w])pr` "Expectation" Awr
-\mathbb{E}_{$1}\left[ $2 \right]`!p
+\mathbb{E}_{${1:\theta}}\left[ $2 \right]`!p
 if t[0] and t[0][0] not in [',',' ']:
 	snip.rv = ' '
 else:

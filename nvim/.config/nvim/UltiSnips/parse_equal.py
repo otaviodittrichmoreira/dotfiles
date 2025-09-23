@@ -10,7 +10,7 @@ def parse_equation(latex_str: str):
     depth = 0
     eq_index = None
 
-    latex_str = latex_str.replace("&", "")
+    # latex_str = latex_str.replace("&", "")
     latex_str = latex_str.replace(r"\log", r"\ln")
 
     for i, ch in enumerate(latex_str):

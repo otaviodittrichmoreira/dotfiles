@@ -1,3 +1,26 @@
+global !p
+def in_r_function():
+    """
+    Check if the cursor is inside a function call in R by tracking parentheses
+    across multiple lines.
+    """
+    import vim
+
+    row, col = vim.current.window.cursor
+    # get all lines up to the cursor
+    lines = vim.current.buffer[:row-1] + [vim.current.line[:col]]
+
+    open_parens = 0
+    close_parens = 0
+
+    for line in lines:
+        open_parens += line.count('(')
+        close_parens += line.count(')')
+
+    # if there is at least one unmatched '(', we are inside a function
+    return (open_parens - close_parens) <= 0
+endglobal
+
 snippet for "for loop" Ab
 for (${1:i} in ${2:start}:${3:end}) {
 	$0
@@ -24,8 +47,14 @@ snippet pf "Print format" bA
 cat("$1 =", ${1:${VISUAL}}, "\n")
 endsnippet
 
-snippet `^(\s*[^(]*\s*)=` "Replace = by <-" Ar
+context "in_r_function()"
+snippet `^(\s*[^<-=]*\s*)=` "Replace equal = by <-" Ar
 `!p snip.rv = match.group(1) + "<-"`
+endsnippet
+
+context "in_r_function()"
+snippet <-= "Replace <-= by ==" Ai
+==
 endsnippet
 
 snippet exit "Exit" bA

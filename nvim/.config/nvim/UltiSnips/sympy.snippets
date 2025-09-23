@@ -61,7 +61,8 @@ if snip.v.text:
 	from parse_equal import parse_equation
 	from sympy import *
 	x, y, z, t = symbols('x y z t')
-	k, m, n = symbols('k m n', integer=True)
+	k, m = symbols('k m', integer=True)
+	n = symbols('n', integer=True, positive=True)
 	f, g, h = symbols('f g h', cls=Function)
 	init_printing()
 	latex_exp = snip.v.text
@@ -235,7 +236,7 @@ x, y, z, t = symbols('x y z t')
 k, m, n = symbols('k m n', integer=True)
 f, g, h = symbols('f g h', cls=Function)
 init_printing()
-latex_exp = parse_equation(match.group(1).replace("&", ""))
+latex_exp = parse_equation(match.group(1))
 old_var = parse_equation(match.group(2))
 new_var = parse_equation(match.group(3))
 snip.rv = latex(latex_exp.subs(old_var, new_var))
