@@ -197,6 +197,20 @@ snippet syint "init integrate expression" A
 [INT]{${1:${VISUAL}}}{${2:var}}[INT]
 endsnippet
 
+#context "math()"
+#snippet sydoit "compute integral" A
+#`!p
+#from latex2sympy2 import latex2sympy as parse_latex
+#from sympy import Integral, latex
+#expr = parse_latex(snip.v.text)
+#if isinstance(expr, Integral):
+#	result = expr.doit()
+#else:
+#	result = "error"
+#snip.rv = latex(expr)
+#`
+#endsnippet
+
 context "math()"
 snippet `\[INT\]\{(.*)\}\{(.*)\}\[INT\]` "integrate expression" Ar
 `!p
@@ -211,7 +225,7 @@ f, g, h = symbols('f g h', cls=Function)
 init_printing()
 latex_exp = parse_equation(match.group(1))
 int_var = parse_equation(match.group(2))
-snip.rv = latex(integrate(latex_exp, int_var))
+snip.rv = latex(integrate(latex_exp, int_var, conds='none'))
 `
 endsnippet
 

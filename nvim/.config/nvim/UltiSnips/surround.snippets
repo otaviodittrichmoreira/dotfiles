@@ -13,7 +13,7 @@ endglobal
 
 snippet sp "Parenthesis outside mathmode" w
 (${1:${VISUAL}})`!p
-if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ','/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -22,7 +22,7 @@ endsnippet
 
 snippet sb "Brackets outside mathmode" w
 [${1:${VISUAL}}]`!p
-if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ','/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -31,7 +31,7 @@ endsnippet
 
 snippet sc "Curly brackets outside mathmode" w
 {${1:${VISUAL}}}`!p
-if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ','/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -43,7 +43,7 @@ snippet '(\+|=|-?)Sp' "Parentheses" Ar
 `!p
 symbol = match.group(1) + ' ' if match.group(1) else ''
 snip.rv = symbol`\left(  ${1:${VISUAL}} \right)`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -56,7 +56,7 @@ snippet '(\+|=|-?)Sb' "Brackets" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
 `\left[  ${1:${VISUAL}} \right]`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -68,7 +68,7 @@ snippet '(\+|=|-?)Sc'  "Curly Brackets" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
 `\left\\{  ${1:${VISUAL}} \right\\}`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -80,7 +80,7 @@ snippet '(\+|=|-?)Sn'  "Norm" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
 `\left\|  ${1:${VISUAL}} \right\|`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -89,11 +89,11 @@ endsnippet
 
 
 context "math()"
-snippet '(\+|=|-?)(sp|ps)'  "Parentheses" Ar
+snippet '(\+|=|-?)(sp|(?<!e)ps)'  "Parentheses" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
 `(${1:${VISUAL}})`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -105,7 +105,7 @@ snippet '(\+|=|-?)sb'  "Brackets" iAr
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
 `[${1:${VISUAL}}]`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -117,7 +117,7 @@ snippet '(\+|=|-?)sc'  "Curly Brackets" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
 `\\{${1:${VISUAL}}\\}`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -129,7 +129,7 @@ snippet '(\+|=|-?)(?<![\\\w])sn'  "Norm" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
 `\|${1:${VISUAL}}\|`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -139,7 +139,7 @@ endsnippet
 context "math()"
 snippet lr, "<>" iA
 \left< ${1:${VISUAL}} \right>`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -149,7 +149,7 @@ endsnippet
 context "math()"
 snippet Abs "Absolute Value" iA
 \left| ${1:${VISUAL}} \right|`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -159,7 +159,7 @@ endsnippet
 context "math()"
 snippet abs "Absolute Value" iA
 | ${1:${VISUAL}} |`!p
-if t[0] and t[0][0] not in [',', ' ']:
+if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:
 	snip.rv = ''

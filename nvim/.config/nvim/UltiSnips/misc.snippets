@@ -21,7 +21,7 @@ endsnippet
 
 context "math()"
 snippet `(?<!\\)by` "Justification" riA
-\tag{(By $1)}$0
+\tag{By $1}$0
 endsnippet
 
 context "math()"
@@ -30,7 +30,7 @@ snippet and "and" wA
 endsnippet
 
 context "math()"
-snippet `->|(?<!\\)to` "to" Ar
+snippet `->|(?<![\\\w])to` "to" Ar
 \to $0
 endsnippet
 
@@ -141,7 +141,7 @@ endsnippet
 
 context "math()"
 snippet under "Underbrace" iA
-\underbrace{${1:expression}}_{\text{${2:label}}}$0
+\underbrace{${1:${VISUAL}}}_{${2:= 0}}$0
 endsnippet
 
 context "math()"
@@ -149,6 +149,15 @@ snippet stack "Stack Expressions" iA
 \stackrel{${1:label}}{${2:${VISUAL}}}$0
 endsnippet
 
+context "math()"
+snippet can "Cancel Expressions" iA
+\cancel{${1:${VISUAL}}}$0
+endsnippet
+
 snippet input "Input" bA
 \input{${1:filename}}$0
+endsnippet
+
+snippet rext "Import external .R script" bA
+\Rexternal{./${1:filename}.R}
 endsnippet

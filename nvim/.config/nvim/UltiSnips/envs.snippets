@@ -60,7 +60,18 @@ $0
 endsnippet
 
 snippet '\\input\{(.*)\}' "Create file input" r
-`!p import os; filename = match.group(1); os.makedirs(os.path.dirname(filename), exist_ok=True) if '/' in filename else None; open(filename, "a").close(); snip.rv = match.group(0)`
+`!p filename = match.group(1); os.makedirs(os.path.dirname(filename), exist_ok=True) if '/' in filename else None; open(filename, "a").close(); snip.rv = match.group(0)`
+endsnippet
+
+snippet genfiles "Create file input" b
+`!p 
+text = snip.v.text
+matches = re.findall(r"\\input\{([^}]*)\}", text)
+for m in matches:
+    filename = m
+    os.makedirs(os.path.dirname(filename), exist_ok=True) if '/' in filename else None
+    open(filename, "a").close()
+snip.rv = text.lstrip().rstrip("\n")`
 endsnippet
 
 snippet begg "begin{} / end{}" bA

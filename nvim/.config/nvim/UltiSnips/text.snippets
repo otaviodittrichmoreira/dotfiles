@@ -34,6 +34,16 @@ else:
 endsnippet
 
 context "not_math()"
+snippet ttt "Bold" w
+\texttt{${1:${VISUAL}}}`!p
+if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+context "not_math()"
 snippet emph "Emphasize" w
 \emph{${1:${VISUAL}}}`!p
 if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
@@ -41,4 +51,9 @@ if t[0] and t[0][0] not in [';', ':', ',', '.', '?', '-', ' ']:
 else:
 	snip.rv = ''
 `$0
+endsnippet
+
+context "math()"
+snippet tt "text" iA
+\text{${1:${VISUAL}}} $0
 endsnippet

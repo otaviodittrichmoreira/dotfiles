@@ -9,76 +9,106 @@ def env(name):
 	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
 	return x != '0' and y != '0'
 
+def not_in(right_delimiter, left_delimiter):
+    row, col = vim.current.window.cursor
+    # get all lines up to the cursor
+    lines = vim.current.buffer[:row-1] + [vim.current.line[:col]]
+
+    open_delimiter = 0
+    close_delimiter = 0
+
+    for line in lines:
+        open_delimiter += line.count(right_delimiter)
+        close_delimiter += line.count(left_delimiter)
+
+    # if there is at least one unmatched '(', we are inside a function
+    return (open_delimiter - close_delimiter) <= 0
+
+def align_condition():
+	return (env('align*') or env('align')) and not_in('{','}') and not_in('[',']') and not_in('(',')') and (not env('cases'))
+
 endglobal
 
 priority 200
-context "env('align*')"
+context "align_condition()"
 snippet '^(\s*)je'  "Equal align beggining of the line" Ar
 `!p snip.rv=match.group(1)`=&\ $0
 endsnippet
 
 priority 200
-context "env('align*')"
+context "align_condition()"
 snippet '^((?!.*&).*\S)(\s*)je'  "Equal align" iAr
 `!p snip.rv=match.group(1)` =&\ $0
 endsnippet
 
 priority 1000
-context "env('align*')"
+context "align_condition()"
 snippet '(leq|lq)'  "Leq align beggining of the line" Arb
 \leq&\ $0
 endsnippet
 
 priority 20000
-context "env('align*')"
+context "align_condition()"
 snippet '^((?!.*&).*\S)(\s*)(leq|lq)'  "Leq align" iAr
 `!p snip.rv=match.group(1)` \leq&\ $0
 endsnippet
 
-priority 1000
-context "env('align*')"
+priority 200000
+context "align_condition()"
 snippet '(geq|gq)'  "Geq align beggining of the line" Arb
 \geq&\ $0
 endsnippet
 
-priority 200
-context "env('align*')"
+priority 200000
+context "align_condition()"
 snippet '^((?!.*&).*\S)(\s*)(geq|gq)'  "geq align" iAr
 `!p snip.rv=match.group(1)` \geq&\ $0
 endsnippet
 
+priority 1000
+context "align_condition()"
+snippet 'prop'  "Propto align beggining of the line" Arb
+\propto &\ $0
+endsnippet
+
 priority 200
-context "env('align*')"
+context "align_condition()"
+snippet '^((?!.*&).*\S)(\s*)prop'  "geq align" iAr
+`!p snip.rv=match.group(1)` \propto &\ $0
+endsnippet
+
+priority 200
+context "align_condition()"
 snippet '^(\s*)>'  "> align beggining of the line" Ar
 `!p snip.rv=match.group(1)`>&\ $0
 endsnippet
 
 priority 200
-context "env('align*')"
+context "align_condition()"
 snippet '^((?!.*&).*\S)(\s*)>'  "> align" iAr
 `!p snip.rv=match.group(1)` >&\ $0
 endsnippet
 
 priority 200
-context "env('align*')"
+context "align_condition()"
 snippet '^(\s*)<'  "< align beggining of the line" Ar
 `!p snip.rv=match.group(1)`<&\ $0
 endsnippet
 
 priority 200
-context "env('align*')"
+context "align_condition()"
 snippet '^((?!.*&).*\S)(\s*)<'  "< align" iAr
 `!p snip.rv=match.group(1)` <&\ $0
 endsnippet
 
 priority 200
-context "env('align*')"
+context "align_condition()"
 snippet '^(\s*)jp'  "Plus align beggining of the line" Ar
 `!p snip.rv=match.group(1)`&+ $0
 endsnippet
 
 priority 200
-context "env('align*')"
+context "align_condition()"
 snippet '^(\s*)jm'  "Plus align beggining of the line" Ar
 `!p snip.rv=match.group(1)`&- $0
 endsnippet

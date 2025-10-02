@@ -15,6 +15,7 @@
 \usepackage[affil-it]{authblk} % para afiliação
 \usepackage{makeidx} % para índice remissivo
 \usepackage{import} % para importar arquivos
+\usepackage{cancel} % Cancel symbol
 %\usepackage{makecell}
 %\usepackage{colortbl}
 %\usepackage[dvipsnames]{xcolor}
@@ -66,6 +67,14 @@
 \newcommand{\under}[2]{\underset{#2}{{\underbrace{#1}}}} % para escrever texto embaixo de um brace.
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+
+% Probability distributions
+\def\dnormal{\mathcal{N}}
+\def\dbin{\operatorname{Bin}}
+\def\dbern{\operatorname{Bern}}
+\def\dunif{\operatorname{Unif}}
+\def\dpoisson{\operatorname{Pois}}
+\def\dbeta{\operatorname{Beta}}
 
 
 
@@ -199,7 +208,13 @@ literate={á}{{\'a}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ç}{{
 \lstnewenvironment{python}[1][]
 {
 \pythonstyle
-\lstset{#1}
+\lstset{
+  #1,
+  aboveskip=-10pt, % pull listing closer to previous content
+  belowskip=0.5em,
+  title=\makebox[\linewidth][r]{\raisebox{-0.8em}{\scriptsize \texttt{Python}}}, % lower only the label
+  frame=tb,               % keep your top/bottom frame
+}
 }
 {}
 
@@ -225,11 +240,17 @@ frame=tb,                         % Any extra options here
 showstringspaces=false            % 
 }}
 
-% Python environment
+% R environment
 \lstnewenvironment{Rcode}[1][]
 {
 \Rstyle
-\lstset{#1}
+\lstset{
+  #1,
+    aboveskip=-10pt, % pull listing closer to previous content
+    belowskip=0.5em,
+  title=\makebox[\linewidth][r]{\raisebox{-0.8em}{\scriptsize \texttt{R}}}, % lower only the label
+  frame=tb,               % keep your top/bottom frame
+}
 }
 {}
 

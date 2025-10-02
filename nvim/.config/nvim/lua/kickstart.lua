@@ -599,6 +599,28 @@ require("lazy").setup({
 						},
 					},
 				},
+				r_language_server = {
+					handlers = {
+						["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+							if result.diagnostics ~= nil then
+								-- remove INFO and HINT
+								local filtered = {}
+								for _, diag in ipairs(result.diagnostics) do
+									if diag.code == "assignment_linter" then
+										table.insert(filtered, diag)
+									elseif
+										diag.severity ~= vim.lsp.protocol.DiagnosticSeverity.Information
+										and diag.severity ~= vim.lsp.protocol.DiagnosticSeverity.Hint
+									then
+										table.insert(filtered, diag)
+									end
+								end
+								result.diagnostics = filtered
+							end
+							vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+						end,
+					},
+				},
 			}
 
 			-- Ensure the servers and tools above are installed
