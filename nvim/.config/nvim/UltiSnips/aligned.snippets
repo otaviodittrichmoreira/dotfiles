@@ -24,10 +24,31 @@ def not_in(right_delimiter, left_delimiter):
     # if there is at least one unmatched '(', we are inside a function
     return (open_delimiter - close_delimiter) <= 0
 
+def line_above_ends_with_double_backslash():
+    row, col = vim.current.window.cursor
+    if row <= 1:  # No line above the first line
+        return False
+    line_above = vim.current.buffer[row - 2]  # 0-based index
+    return line_above.rstrip().endswith("\\\\") or ('align' in line_above)
+
 def align_condition():
 	return (env('align*') or env('align')) and not_in('{','}') and not_in('[',']') and not_in('(',')') and (not env('cases'))
 
 endglobal
+
+context "not line_above_ends_with_double_backslash() and env('align*')"
+snippet `(.)` "test" rA
+`!p
+row, col = vim.current.window.cursor
+if row > 1:  # No line above the first line
+	# Get the line above (0-based indexing)
+	line_above = vim.current.buffer[row - 2]
+	# Append two backslashes if not already there
+	if not line_above.endswith("\\\\"):
+		vim.current.buffer[row - 2] = line_above + " \\\\"
+snip.rv = match.group(1)
+`
+endsnippet
 
 priority 200
 context "align_condition()"
