@@ -138,8 +138,18 @@ $0
 endsnippet
 
 snippet bpar "Parts" bA
-\begin{parts}
-	\part ${1:${VISUAL}}
+`!p
+if snip.v.text is not None and len(snip.v.text) > 0:
+    pattern = r'^\s*(\([a-z]\)|[1-9]\.)'
+    new_text = re.sub(pattern, r'\\part', snip.v.text, flags=re.MULTILINE).rstrip("\n")
+    new_text = re.sub(r'^(?!$)', '    ', new_text, flags=re.MULTILINE)
+    snip.rv = """
+\\begin{parts}
+""" + new_text
+else:
+    snip.rv = """
+\\begin{parts}
+	\part """`$1
 \end{parts}
 $0
 endsnippet
@@ -276,4 +286,12 @@ endsnippet
 
 snippet par "Paragraph" bA
 \paragraph{${1:${VISUAL}}} $0
+endsnippet
+
+
+context "math()"
+snippet `\scase` "cases" rA
+ \begin{cases}
+	${1:${VISUAL}}
+\end{cases}
 endsnippet

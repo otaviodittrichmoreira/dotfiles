@@ -126,23 +126,43 @@ endsnippet
 #######     COLLECT     ######
 ##############################
 context "math()"
-priority 10000
-snippet `sycol\{(.*)\}` "collect expression" r
+snippet sycol "init diff expression" A
+[COLLECT]{${1:${VISUAL}}}{${2:var}}[COLLECT]
+endsnippet
+
+context "math()"
+snippet `\[COLLECT\]\{(.*)\}\{(.*)\}\[COLLECT\]` "collect expression" Ar
 `!p
-if snip.v.text:
-	import sys
-	# Add your Neovim config folder to sys.path
-	sys.path.append("/home/otavio/.config/nvim/UltiSnips")
-	from parse_equal import parse_equation as parse_latex
-	from sympy import *
-	x, y, z, t = symbols('x y z t')
-	k, m, n = symbols('k m n', integer=True)
-	f, g, h = symbols('f g h', cls=Function)
-	init_printing()
-	latex_exp = snip.v.text
-	parsed_latex = parse_latex(latex_exp)
-	col_var = parse_latex(match.group(1))
-	snip.rv = latex(collect(parsed_latex, col_var))
+import sys
+# Add your Neovim config folder to sys.path
+sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+from parse_equal import parse_equation
+from sympy import latex, collect, expand
+exp = parse_equation(match.group(1))
+var = parse_equation(match.group(2))
+snip.rv = latex(collect(expand(exp), var))
+`
+endsnippet
+
+##############################
+#######     SOLVE     ######
+##############################
+context "math()"
+snippet sysol "init diff expression" A
+[SOLVE]{${1:${VISUAL}}}{${2:var}}[SOLVE]
+endsnippet
+
+context "math()"
+snippet `\[SOLVE\]\{(.*)\}\{(.*)\}\[SOLVE\]` "solve expression" Ar
+`!p
+import sys
+# Add your Neovim config folder to sys.path
+sys.path.append("/home/otavio/.config/nvim/UltiSnips")
+from parse_equal import parse_equation
+from sympy import latex, solve
+exp = parse_equation(match.group(1))
+var = parse_equation(match.group(2))
+snip.rv = latex(solve(exp, var))
 `
 endsnippet
 
@@ -239,7 +259,7 @@ endsnippet
 
 context "math()"
 priority 10000
-snippet `\[SUB\]\{(.*)\}\{(.*)\}\{(.*)\}\[SUB\]` "simplify expression" Ar
+snippet `\[SUB\]\{(.*)\}\{(.*)\}\{(.*)\}\[SUB\]` "substitute variable" Ar
 `!p
 import sys
 # Add your Neovim config folder to sys.path

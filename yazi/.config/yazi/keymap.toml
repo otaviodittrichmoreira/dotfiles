@@ -1,9 +1,16 @@
-[mgr]
-prepend_keymap = [
-    { on = "y", run = [
-        '''
-        shell 'xclip -selection clipboard -t image/png -i "$@"' --confirm
-        ''',
-        "yank"
-    ], desc = "Yank image and copy it to clipboard" }
+[[mgr.prepend_keymap]]
+on = "y"
+run = [
+  '''
+  shell '
+  uris=""
+  for f in "$@"; do
+    uri="file://$(realpath "$f")"
+    uris="$uris$uri\n"
+  done
+  printf "%b" "$uris" | xclip -selection clipboard -t text/uri-list
+  ' --confirm
+  ''',
+  "yank"
 ]
+desc = "Yank file(s) (like Nautilus) to clipboard"
