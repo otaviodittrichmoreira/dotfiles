@@ -136,6 +136,7 @@ unset key
 
 # add nvim to path
 alias nvim="$HOME/bin/nvim.appimage"
+alias n="$HOME/bin/nvim.appimage"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export EDITOR="$HOME/bin/nvim.appimage"

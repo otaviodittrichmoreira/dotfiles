@@ -689,6 +689,7 @@ require("lazy").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
 				r = { "air" },
+				-- tex = { "latexindent" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				-- TODO: Add Latex formatter
@@ -702,6 +703,11 @@ require("lazy").setup({
 					command = "air", -- assumes it's on your PATH
 					args = { "format", "$FILENAME" }, -- format the file directly
 					stdin = false, -- don't send input through stdin
+				},
+				latexindent = {
+					command = "latexindent",
+					args = { "-l", "-m", "$FILENAME" },
+					stdin = true,
 				},
 			},
 		},

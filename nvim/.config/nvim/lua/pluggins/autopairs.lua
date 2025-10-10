@@ -5,8 +5,9 @@ return {
 	config = function()
 		local npairs = require("nvim-autopairs")
 
-		npairs.setup({})
-
+		npairs.setup({
+			disable_filetype = { "TelescopePrompt", "latex", "tex" }, -- 👈 disable for LaTeX
+		})
 		-- remove single-quote pairing
 		npairs.remove_rule("'")
 

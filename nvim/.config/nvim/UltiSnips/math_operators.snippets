@@ -65,8 +65,19 @@ snippet `(?<![\\a-zA-Z])Cap` "Big intersection" Ar
 \bigcap 
 endsnippet
 
+context "math()"
 snippet UU "cup" iA
 \cup 
+endsnippet
+
+context "math()"
+snippet `(?<![\\\w])lim` "limit" rA
+\lim_{${1:n} \to ${2:\infty}} 
+endsnippet
+
+context "math()"
+snippet `(?<![\\\w])limsup` "limsup" rA
+\limsup_{${1:n} \to ${2:\infty}} 
 endsnippet
 
 snippet uuu "bigcup" iA
@@ -136,6 +147,16 @@ snippet `(?<!\\)\b(gq|geq)` "Greater than or equal to" wAr
 \geq $0
 endsnippet
 
+context "math()"
+snippet `(\s*)<` "Smaller than (fix spacing)" Ar
+ < $0
+endsnippet
+
+context "math()"
+snippet `(\s*)>` "Larger than (fix spacing)" Ar
+ > $0
+endsnippet
+
 priority 100
 context "math()"
 snippet `->|(?<!\\)to` "to" A
@@ -202,7 +223,12 @@ endsnippet
 
 context "math()"
 snippet `(\W)(?<!\\)sup` "sup" wAr
-`!p snip.rv=match.group(1)`\sup_{$1} $0
+`!p snip.rv=match.group(1)`\sup $0
+endsnippet
+
+context "math()"
+snippet `(\W)(?<!\\)inf` "inf" wAr
+`!p snip.rv=match.group(1)`\inf $0
 endsnippet
 
 context "math()"

@@ -17,7 +17,7 @@ endglobal
 context "math()"
 snippet `([a-zA-Z0-9])(b|B)f` "Mathbf" Ar
 \mathbf{`!p snip.rv=match.group(1)`}`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -27,7 +27,7 @@ endsnippet
 context "math()"
 snippet `([a-zA-Z])(c|C)al` "Mathcal" Ar
 \mathcal{`!p snip.rv=match.group(1).upper()`}`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -37,7 +37,7 @@ endsnippet
 context "math()"
 snippet `(\\\\)([a-zA-Z])` "Mathbb" Ar
 \mathbb{`!p snip.rv=match.group(2).upper()`}`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -48,7 +48,7 @@ endsnippet
 context "math()"
 snippet `(;a)|((?<![\a-zA-Z])alpha)` "Alpha" Ar
 \alpha`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -58,7 +58,7 @@ endsnippet
 context "math()"
 snippet `(;A)|((?<![\a-zA-Z])Alpha)` "Alpha Uppercase" Ar
 \Alpha`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -68,7 +68,7 @@ endsnippet
 context "math()"
 snippet `(;b)|((?<![\a-zA-Z])beta)` "Beta" Ar
 \beta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -78,7 +78,7 @@ endsnippet
 context "math()"
 snippet `(;B)|((?<![\a-zA-Z])Beta)` "Beta Uppercase" Ar
 \Beta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -88,7 +88,7 @@ endsnippet
 context "math()"
 snippet `(;g)|((?<![\a-zA-Z])gamma)` "Gamma" Ar
 \gamma`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -98,7 +98,7 @@ endsnippet
 context "math()"
 snippet `(;G)|((?<![\a-zA-Z])Gamma)` "Gamma Uppercase" Ar
 \Gamma`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -108,7 +108,7 @@ endsnippet
 context "math()"
 snippet `(;d)|((?<![\a-zA-Z])delta)` "Delta" Ar
 \delta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -118,7 +118,7 @@ endsnippet
 context "math()"
 snippet `(;D)|((?<![\a-zA-Z])Delta)` "Delta Uppercase" Ar
 \Delta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -128,7 +128,7 @@ endsnippet
 context "math()"
 snippet `((?<!\\)Eps)` "Epsilon Uppercase" Arw
 \Epsilon`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -138,7 +138,7 @@ endsnippet
 context "math()"
 snippet eps "Epsilon" Aw
 \epsilon`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -148,7 +148,7 @@ endsnippet
 context "math()"
 snippet `(;e)|((?<![\a-zA-Z])eta)` "Eta" Ar
 \eta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -158,7 +158,7 @@ endsnippet
 context "math()"
 snippet `(;E)|((?<![\a-zA-Z])Eta)` "Eta Uppercase" Ar
 \Eta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -168,7 +168,7 @@ endsnippet
 context "math()"
 snippet `(;l)|((?<![\a-zA-Z])lambda)` "Lambda" Ar
 \lambda`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -178,7 +178,7 @@ endsnippet
 context "math()"
 snippet `(;L)|((?<![\a-zA-Z])Lambda)` "Lambda Uppercase" Ar
 \Lambda`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -188,7 +188,7 @@ endsnippet
 context "math()"
 snippet `(;m)|((?<![\a-zA-Z])mu)` "Mu" Ar
 \mu`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -198,7 +198,7 @@ endsnippet
 context "math()"
 snippet `(;M)|((?<![\a-zA-Z])Mu)` "Mu Uppercase" Ar
 \Mu`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -208,7 +208,7 @@ endsnippet
 context "math()"
 snippet `(;p)|((?<![\a-zA-Z])pi)` "Pi" Ar
 \pi`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -218,7 +218,7 @@ endsnippet
 context "math()"
 snippet `(;P)|((?<![\a-zA-Z])Pi)` "Pi Uppercase" Ar
 \Pi`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -228,7 +228,7 @@ endsnippet
 context "math()"
 snippet `(;s)|((?<![\a-zA-Z])sigma)` "Sigma" Ar
 \sigma`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -238,7 +238,7 @@ endsnippet
 context "math()"
 snippet `(;S)|((?<![\a-zA-Z])Sigma)` "Sigma Uppercase" Ar
 \Sigma`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -248,7 +248,7 @@ endsnippet
 context "math()"
 snippet `(;t)|((?<![\a-zA-Z])theta)` "Theta" Ar
 \theta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -258,7 +258,7 @@ endsnippet
 context "math()"
 snippet `(;T)|((?<![\a-zA-Z])Theta)` "Theta Uppercase" Ar
 \Theta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -268,7 +268,7 @@ endsnippet
 context "math()"
 snippet `(;o)|((?<![\a-zA-Z])omega)` "Omega" Ar
 \omega`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -278,7 +278,7 @@ endsnippet
 context "math()"
 snippet `(;O)|((?<![\a-zA-Z])Omega)` "Omega Uppercase" Ar
 \Omega`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -288,7 +288,7 @@ endsnippet
 context "math()"
 snippet `(;z)|((?<![\a-zA-Z])zeta)` "Zeta" Ar
 \zeta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -298,7 +298,7 @@ endsnippet
 context "math()"
 snippet `(;Z)|((?<![\a-zA-Z])Zeta)` "Zeta Uppercase" Ar
 \Zeta`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -309,7 +309,7 @@ context "math()"
 #snippet `(;x)|((?<![\a-zA-Z])xi)` "Xi" Ar
 snippet `(;x)` "Xi" Ar
 \xi`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -319,7 +319,7 @@ endsnippet
 context "math()"
 snippet `(;X)` "Xi Uppercase" Ar
 \Xi`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -329,7 +329,7 @@ endsnippet
 context "math()"
 snippet `(;r)|((?<![\a-zA-Z])rho)` "Rho" Ar
 \rho`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -339,7 +339,7 @@ endsnippet
 context "math()"
 snippet `(;R)|((?<![\a-zA-Z])Rho)` "Rho Uppercase" Ar
 \Rho`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -349,7 +349,7 @@ endsnippet
 context "math()"
 snippet `(;n)|((?<![\a-zA-Z])nu)` "Nu" Ar
 \nu`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -359,7 +359,7 @@ endsnippet
 context "math()"
 snippet `(;N)|((?<![\a-zA-Z])Nu)` "Nu Uppercase" Ar
 \Nu`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -379,7 +379,7 @@ endsnippet
 context "math()"
 snippet `(;F)|((?<![\a-zA-Z])Phi)` "Phi Uppercase" Ar
 \Phi`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -389,7 +389,7 @@ endsnippet
 context "math()"
 snippet `(;c)|((?<![\a-zA-Z])chi)` "Chi" Ar
 \chi`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -399,7 +399,7 @@ endsnippet
 context "math()"
 snippet `(;C)|((?<![\a-zA-Z])Chi)` "Chi Uppercase" Ar
 \Chi`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -409,7 +409,7 @@ endsnippet
 context "math()"
 snippet `(;y)|((?<![\a-zA-Z])psi)` "Psi" Ar
 \psi`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -419,7 +419,7 @@ endsnippet
 context "math()"
 snippet `(;Y)|((?<![\a-zA-Z])Psi)` "Psi Uppercase" Ar
 \Psi`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -429,7 +429,7 @@ endsnippet
 context "math()"
 snippet `(;w)|((?<![\a-zA-Z])tau)` "Tau" Ar
 \tau`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -439,7 +439,7 @@ endsnippet
 context "math()"
 snippet `(;W)|((?<![\a-zA-Z])Tau)` "Tau Uppercase" Ar
 \Tau`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -449,7 +449,7 @@ endsnippet
 context "math()"
 snippet `(;v)|((?<![\a-zA-Z])upsilon)` "Upsilon" Ar
 \upsilon`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -459,7 +459,7 @@ endsnippet
 context "math()"
 snippet `(;V)|((?<![\a-zA-Z])Upsilon)` "Upsilon Uppercase" Ar
 \Upsilon`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -469,7 +469,7 @@ endsnippet
 context "math()"
 snippet `(;k)|((?<![\a-zA-Z])kappa)` "Kappa" Ar
 \kappa`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -479,7 +479,7 @@ endsnippet
 context "math()"
 snippet `(;K)|((?<![\a-zA-Z])Kappa)` "Kappa Uppercase" Ar
 \Kappa`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -489,7 +489,7 @@ endsnippet
 context "math()"
 snippet `(;i)|((?<![\a-zA-Z])iota)` "Iota" Ar
 \iota`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -499,7 +499,7 @@ endsnippet
 context "math()"
 snippet `(;I)|((?<![\a-zA-Z])Iota)` "Iota Uppercase" Ar
 \Iota`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -519,7 +519,7 @@ endsnippet
 context "math()"
 snippet `(?<![\\\w])pe` "Expectation" Awr
 \mathbb{E}\left[ ${1:${VISUAL}} \right]`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -529,7 +529,7 @@ endsnippet
 context "math()"
 snippet `(?<![\\\w])pf` "Expectation" Awr
 \mathbb{E}_{${1:\theta}}\left[ $2 \right]`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -579,7 +579,7 @@ endsnippet
 context "not_math()"
 snippet wp "with probability" i
 with probability at least \(1 - ${1:delta}\)`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -590,7 +590,7 @@ endsnippet
 context "math()"
 snippet empty "Empty Set" Aw
 \varnothing`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -602,7 +602,7 @@ endsnippet
 context "math()"
 snippet `(\w)tn` "Tensor" Ar
 \Tn{`!p snip.rv=match.group(1).upper()`}`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -612,7 +612,7 @@ endsnippet
 context "math()"
 snippet tn "Tensor" Aw
 \Tn{${1:${VISUAL}}}`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -622,7 +622,7 @@ endsnippet
 context "math()"
 snippet `(\w)mx` "Matrix" Ar
 \Mx{`!p snip.rv=match.group(1).upper()`}`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -632,7 +632,7 @@ endsnippet
 context "math()"
 snippet mx "Matrix" Aw
 \Mx{${1:${VISUAL}}}`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -652,7 +652,7 @@ endsnippet
 context "math()"
 snippet vc "Vector" Aw
 \Vc{${1:${VISUAL}}}`!p
-if t[0] and t[0][0] not in [',', ' ', '/', "\'" '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
 else:
 	snip.rv = ''

@@ -1,0 +1,58 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+
+def not_in(right_delimiter, left_delimiter):
+    row, col = vim.current.window.cursor
+    # get all lines up to the cursor
+    # lines = vim.current.buffer[:row-1] + [vim.current.line[:col]]
+    lines = [vim.current.line[:col]]
+
+    open_delimiter = 0
+    close_delimiter = 0
+
+    for line in lines:
+        open_delimiter += line.count(right_delimiter)
+        close_delimiter += line.count(left_delimiter)
+
+    # if there is at least one unmatched '(', we are inside a function
+    return (open_delimiter - close_delimiter) <= 0
+
+def line_above_ends_with_double_backslash():
+    row, col = vim.current.window.cursor
+    if row <= 1:  # No line above the first line
+        return False
+    line_above = vim.current.buffer[row - 2]  # 0-based index
+    return line_above.rstrip().endswith("\\\\") or ('align' in line_above) or (in_normal_mode())
+
+def align_condition():
+	return (env('align*') or env('align')) and not_in('{','}') and not_in('[',']') and not_in('(',')') and (not env('cases'))
+
+def in_normal_mode():
+    # vim.eval('mode()') returns the current mode as a string
+    return vim.eval('mode()') == 'n'
+
+endglobal
+
+snippet ( "Parenthesis" Ai
+(${1:${VISUAL}})$0
+endsnippet
+
+snippet [ "Brackets" Ai
+[${1:${VISUAL}}]$0
+endsnippet
+
+snippet { "Squirly brackets" Ai
+\{${1:${VISUAL}}\}$0
+endsnippet
+
+snippet " "Quotes" Ai
+\`\`${1:${VISUAL}}''
+endsnippet

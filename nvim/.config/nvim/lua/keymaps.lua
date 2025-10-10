@@ -250,6 +250,10 @@ function CorrectLastMisspelledInsert()
 	-- Exit insert mode temporarily
 	vim.cmd("stopinsert")
 
+	-- Save current cursor position
+	local line = vim.fn.line(".")
+	local col = vim.fn.col(".")
+
 	-- Jump to previous misspelled word
 	vim.cmd("normal! [s")
 
@@ -259,11 +263,17 @@ function CorrectLastMisspelledInsert()
 
 	-- Replace with first suggestion if available
 	if #suggestions > 0 then
+		local new_word = suggestions[1]
+		print(word .. " -> " .. new_word)
 		vim.cmd("normal! ciw" .. suggestions[1])
+
+		if vim.fn.line(".") == line then
+			col = col + #new_word - #word
+		end
 	end
 
-	-- Move cursor to the end of the line
-	vim.cmd("normal! $")
+	-- Move cursor to the previous position
+	vim.api.nvim_win_set_cursor(0, { line, col - 1 })
 
 	-- Return to insert mode
 	vim.cmd("startinsert")
@@ -272,17 +282,29 @@ end
 -- Keymaps for Insert mode
 vim.api.nvim_set_keymap("i", "<C-f>", "<C-o>:lua CorrectLastMisspelledInsert()<CR>", { noremap = true, silent = true })
 
--- Open Texpresso
+-- Open TeXpresso
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "tex",
 	callback = function()
-		vim.api.nvim_buf_set_keymap(
-			0,
-			"n",
-			"<Leader>r",
-			[[:TeXpresso %<CR>]],
-			-- [[:up<CR>:execute "silent !tmux send-keys -t top-right -X cancel; tmux send-keys -t top-right C-u 'python3 %:p' C-m" <CR>]],
-			{ noremap = true, silent = true, desc = "Run python file in a tmux pane" }
-		)
+		vim.keymap.set("n", "<Leader>r", function()
+			-- Check for main.tex among open buffers
+			local main_tex = nil
+			for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+				if vim.api.nvim_buf_is_loaded(buf) then
+					local name = vim.api.nvim_buf_get_name(buf)
+					if name:match("main%.tex$") then
+						main_tex = name
+						break
+					end
+				end
+			end
+
+			-- Run TeXpresso on main.tex if found, else on current file
+			if main_tex then
+				vim.cmd("TeXpresso " .. vim.fn.fnameescape(main_tex))
+			else
+				vim.cmd("TeXpresso %")
+			end
+		end, { buffer = true, noremap = true, silent = true, desc = "Run TeXpresso on main.tex or current buffer" })
 	end,
 })

@@ -12,7 +12,8 @@ def env(name):
 def not_in(right_delimiter, left_delimiter):
     row, col = vim.current.window.cursor
     # get all lines up to the cursor
-    lines = vim.current.buffer[:row-1] + [vim.current.line[:col]]
+    # lines = vim.current.buffer[:row-1] + [vim.current.line[:col]]
+    lines = [vim.current.line[:col]]
 
     open_delimiter = 0
     close_delimiter = 0
@@ -54,13 +55,13 @@ snip.rv = match.group(1)
 `
 endsnippet
 
-priority 200
+priority 200000
 context "align_condition()"
 snippet '^(\s*)je'  "Equal align beggining of the line" Ar
 `!p snip.rv=match.group(1)`=&\ $0
 endsnippet
 
-priority 200
+priority 200000
 context "align_condition()"
 snippet '^((?!.*&).*\S)(\s*)je'  "Equal align" iAr
 `!p snip.rv=match.group(1)` =&\ $0
@@ -102,13 +103,13 @@ snippet '^((?!.*&).*\S)(\s*)prop'  "geq align" iAr
 `!p snip.rv=match.group(1)` \propto &\ $0
 endsnippet
 
-priority 200
+priority 200000
 context "align_condition()"
 snippet '^(\s*)>'  "> align beggining of the line" Ar
 `!p snip.rv=match.group(1)`>&\ $0
 endsnippet
 
-priority 200
+priority 200000
 context "align_condition()"
 snippet '^((?!.*&).*\S)(\s*)>'  "> align" iAr
 `!p snip.rv=match.group(1)` >&\ $0
@@ -138,5 +139,14 @@ snippet '^(\s*)jm'  "Plus align beggining of the line" Ar
 `!p snip.rv=match.group(1)`&- $0
 endsnippet
 
-# Remove \\ from last line of aligned
-# Replace . by , in aligned when start line with lowcase.
+priority 20000
+context "align_condition()"
+snippet AA "For all in aligned" A
+\quad \forall \ $0
+endsnippet
+
+priority 20000
+context "align_condition()"
+snippet EE "Exists in aligned" A
+\quad \exists \ $0
+endsnippet

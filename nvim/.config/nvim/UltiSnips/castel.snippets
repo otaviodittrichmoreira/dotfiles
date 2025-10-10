@@ -298,14 +298,6 @@ snippet taylor "taylor" w
 \sum_{${1:k}=${2:0}}^{${3:\infty}} ${4:c_$1} (x-a)^$1 $0
 endsnippet
 
-snippet lim "limit" w
-\lim_{${1:n} \to ${2:\infty}} 
-endsnippet
-
-snippet limsup "limsup" w
-\limsup_{${1:n} \to ${2:\infty}} 
-endsnippet
-
 context "math()"
 snippet `(?<!\\)part|del` "d/dx" wAr
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
@@ -337,10 +329,10 @@ snippet EE "exists" iA
 \exists 
 endsnippet
 
-context "math()"
-snippet AA "forall" iA
-\forall 
-endsnippet
+# context "math()"
+# snippet AA "forall" iA
+# \forall 
+# endsnippet
 
 context "math()"
 snippet xnn "xn" iA
@@ -432,7 +424,7 @@ endsnippet
 
 context "math()"
 snippet `(norm|nrmo|nrom)` "norm" iAr
-\left\|$1\right\| $0
+\left\| ${1:${VISUAL}} \right\| $0
 endsnippet
 
 priority 100
@@ -514,6 +506,11 @@ snippet inn "in " iA
 \in 
 endsnippet
 
+context "math()"
+snippet zin "in " iA
+\in 
+endsnippet
+
 snippet NN "n" iA
 \N 
 endsnippet
@@ -577,19 +574,35 @@ endsnippet
 
 priority 10
 context "math()"
-snippet "bar" "bar" riA
-\overline{${1:${VISUAL}}} $0
+snippet '((\\)?([A-Za-z]+)[\{]?[a-zA-Z]+[\}]?)\s?bar' "Overliner / bar above symbol" wrA
+\overline{`!p
+if isinstance(snip.v.text, str) and len(snip.v.text) > 0:
+    snip.rv = snip.v.text
+else:
+    snip.rv = match.group(1)
+`} $0
 endsnippet
 
 priority 100
 context "math()"
-snippet "([a-zA-Z])bar" "bar" riA
-\overline{`!p snip.rv=match.group(1)`}
+snippet "(\W)([a-zA-Z])bar" "Overliner / bar above letter" riA
+`!p snip.rv = match.group(1)`\overline{`!p snip.rv=match.group(2).lstrip()`}
 endsnippet
 
 priority 10
 context "math()"
-snippet `(?<!\\)til` "tilde" riA
+snippet '((\\)?([A-Za-z]+)[\{]?[a-zA-Z]+[\}]?)\s?til' "Overliner / til above symbol" wrA
+\tilde{`!p
+if isinstance(snip.v.text, str) and len(snip.v.text) > 0:
+    snip.rv = snip.v.text
+else:
+    snip.rv = match.group(1)
+`} $0
+endsnippet
+
+priority 1000
+context "math()"
+snippet `(\W)([a-zA-Z])til` "tilde" riA
 \tilde{${1:${VISUAL}}} $0
 endsnippet
 

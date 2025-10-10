@@ -156,9 +156,8 @@ endsnippet
 
 snippet bsol "Solution" bA
 \begin{solution}{}{}
-	${1:${VISUAL}}
+	${0:${VISUAL}}
 \end{solution}
-$0
 endsnippet
 
 snippet bexer "Exercise" bA
@@ -203,6 +202,15 @@ snippet ben "Enumerate" bA
 $0
 endsnippet
 
+snippet `\\begin\{enumerate\}[\[]?` "Enumerate" rA
+\begin{enumerate}[label=(\\${1:alph}*)]`!p
+if t[1] and len(t[1]) > 3:
+	snip.rv = ""
+else:
+	snip.rv = "% alph (a), roman (i), arabic (1)"
+`
+endsnippet
+
 context "not_math()"
 snippet '-\s' "Init Itemize" bAr 
 \begin{itemize}
@@ -233,10 +241,6 @@ snippet ali "Align" bA
 \begin{align*}
 	${1:${VISUAL}}
 .\end{align*}
-endsnippet
-
-snippet emph "Emphasize" bA
-\emph{${1:Text}}$0
 endsnippet
 
 

@@ -254,14 +254,15 @@ endsnippet
 ##############################
 context "math()"
 snippet sysub "init sympy sub" Aw
-[SUB]{${1:${VISUAL}}}{${2:old}}{${3:new}}[SUB]
+[SUB][[${1:${VISUAL}}]][[${2:old}]][[${3:new}]][SUB]
 endsnippet
 
 context "math()"
 priority 10000
-snippet `\[SUB\]\{(.*)\}\{(.*)\}\{(.*)\}\[SUB\]` "substitute variable" Ar
+snippet `\[SUB\]\[\[(.*)\]\]\[\[(.*)\]\]\[\[(.*)\]\]\[SUB\]` "substitute variable" Ar
 `!p
 import sys
+snip.rv = "1: " + match.group(1) + "2: " + match.group(2)+ "3: " + match.group(3)
 # Add your Neovim config folder to sys.path
 sys.path.append("/home/otavio/.config/nvim/UltiSnips")
 from parse_equal import parse_equation
