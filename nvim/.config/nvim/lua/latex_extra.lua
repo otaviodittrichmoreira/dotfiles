@@ -123,7 +123,7 @@ function SelectLatexValue(after, around)
 			if break_line_col then
 				e_col = break_line_col - 1
 			end
-			local _, last_non_space = line:find(".*%S")
+			local _, last_non_space = line:sub(1, e_col):find(".*%S")
 			if last_non_space then
 				e_col = math.min(e_col, last_non_space)
 			end
