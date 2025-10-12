@@ -20,16 +20,24 @@ vim.api.nvim_set_keymap("x", "an", [[:<C-u>lua SelectLatexValue(false, true)<CR>
 vim.api.nvim_set_keymap("o", "an", [[:<C-u>lua SelectLatexValue(false, true)<CR>]], { noremap = true, silent = true })
 
 function Find_unenclosed_equal(s)
-	local depth = 0, 0
+	local symbols = {
+		["="] = true,
+		["\\leq"] = true,
+		["\\geq"] = true,
+		["<"] = true,
+		[">"] = true,
+	}
+	local depth = 0
 
 	for i = 1, #s do
 		local c = s:sub(i, i)
+		local c_long = s:sub(i, math.min(#s, i + 3))
 
 		if c == "(" or c == "[" then
 			depth = depth + 1
 		elseif c == ")" or c == "]" then
 			depth = math.max(depth - 1, 0)
-		elseif c == "=" then
+		elseif symbols[c] or symbols[c_long] then
 			if depth == 0 then
 				return i
 			end
@@ -70,6 +78,7 @@ end
 function SelectLatexValue(after, around)
 	local line = vim.api.nvim_get_current_line()
 	local col = vim.fn.col(".")
+	print("Find_unenclosed_equal(line) =", Find_unenclosed_equal(line))
 
 	local last = SafeMax(Find_unenclosed_equal(line), line:find("&"))
 	if line:sub(last + 1, last + 1) == "\\" then
