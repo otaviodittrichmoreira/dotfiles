@@ -78,7 +78,6 @@ end
 function SelectLatexValue(after, around)
 	local line = vim.api.nvim_get_current_line()
 	local col = vim.fn.col(".")
-	print("Find_unenclosed_equal(line) =", Find_unenclosed_equal(line))
 
 	local last = SafeMax(Find_unenclosed_equal(line), line:find("&"))
 	if line:sub(last + 1, last + 1) == "\\" then
