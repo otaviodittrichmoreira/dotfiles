@@ -11,6 +11,7 @@ require("mini.starter").setup()
 require("keymaps")
 require("ruff")
 require("settings")
+require("latex_extra")
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "tex",
