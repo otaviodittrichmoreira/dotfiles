@@ -172,7 +172,7 @@ snippet `(\s*(.*)\s?=&?\\?\s)\s*` "Repeat what's before = after it" r
 `!p
 before_equal = match.group(2)
 open_del_idx = before_equal.rfind("\\(")
-if open_del_idx > 0:
+if open_del_idx >= 0:
 	before_equal = before_equal[open_del_idx+2:]
 snip.rv = match.group(1) + before_equal
 `
