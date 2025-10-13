@@ -184,16 +184,15 @@ function SelectLatexValue(after, around)
 		end
 	end
 
-	local subline = line:sub(open, close)
 	local e_col
 	if after then
 		e_col = close
 		if not around then
-			local break_line_col = subline:find("\\\\")
+			local break_line_col = line:find("\\\\")
 			if break_line_col then
 				e_col = break_line_col - 1
 			end
-			local _, last_non_space = subline:sub(1, e_col):find(".*%S")
+			local _, last_non_space = line:sub(1, e_col):find(".*%S")
 			if last_non_space then
 				e_col = math.min(e_col, last_non_space) + open - 1
 			end
