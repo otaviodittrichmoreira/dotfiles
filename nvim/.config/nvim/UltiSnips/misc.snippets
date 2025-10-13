@@ -166,3 +166,10 @@ endsnippet
 snippet rext "Import external .R script" bA
 \Rexternal{./${1:filename}.R}
 endsnippet
+
+context "math()"
+snippet `(\s*(.*)\s?=&?\\?\s)\s*` "Repeat what's before = after it" r
+`!p
+snip.rv = match.group(1) + match.group(2)
+`
+endsnippet

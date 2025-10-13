@@ -246,3 +246,6 @@ function SelectLatexValue(after, around)
 	vim.fn.setpos("'>", { 0, vim.fn.line("."), e_col, 0 })
 	vim.cmd("normal! gv")
 end
+
+-- In visual mode, pressing : will prefill the command line
+vim.api.nvim_set_keymap("v", ":", [[:s/\%V]], { noremap = true, silent = false })
