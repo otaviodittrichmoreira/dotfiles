@@ -9,6 +9,21 @@ def env(name):
 	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
 	return x != '0' and y != '0'
 
+def not_in(right_delimiter, left_delimiter):
+    row, col = vim.current.window.cursor
+    # get all lines up to the cursor
+    # lines = vim.current.buffer[:row-1] + [vim.current.line[:col]]
+    lines = [vim.current.line[:col]]
+
+    open_delimiter = 0
+    close_delimiter = 0
+
+    for line in lines:
+        open_delimiter += line.count(right_delimiter)
+        close_delimiter += line.count(left_delimiter)
+
+    # if there is at least one unmatched '(', we are inside a function
+    return (open_delimiter - close_delimiter) <= 0
 endglobal
 snippet -- "em dash" iA
 —
@@ -27,6 +42,11 @@ endsnippet
 context "math()"
 snippet and "and" wA
 \quad \text{and} \quad $0
+endsnippet
+
+context "math()"
+snippet for "for" wA
+\quad \text{for} \ $0
 endsnippet
 
 context "math()"
@@ -164,10 +184,16 @@ snippet input "Input" bA
 endsnippet
 
 snippet rext "Import external .R script" bA
-\Rexternal{./${1:filename}.R}
+\Rexternal{./${1:filename}.r}
 endsnippet
 
-context "math()"
+snippet `(^\s*\\codeoutput\{(.*)\})` "Execute code and save output in a .log file and import to latex" rA
+`!p 
+os.system(f"Rscript {match.group(2)} > {match.group(2)}.log")
+snip.rv = match.group(1)`
+endsnippet
+
+context "math() and not_in('{','}')"
 snippet `(\s*(.*)\s?=&?\\?\s)\s*` "Repeat what's before = after it" r
 `!p
 before_equal = match.group(2)
@@ -176,4 +202,12 @@ if open_del_idx >= 0:
 	before_equal = before_equal[open_del_idx+2:]
 snip.rv = match.group(1) + before_equal
 `
+endsnippet
+
+snippet warning "Warning sign" w
+\warning{${1:${VISUAL}}}
+endsnippet
+
+snippet attention "Warning sign" w
+\warning{${1:${VISUAL}}}
 endsnippet

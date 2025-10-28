@@ -90,7 +90,17 @@ endsnippet
 context "not_math()"
 snippet fm "Math" wA
 \(${1:${VISUAL}}\)`!p
-if t[2] and t[2][0] not in [';', ':', ',', '.', '?', '-', ' ']:
+if t[2] and t[2][0] not in [';', ':', ',', '.', '?', '-', ' ', '\'']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+context "not_math()"
+snippet Fm "Math" wA
+\(${1:${VISUAL}}\)`!p
+if t[2] and t[2][0] not in [';', ':', ',', '.', '?', '-', ' ', '\'']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -329,10 +339,10 @@ snippet EE "exists" iA
 \exists 
 endsnippet
 
-# context "math()"
-# snippet AA "forall" iA
-# \forall 
-# endsnippet
+context "math()"
+snippet AA "forall" iA
+\forall 
+endsnippet
 
 context "math()"
 snippet xnn "xn" iA
@@ -606,10 +616,16 @@ snippet `(\W)([a-zA-Z])til` "tilde" riA
 \tilde{${1:${VISUAL}}} $0
 endsnippet
 
+
 priority 10
 context "math()"
-snippet `(?<!\\)hat` "hat" riA
-\hat{${1:${VISUAL}}} $0
+snippet '((\\)?([A-Za-z]+)[\{]?[a-zA-Z]+[\}]?)\s?hat' "hat above symbol" wrA
+\hat{`!p
+if isinstance(snip.v.text, str) and len(snip.v.text) > 0:
+    snip.rv = snip.v.text
+else:
+    snip.rv = match.group(1)
+`} $0
 endsnippet
 
 priority 100
@@ -620,7 +636,7 @@ endsnippet
 
 priority 100
 context "math()"
-snippet "([a-zA-Z])hat" "hat" riA
+snippet "(?<![a-zA-Z\\])([a-zA-Z])\s?hat" "hat" riA
 \hat{`!p snip.rv=match.group(1)`} 
 endsnippet
 

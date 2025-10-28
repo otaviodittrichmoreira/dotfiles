@@ -32,6 +32,14 @@ def line_above_ends_with_double_backslash():
     line_above = vim.current.buffer[row - 2]  # 0-based index
     return line_above.rstrip().endswith("\\\\") or ('align' in line_above) or (in_normal_mode())
 
+def ends_on_begin_env():
+    pattern = r'\\begin\{\s*[^}]+\s*\}$'  # matches \begin{something}
+    row, col = vim.current.window.cursor
+    if row <= 1:  # No line above the first line
+        return False
+    line_above = vim.current.buffer[row - 2]  # 0-based index
+    return bool(re.search(pattern, line_above))
+
 def align_condition():
 	return (env('align*') or env('align')) and not_in('{','}') and not_in('[',']') and not_in('(',')') and (not env('cases'))
 
@@ -41,8 +49,8 @@ def in_normal_mode():
 
 endglobal
 
-context "not line_above_ends_with_double_backslash() and env('align*')"
-snippet `(^\s*\S)` "test" rA
+context "not line_above_ends_with_double_backslash() and env('align*') and (not ends_on_begin_env())"
+snippet `(^\s*\S)` "Break line in aligned/ add \\ to the end of equation in aligned" rA
 `!p
 row, col = vim.current.window.cursor
 if row > 1:  # No line above the first line
@@ -149,4 +157,14 @@ priority 20000
 context "align_condition()"
 snippet EE "Exists in aligned" A
 \quad \exists \ $0
+endsnippet
+
+context "env('cases')"
+snippet `\sif` "if in cases" Ar
+ \ \text{if} \ $0
+endsnippet
+
+context "env('cases')"
+snippet `\sother` "otherwise in cases" Ar
+ \ \text{otherwise} $0
 endsnippet

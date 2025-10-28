@@ -291,6 +291,7 @@ if snip.v.text:
 	sys.path.append("/home/otavio/.config/nvim/UltiSnips")
 	from parse_equal import parse_equation
 	from sympy import *
+	init_printing(digits=3)
 	x, y, z, t = symbols('x y z t')
 	k, m, n = symbols('k m n', integer=True)
 	f, g, h = symbols('f g h', cls=Function)
@@ -299,7 +300,7 @@ if snip.v.text:
 	parsed_latex = parse_equation(latex_exp)
 	if isinstance(parsed_latex, list):
 		parsed_latex = parsed_latex[0]
-	evaled = parsed_latex.evalf()
+	evaled = parsed_latex.evalf().round(4)
 	snip.rv = latex(evaled)
 `
 endsnippet

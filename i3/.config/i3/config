@@ -267,3 +267,6 @@ for_window [class="nvimfloat"] floating enable, resize set 80 ppt 40 ppt, move p
 # Hide title bar in applications
 for_window [class="^.*"] border pixel 1
 
+# Notification opens as floating windows in zoom 
+for_window [class="zoom" title="^zoom$"] floating enable, border pixel 1
+

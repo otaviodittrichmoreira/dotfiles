@@ -59,6 +59,6 @@ snippet tt "text" iA
 endsnippet
 
 context "not_math()"
-snippet `\.\s([a-z])` "Uppecase after dot" Ar
-. `!p snip.rv = match.group(1).upper()`
+snippet `([\.:])\s([a-z])` "Uppecase after dot" Ar
+`!p snip.rv = match.group(1) + " " + match.group(2).upper()`
 endsnippet

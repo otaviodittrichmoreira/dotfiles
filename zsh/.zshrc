@@ -143,6 +143,7 @@ export EDITOR="$HOME/bin/nvim.appimage"
 export VISUAL="$HOME/bin/nvim.appimage"
 bindkey -M vicmd v edit-command-line
 alias copy='xclip -selection clipboard'
+alias ulti='cd $HOME/.config/nvim/UltiSnips/; nvim'
 
 # Bind ctrl+Y to accept the autosuggestion
 bindkey '^Y' autosuggest-accept

@@ -26,12 +26,15 @@ function Find_unenclosed_equal(s)
 		["\\geq"] = true,
 		["<"] = true,
 		[">"] = true,
+		["\\approx"] = true,
+		["\\propto"] = true,
 	}
 	local depth = 0
 
 	for i = 1, #s do
 		local c = s:sub(i, i)
 		local c_long = s:sub(i, math.min(#s, i + 3))
+		local c_extra = s:sub(i, math.min(#s, i + 6))
 		local c_before = s:sub(math.max(i - 1, 1), i)
 
 		if c_before == "\\(" or c_before == "\\)" then
@@ -39,9 +42,17 @@ function Find_unenclosed_equal(s)
 			depth = depth + 1
 		elseif c == ")" or c == "]" then
 			depth = math.max(depth - 1, 0)
-		elseif symbols[c] or symbols[c_long] then
+		elseif symbols[c_extra] then
 			if depth == 0 then
-				return i
+				return i, i + 6
+			end
+		elseif symbols[c_long] then
+			if depth == 0 then
+				return i, i + 3
+			end
+		elseif symbols[c] then
+			if depth == 0 then
+				return i, i + 1
 			end
 		end
 	end
@@ -92,7 +103,7 @@ function FindMathDelimiters(line, col)
 			return 1, #line
 		end
 		if open and close then
-			has_equal_between = line:sub(open, close):find("=")
+			has_equal_between = Find_unenclosed_equal(line:sub(open, close)) ~= nil
 			if not has_equal_between then
 				pos = close + 1
 			end
@@ -131,22 +142,24 @@ function SelectLatexValue(after, around)
 	line = line:sub(open, close)
 
 	-- Find equal sign in line
-	local real_eq_pos = Find_unenclosed_equal(line)
+	local real_eq_pos_beg, real_eq_pos_end = Find_unenclosed_equal(line)
 
 	-- Find position of last character attached to = ( =& or =&\ )
-	local last = SafeMax(real_eq_pos, line:find("&"))
+	local last = SafeMax(real_eq_pos_end, line:find("&"))
 	if not last then
 		return
 	end
-	if line:sub(last + 1, last + 1) == "\\" then
-		last = last + 1
+	if #line > last and line:sub(last + 1, last + 1) == "\\" then
+		if not (#line < last + 2 or line:sub(last + 2, last + 2):match("%a")) then
+			last = last + 1
+		end
 	end
 	if line:sub(last + 1, last + 1) == " " then
 		last = last + 1
 	end
 
 	-- Find position of first character attached to =
-	local first = SafeMin(real_eq_pos, line:find("&"))
+	local first = SafeMin(real_eq_pos_beg, line:find("&"))
 
 	-- Define reference for border of selection
 	local eq_pos

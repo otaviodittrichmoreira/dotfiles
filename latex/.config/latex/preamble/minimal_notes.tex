@@ -1,0 +1,37 @@
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{xparse} % allows flexible argument definitions
+\usepackage{enumitem} % Enumerate env
+
+% --- Define base theorem counter ---
+\theoremstyle{definition}
+\newtheorem{innerthm}{Theorem}[section]
+\newtheorem{innerprop}{Proposition}[section]
+\newtheorem{innercorollary}{Corollary}[section]
+\newtheorem{innerproblem}{Problem}[section]
+\newtheorem{innerquestion}{Question}[section]
+\newtheorem{innerfact}{Fact}[section]
+\newtheorem{innerexample}{Example}[section]
+\newtheorem{innerdefinition}{Definition}[section]
+\newtheorem{innerremark}{Remark}[section]
+\newtheorem{innersolution}{Solution}[section]
+
+% --- Redefine environment with {Title}{label} syntax ---
+\NewDocumentEnvironment{theorem}{m m}
+ {%
+   \begin{innerthm}\textbf{(#1)}\label{thm:#2}\\
+ }
+ {%
+   \end{innerthm}
+ }
+
+\NewDocumentEnvironment{proposition}{m m} { \begin{innerprop}\textbf{(#1)}\label{prop:#2}\\ } { \end{innerprop} }
+\NewDocumentEnvironment{corollary}{m m} { \begin{innercorollary}\textbf{(#1)}\label{cor:#2}\\ } { \end{innercorollary} }
+\NewDocumentEnvironment{problem}{m m} { \begin{innerproblem}\textbf{(#1)}\label{prob:#2}\\ } { \end{innerproblem} }
+\NewDocumentEnvironment{question}{m m} { \begin{innerquestion}\textbf{(#1)}\label{prob:#2}\\ } { \end{innerquestion} }
+\NewDocumentEnvironment{fact}{m m} { \begin{innerfact}\textbf{(#1)}\label{fact:#2}\\ } { \end{innerfact} }
+\NewDocumentEnvironment{example}{m m} { \begin{innerexample}\textbf{(#1)}\label{eg:#2}\\ } { \end{innerexample} }
+\NewDocumentEnvironment{definition}{m m} { \begin{innerdefinition}\textbf{(#1)}\label{def:#2}\\ } { \end{innerdefinition} }
+\NewDocumentEnvironment{remark}{m m} { \begin{innerremark}\textbf{(#1)}\label{rmk:#2}\\ } { \end{innerremark} }
+\NewDocumentEnvironment{solution}{m m} { \begin{innersolution}\textbf{(#1)}\label{sol:#2}\\ } { \end{innersolution} }
+
+

@@ -4,6 +4,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{color}
+\usepackage{xcolor}
 \usepackage{microtype}
 \usepackage{lmodern}
 \usepackage[mathscr]{eucal}
@@ -240,25 +241,31 @@ frame=tb,                         % Any extra options here
 showstringspaces=false            % 
 }}
 
-% R environment
-\lstnewenvironment{Rcode}[1][]
-{
-\Rstyle
+\definecolor{lightgray}{gray}{0.95} % Defines a light gray color
+\lstdefinestyle{Rstyle}{
+  language=R,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray},
+  frame=none,
+}
+
 \lstset{
-  #1,
-    aboveskip=-10pt, % pull listing closer to previous content
-    belowskip=0.5em,
-  title=\makebox[\linewidth][r]{\raisebox{-0.8em}{\scriptsize \texttt{R}}}, % lower only the label
-  frame=tb,               % keep your top/bottom frame
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray},
+  frame=none,
 }
-}
+
+\lstnewenvironment{Rcode}[1][] % optional args
+{\lstset{style=Rstyle,#1}} % apply style + optional args
 {}
 
-% R for external files (always .R)
-\newcommand\Rexternal[2][]{{
-  \Rstyle
-  \lstinputlisting[#1]{#2} % always add .R extension
-}}
+\newcommand{\Rexternal}[2][]{%
+  \lstinputlisting[style=Rstyle,#1]{#2}%
+}
+
+\newcommand{\codeoutput}[2][]{%
+  \lstinputlisting[#1]{#2.log}%
+}
 
 % remove o label das questões
 % \qformat{} 
