@@ -189,8 +189,21 @@ endsnippet
 
 snippet `(^\s*\\codeoutput\{(.*)\})` "Execute code and save output in a .log file and import to latex" rA
 `!p 
-os.system(f"Rscript {match.group(2)} > {match.group(2)}.log")
-snip.rv = match.group(1)`
+from pathlib import Path
+raw_path = match.group(2)
+script_path = Path(raw_path)
+if script_path.exists():
+    if script_path.suffix in [".r", ".R"]:
+        os.system(f"Rscript {raw_path} > {raw_path}.log")
+        snip.rv = match.group(1)
+    elif script_path.suffix == ".py":
+        os.system(f"python3 {raw_path} > {raw_path}.log")
+        snip.rv = match.group(1)
+    else:
+        snip.rv = match.group(1) + " % Error: File suffix not implemented"
+else:
+    snip.rv = match.group(1) + " % Error: script's path don't exist."
+`
 endsnippet
 
 context "math() and not_in('{','}')"

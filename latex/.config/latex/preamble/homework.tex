@@ -227,6 +227,11 @@ literate={á}{{\'a}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ç}{{
 % Python for inline
 \newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
 
+\definecolor{codebg}{RGB}{245,245,245}       % background color
+\definecolor{keywordcolor}{RGB}{30, 102, 245} % keywords
+\definecolor{commentcolor}{RGB}{76, 79, 105} % comments
+\definecolor{stringcolor}{RGB}{64, 160, 43}  % strings
+\definecolor{numbercolor}{RGB}{220,50,47}   % numbers
 
 % R style for highlighting
 \newcommand\Rstyle{\lstset{
@@ -247,6 +252,10 @@ showstringspaces=false            %
   basicstyle=\ttfamily\small,
   backgroundcolor=\color{lightgray},
   frame=none,
+  keywordstyle=\color{keywordcolor}\bfseries,
+  commentstyle=\color{commentcolor}\itshape,
+  stringstyle=\color{stringcolor},
+  numberstyle=\color{numbercolor},
 }
 
 \lstset{
@@ -264,9 +273,8 @@ showstringspaces=false            %
 }
 
 \newcommand{\codeoutput}[2][]{%
-  \lstinputlisting[#1]{#2.log}%
+  \lstinputlisting[keywordstyle=\color{black}, #1]{#2.log}%
 }
-
 % remove o label das questões
 % \qformat{} 
 
