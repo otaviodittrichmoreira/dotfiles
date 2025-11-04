@@ -207,7 +207,7 @@ else:
 endsnippet
 
 context "math() and not_in('{','}')"
-snippet `(\s*(.*)\s?=&?\\?\s)\s*` "Repeat what's before = after it" r
+snippet `(\s*(.*)\s?(=|\\leq|\\geq|\\approx|<|>|\\propto|\\implies)\s?&?\\?\s)\s*` "Repeat what's before = after it" r
 `!p
 before_equal = match.group(2)
 open_del_idx = before_equal.rfind("\\(")
