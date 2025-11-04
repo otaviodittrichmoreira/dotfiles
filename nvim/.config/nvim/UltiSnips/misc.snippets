@@ -207,12 +207,40 @@ else:
 endsnippet
 
 context "math() and not_in('{','}')"
-snippet `(\s*(.*)\s?(=|\\leq|\\geq|\\approx|<|>|\\propto|\\implies)\s?&?\\?\s)\s*` "Repeat what's before = after it" r
+snippet `(\s*(.*)\s?(=|\\leq|\\geq|\\approx|<|>|\\propto|\\implies)&?\\?\s)\s*` "Repeat/copy what's before = after it" r
 `!p
 before_equal = match.group(2)
 open_del_idx = before_equal.rfind("\\(")
 if open_del_idx >= 0:
 	before_equal = before_equal[open_del_idx+2:]
+if match.group(3) != "\implies":
+    equal_idx = max(
+        before_equal.rfind("="),
+        (before_equal.rfind("\\leq")+3 if (before_equal.rfind("\\leq")>0) else -1),
+        (before_equal.rfind("\\geq")+3 if (before_equal.rfind("\\geq")>0) else -1),
+        (before_equal.rfind("\\approx")+6 if (before_equal.rfind("\\approx")>0) else -1),
+        (before_equal.rfind("\\propto")+6 if (before_equal.rfind("\\propto")>0) else -1),
+        (before_equal.rfind("\\implies")+7 if (before_equal.rfind("\\implies")>0) else -1),
+        before_equal.rfind(">"),
+        before_equal.rfind("<")
+    )
+    snip.rv = before_equal.rfind("\\leq")
+    before_equal = before_equal[equal_idx+1:]
+else:
+    implies_idx = before_equal.rfind("\\implies")
+    if implies_idx > 0:
+        before_equal = before_equal[implies_idx+8:]
+    if "\\implies" not in before_equal and "&" in before_equal:
+        before_equal = before_equal.replace("&\\", "")
+        before_equal = before_equal.replace("&", "")
+if before_equal.startswith("&\ "):
+    before_equal = before_equal[3:]
+elif before_equal.startswith("& "):
+    before_equal = before_equal[2:]
+elif before_equal.startswith("&"):
+    before_equal = before_equal[1:]
+elif before_equal.startswith(" "):
+    before_equal = before_equal[1:]
 snip.rv = match.group(1) + before_equal
 `
 endsnippet

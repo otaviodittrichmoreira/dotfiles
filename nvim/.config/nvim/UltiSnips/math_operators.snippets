@@ -143,8 +143,13 @@ snippet `(?<!\\)\b(lq|leq)` "Less than or equal to" wAr
 endsnippet
 
 context "math()"
-snippet `(?<!\\)\b(gq|geq)` "Greater than or equal to" wAr
-\geq $0
+snippet `(?<!\\)\bprop` "Less than or equal to" wAr
+\propto $0
+endsnippet
+
+context "math()"
+snippet `(?<!\\)\bapprox` "Greater than or equal to" wAr
+\approx $0
 endsnippet
 
 context "math()"

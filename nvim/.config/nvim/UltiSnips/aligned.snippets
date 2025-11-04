@@ -99,16 +99,16 @@ snippet '^((?!.*&).*\S)(\s*)(geq|gq)'  "geq align" iAr
 `!p snip.rv=match.group(1)` \geq&\ $0
 endsnippet
 
-priority 1000
+priority 200000
 context "align_condition()"
 snippet 'prop'  "Propto align beggining of the line" Arb
 \propto &\ $0
 endsnippet
 
-priority 200
+priority 200000
 context "align_condition()"
-snippet '^((?!.*&).*\S)(\s*)prop'  "geq align" iAr
-`!p snip.rv=match.group(1)` \propto &\ $0
+snippet '^((?!.*&).*\S)(\s*)prop'  "prop align" iAr
+`!p snip.rv=match.group(1)` \propto&\ $0
 endsnippet
 
 priority 200000
