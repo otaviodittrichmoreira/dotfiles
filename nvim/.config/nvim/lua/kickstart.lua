@@ -1075,6 +1075,7 @@ require("lazy").setup({
 	require("pluggins.jupytext"),
 	require("pluggins.R"),
 	require("pluggins.texpresso"),
+	require("pluggins.csvview"),
 	-- require("pluggins.tabout"),
 	-- require 'pluggins.startup',
 	-- require 'kickstart.plugins.neo-tree',

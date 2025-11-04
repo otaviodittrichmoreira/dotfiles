@@ -97,42 +97,78 @@ $0
 endsnippet
 
 snippet bthm "Theorem" bA
-\begin{theorem}{${1:Title}}{`!p snip.rv = re.sub(r'\W+', '-', t[1]).lower()`}
+\begin{theorem}{${1:Title}}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+if t[1] and len(t[1])>0:
+	snip.rv = re.sub(r'\W+', '-', t[1]).lower()
+else:
+	snip.rv = random_label
+`}
 	$2
 \end{theorem}
 $0
 endsnippet
 
 snippet bprop "Proposition" bA
-\begin{proposition}{${1:Title}}{`!p snip.rv = re.sub(r'\W+', '-', t[1]).lower()`}
+\begin{proposition}{${1:Title}}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+if t[1] and len(t[1])>0:
+	snip.rv = re.sub(r'\W+', '-', t[1]).lower()
+else:
+	snip.rv = random_label
+`}
 	$2
 \end{proposition}
 $0
 endsnippet
 
-snippet blemm "Lemma" bA
-\begin{lemma}{}{}
+snippet blem "Lemma" bA
+\begin{lemma}{}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+snip.rv = random_label
+`}
 	${1:${VISUAL}}
 \end{lemma}
 $0
 endsnippet
 
 snippet bcor "Corollary" bA
-\begin{corollary}{}{}
+\begin{corollary}{}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+snip.rv = random_label
+`}
 	${1:${VISUAL}}
 \end{corollary}
 $0
 endsnippet
 
 snippet bfa "Fact" bA
-\begin{fact}{}{}
+\begin{fact}{}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+snip.rv = random_label
+`}
 	${1:${VISUAL}}
 \end{fact}
 $0
 endsnippet
 
 snippet bqu "Question" bA
-\begin{question}{}{}
+\begin{question}{}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+snip.rv = random_label
+`}
 	${1:${VISUAL}}
 \end{question}
 $0
@@ -156,41 +192,74 @@ $0
 endsnippet
 
 snippet bsol "Solution" bA
-\begin{solution}{}{}
+\begin{solution}{}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+snip.rv = random_label
+`}
 	${0:${VISUAL}}
 \end{solution}
 endsnippet
 
 snippet bexer "Exercise" bA
-\begin{exercise}{}{}
+\begin{exercise}{}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+snip.rv = random_label
+`}
 	${1:${VISUAL}}
 \end{exercise}
 $0
 endsnippet
 
 snippet bexam "Example" bA
-\begin{example}{}{}
+\begin{example}{}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+snip.rv = random_label
+`}
 	${1:${VISUAL}}
 \end{example}
 $0
 endsnippet
 
 snippet bdef "Definition" bA
-\begin{definition}{${1:Title}}{`!p snip.rv = re.sub(r'\W+', '-', t[1]).lower()`}
+\begin{definition}{${1:Title}}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+if t[1] and len(t[1])>0:
+	snip.rv = re.sub(r'\W+', '-', t[1]).lower()
+else:
+	snip.rv = random_label
+`}
 	$2
 \end{definition}
 $0
 endsnippet
 
 snippet brmk "Remark" bA
-\begin{remark}{}{}
+\begin{remark}{}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+snip.rv = random_label
+`}
 	${1:${VISUAL}}
 \end{remark}
 $0
 endsnippet
 
 snippet bpf "Proof" bA
-\begin{proof}{}{}
+\begin{proof}{}{`!p
+import random, string
+if not snip.c:
+	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+snip.rv = random_label
+`}
 	${1:${VISUAL}}
 \end{proof}
 $0
