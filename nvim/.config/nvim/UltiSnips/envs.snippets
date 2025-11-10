@@ -184,20 +184,13 @@ if snip.v.text is not None and len(snip.v.text) > 0:
 \\begin{parts}
 """ + new_text
 else:
-    snip.rv = """
-\\begin{parts}
-	\part """`$1
+    snip.rv = """\\begin{parts}
+	\part """`$0
 \end{parts}
-$0
 endsnippet
 
 snippet bsol "Solution" bA
-\begin{solution}{}{`!p
-import random, string
-if not snip.c:
-	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
-snip.rv = random_label
-`}
+\begin{solution}{}{}
 	${0:${VISUAL}}
 \end{solution}
 endsnippet
@@ -269,6 +262,13 @@ snippet ben "Enumerate" bA
 \begin{enumerate}
 	\item ${1:${VISUAL}}
 \end{enumerate}
+$0
+endsnippet
+
+snippet bit "Itemize" bA
+\begin{itemize}
+	\item ${1:${VISUAL}}
+\end{itemize}
 $0
 endsnippet
 

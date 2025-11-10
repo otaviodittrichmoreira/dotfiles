@@ -499,14 +499,6 @@ snippet \\\ "setminus" iA
 \setminus 
 endsnippet
 
-snippet >> ">>" iA
-\gg 
-endsnippet
-
-snippet << "<<" iA
-\ll 
-endsnippet
-
 snippet ~~ "~" iA
 \sim 
 endsnippet
@@ -601,7 +593,7 @@ endsnippet
 
 priority 100
 context "math()"
-snippet "(\W)([a-zA-Z])bar" "Overliner / bar above letter" riA
+snippet "(\W)([a-zA-Z])\s?bar" "Overliner / bar above letter" riA
 `!p snip.rv = match.group(1)`\overline{`!p snip.rv=match.group(2).lstrip()`}
 endsnippet
 
@@ -618,8 +610,8 @@ endsnippet
 
 priority 1000
 context "math()"
-snippet `(\W)([a-zA-Z])til` "tilde" riA
-\tilde{${1:${VISUAL}}} $0
+snippet `(\W)([a-zA-Z])\s?til` "tilde" riA
+`!p snip.rv = match.group(1)`\tilde{`!p snip.rv=match.group(2).lstrip()`}
 endsnippet
 
 

@@ -76,6 +76,11 @@ snippet `(?<![\\\w])lim` "limit" r
 endsnippet
 
 context "math()"
+snippet `(?<![\\\w])limjv` "limit" rA
+\lim_{${1:n} \to ${2:\infty}} 
+endsnippet
+
+context "math()"
 snippet `(?<![\\\w])limsup` "limsup" rA
 \limsup_{${1:n} \to ${2:\infty}} 
 endsnippet
@@ -142,6 +147,18 @@ snippet `(?<!\\)\b(lq|leq)` "Less than or equal to" wAr
 \leq $0
 endsnippet
 
+priority 20000
+context "math()"
+snippet `>[&\s]?[\\]?\s*>` ">>" rA
+\gg $0
+endsnippet
+
+priority 20000
+context "math()"
+snippet `<[&\s]?[\\]?\s*<` "<<" rA
+\ll $0
+endsnippet
+
 context "math()"
 snippet `(?<!\\)\bprop` "Less than or equal to" wAr
 \propto $0
@@ -152,11 +169,13 @@ snippet `(?<!\\)\bapprox` "Greater than or equal to" wAr
 \approx $0
 endsnippet
 
+priority 1
 context "math()"
 snippet `(\s*)<` "Smaller than (fix spacing)" Ar
  < $0
 endsnippet
 
+priority 1
 context "math()"
 snippet `(\s*)>` "Larger than (fix spacing)" Ar
  > $0
@@ -255,4 +274,9 @@ if t[0] and t[0][0] not in [',',' ','/']:
 else:
 	snip.rv = ''
 `$0
+endsnippet
+
+context "math()"
+snippet floor "floor" wA
+\lfloor $0 \rfloor
 endsnippet

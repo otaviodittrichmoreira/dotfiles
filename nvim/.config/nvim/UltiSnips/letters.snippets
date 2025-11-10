@@ -682,7 +682,7 @@ endsnippet
 
 ######## Miscellaneous ########
 context "math()"
-snippet `(\w);` "Change letter to uppercase" Ar
+snippet `(?<![a-zA-Z\\])([a-z]);` "Change letter to uppercase" Ar
 `!p 
 if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	space = ' '

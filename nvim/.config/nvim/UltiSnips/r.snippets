@@ -44,7 +44,13 @@ print(${1:${VISUAL}})
 endsnippet
 
 snippet pf "Print format" bA
-cat("$1 =", ${1:${VISUAL}}, "\n")
+`!p
+text = snip.v.text.rstrip("\n")
+if snip.v.text and len(snip.v.text) > 0:
+	snip.rv = f"print(\"{text}:\")\nprint({text}"
+else:
+	snip.rv=f"print(\"{str(t[1])}:\")\nprint("
+`$1)
 endsnippet
 
 context "in_r_function()"

@@ -21,6 +21,9 @@
 %\usepackage{colortbl}
 %\usepackage[dvipsnames]{xcolor}
 
+\usepackage{marginnote}  % margin notes
+\usepackage{stackengine} % for \stackon
+\usepackage{scalerel}    % for \scaleto
 
 %%% MACROS %%%
 \def\R{\mathbb{R}}
@@ -310,4 +313,15 @@ showstringspaces=false            %
   \question
   \phantomsection
   \silentsection{Question \thequestion}%
+}
+
+% Define the danger sign
+\newcommand\dangersign[1][1.5ex]{%
+  \renewcommand\stacktype{L}%
+  \scaleto{\stackon[1pt]{\color{red!80!black}$\triangle$}{\tiny\bfseries !}}{#1}%
+}
+
+% Discreet warning: symbol + optional explanatory text in margin
+\newcommand{\warning}[1]{%
+  \marginnote{\dangersign[3ex]\ \textcolor{red}{\textsf{\small #1}}}%
 }
