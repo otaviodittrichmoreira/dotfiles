@@ -216,3 +216,20 @@
 \newcommand{\warning}[1]{%
   \marginnote{\dangersign[3ex]\ \textcolor{red}{\textsf{\small #1}}}%
 }
+
+\usepackage{xcolor, tikz}
+
+\newcommand{\classseparator}[1]{%
+  \par\vspace{1.2em}\noindent%
+  \begin{tikzpicture}
+    \draw[gray!60, line width=0.4pt] (0,0) -- (\linewidth,0);
+    \node[
+      fill=white,
+      anchor=center,
+      inner sep=2pt,
+      text=gray!70,
+      font=\sffamily\bfseries\fontsize{9}{11}\selectfont
+    ] at (\linewidth/2,0) {#1};
+  \end{tikzpicture}%
+  \par\vspace{1.2em}
+}

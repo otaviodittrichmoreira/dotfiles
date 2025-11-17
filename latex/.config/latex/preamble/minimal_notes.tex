@@ -35,3 +35,14 @@
 \NewDocumentEnvironment{solution}{m m} { \begin{innersolution}\textbf{(#1)}\label{sol:#2}\\ } { \end{innersolution} }
 
 
+\usepackage{xcolor}
+
+\newcommand{\classseparator}[1]{%
+  \noindent\textcolor{gray}{\rule{\linewidth}{0.4pt}}%
+  \vspace{-1.2em}
+  \begin{center}
+    \textcolor{gray}{\small\textsf{#1}}
+  \end{center}
+  \vspace{-0.8em}
+  \noindent\textcolor{gray}{\rule{\linewidth}{0.4pt}}
+}

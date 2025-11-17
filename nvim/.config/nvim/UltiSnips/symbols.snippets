@@ -12,7 +12,7 @@ def env(name):
 endglobal
 
 context "math()"
-snippet dot "center dot" wA
+snippet `(?<!\\\w)c?dot` "center dot" rA
 \cdot $0
 endsnippet
 
@@ -39,4 +39,9 @@ endsnippet
 context "math()"
 snippet `(?<![\\a-zA-Z])mid` "Vertical bar |" rA
 \mid $0
+endsnippet
+
+context "math()"
+snippet `(?<![\\a-zA-Z])oo` "\infty" rA
+\infty 
 endsnippet

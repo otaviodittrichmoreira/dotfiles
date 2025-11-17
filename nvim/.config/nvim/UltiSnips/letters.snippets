@@ -14,8 +14,20 @@ def env(name):
 endglobal
 
 ########## Functions ##########
+priority 10
 context "math()"
-snippet `([a-zA-Z0-9])(b|B)f` "Mathbf" Ar
+snippet '((\\)?([A-Za-z]+)[\{]?[a-zA-Z]+[\}]?)\s?([bB]f|bold)' "Mathbf above symbol" wrA
+\hat{`!p
+if isinstance(snip.v.text, str) and len(snip.v.text) > 0:
+    snip.rv = snip.v.text
+else:
+    snip.rv = match.group(1)
+`} $0
+endsnippet
+
+priority 100
+context "math()"
+snippet "(?<![a-zA-Z\\])([a-zA-Z])\s?([bB]f|bold)" "Mathbf" Ar
 \mathbf{`!p snip.rv=match.group(1)`}`!p
 if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	snip.rv = ' '
@@ -577,12 +589,12 @@ snippet deq "Equal in distribution" A
 endsnippet
 
 context "math()"
-snippet dto "Equal in distribution" A
+snippet `(?<![\\\w])dto` "Converges in distribution" Ar
  \stackrel{\text{d}}{\to} 
 endsnippet
 
 context "math()"
-snippet pto "Equal in distribution" A
+snippet `(?<![\\\w])pto` "Converges in probability" Ar
  \stackrel{\text{p}}{\to} 
 endsnippet
 

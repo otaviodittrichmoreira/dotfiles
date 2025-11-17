@@ -143,8 +143,13 @@ else:
 endsnippet
 
 context "math()"
-snippet `(?<!\\)\b(lq|leq)` "Less than or equal to" wAr
+snippet `(?<!\\)\b(lq|leq)` "Less than or equal to" Ar
 \leq $0
+endsnippet
+
+context "math()"
+snippet `(?<!\\)\b(gq|geq)` "Less than or equal to" Ar
+\geq $0
 endsnippet
 
 priority 20000

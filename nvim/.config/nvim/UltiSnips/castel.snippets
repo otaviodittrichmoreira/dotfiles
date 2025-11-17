@@ -196,7 +196,7 @@ else:
 endsnippet
 
 context "math()"
-snippet floor "floor" iA
+snippet floor "floor" wA
 \left\lfloor $1 \right\rfloor`!p
 if t[0] and t[0][0] not in [',',' ']:
     snip.rv = ' '
@@ -323,10 +323,6 @@ snippet __ "subscript" iA
 _{$1} $0
 endsnippet
 
-context "math()"
-snippet oo "\infty" iA
-\infty 
-endsnippet
 
 snippet rij "mrij" i
 (${1:x}_${2:n})_{${3:$2}\\in${4:\\N}} $0
