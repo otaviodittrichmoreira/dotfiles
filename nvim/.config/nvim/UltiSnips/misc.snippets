@@ -24,7 +24,61 @@ def not_in(right_delimiter, left_delimiter):
 
     # if there is at least one unmatched '(', we are inside a function
     return (open_delimiter - close_delimiter) <= 0
+
+def find_single_fraction(s):
+    i = s.find(r'\frac')
+    if i == -1:
+        return None  # No \frac found
+    i += 5  # Skip past '\frac'
+    
+    if i >= len(s) or s[i] != '{':
+        return None  # Not a valid \frac format
+    
+    num, next_i = extract_braces(s, i)
+    if next_i >= len(s) or s[next_i] != '{':
+        return None  # No denominator found
+    
+    den, final_i = extract_braces(s, next_i)
+    return num, den
+
+
+def extract_braces(s, start):
+    """Extract content inside matching braces starting at index `start`."""
+    assert s[start] == '{', "Expected '{' at the start"
+    stack = 1
+    i = start + 1
+    while i < len(s) and stack > 0:
+        if s[i] == '{':
+            stack += 1
+        elif s[i] == '}':
+            stack -= 1
+        i += 1
+    return s[start+1:i-1], i
+
+def has_unbracketed_plus(s):
+    stack = []
+    brackets = {'{': '}', '[': ']', '(': ')'}
+    for char in s:
+        if char in brackets:
+            # Opening bracket: push its closing pair
+            stack.append(brackets[char])
+        elif char in brackets.values():
+            # Closing bracket: pop from stack if matching
+            if stack and stack[-1] == char:
+                stack.pop()
+            else:
+                # Mismatched bracket – optional handling
+                return False
+        elif char == '+':
+            # If stack is empty, plus is outside brackets
+            if not stack:
+                return True
+    return False
+
 endglobal
+
+
+
 snippet -- "em dash" iA
 —
 endsnippet
@@ -210,6 +264,13 @@ context "math() and not_in('{','}')"
 snippet `(\s*(.*)\s?(=|\\leq|\\geq|\\approx|<|>|\\propto|\\implies)&?\\?\s)\s*` "Repeat/copy what's before = after it" r
 `!p
 before_equal = match.group(2)
+if set(before_equal).issubset({" "}) and vim.eval("vimtex#env#is_inside('align')") == '1':
+    # Extract the line above the cursor
+    row, col = vim.current.window.cursor
+    if row > 1:
+        line_above = vim.current.buffer[row - 2]
+        line_above = line_above.strip()
+else:
 open_del_idx = before_equal.rfind("\\(")
 if open_del_idx >= 0:
 	before_equal = before_equal[open_del_idx+2:]
@@ -251,4 +312,15 @@ endsnippet
 
 snippet attention "Warning sign" w
 \warning{${1:${VISUAL}}}
+endsnippet
+
+snippet `(\\frac{(.*)}{(.*)})\s?fj` "Change fraction from a/b to 1/b a" Ar
+`!p
+expr = match.group(1)
+num, dem = find_single_fraction(expr)
+if has_unbracketed_plus(num):
+    snip.rv = "\\frac{1}{" + dem + "} \\left(" + num + "\\right )"
+else:
+    snip.rv = "\\frac{1}{" + dem + "} " + num
+`
 endsnippet

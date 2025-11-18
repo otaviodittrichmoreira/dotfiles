@@ -47,6 +47,41 @@ def in_normal_mode():
     # vim.eval('mode()') returns the current mode as a string
     return vim.eval('mode()') == 'n'
 
+def find_last_unbracketed_operator(s, operators):
+    stack = []
+    brackets = {'{': '}', '[': ']', '(': ')'}
+    last_pos = -1
+    last_op = None
+    
+    i = 0
+    while i < len(s):
+        char = s[i]
+        
+        # Handle opening brackets
+        if char in brackets:
+            stack.append(brackets[char])
+        
+        # Handle closing brackets
+        elif char in brackets.values():
+            if stack and stack[-1] == char:
+                stack.pop()
+        
+        # Check if any operator matches at position i
+        else:
+            for op in operators:
+                if s.startswith(op, i) and not stack:
+                    last_pos = i
+                    last_op = op
+                    break  # Found operator, no need to check smaller operators
+            
+            # If an operator was found, skip ahead
+            if last_op and i == last_pos:
+                i += len(last_op) - 1
+        
+        i += 1
+
+    return last_pos, last_op
+
 endglobal
 
 context "not line_above_ends_with_double_backslash() and env('align*') and (not ends_on_begin_env())"
@@ -102,7 +137,7 @@ endsnippet
 priority 200000
 context "align_condition()"
 snippet 'prop'  "Propto align beggining of the line" Arb
-\propto &\ $0
+\propto&\ $0
 endsnippet
 
 priority 200000
@@ -168,3 +203,45 @@ context "env('cases')"
 snippet `\sother` "otherwise in cases" Ar
  \ \text{otherwise} $0
 endsnippet
+
+context "math() and not_in('{','}')"
+snippet `(\s*(.*)\s?(=|\\leq|\\geq|\\approx|<|>|\\propto|\\implies)&?\\?\s)\s*` "Repeat/copy what's before = after it" r
+`!p
+before_equal = match.group(2)
+if set(before_equal).issubset({" "}) and (env('aligned') or env('align') or env('align*')):
+    # Extract the line above the cursor
+    row, col = vim.current.window.cursor
+    if row > 1:
+        line_above = vim.current.buffer[row - 2]
+        line_above = line_above.strip()
+        if line_above.endswith("\\\\"):
+            line_above = line_above[:-2].rstrip()
+        before_equal = line_above
+else:
+    open_del_idx = before_equal.rfind("\\(")
+    if open_del_idx >= 0:
+	    before_equal = before_equal[open_del_idx+2:]
+if match.group(3) != "\implies":
+    equal_idx, operator = find_last_unbracketed_operator(before_equal, ["=", "\\leq", "\\geq", "\\approx", "<", ">", "\\propto"])
+    if operator and operator.startswith("\\"):
+        equal_idx += len(operator) - 1
+    before_equal = before_equal[equal_idx+1:]
+else:
+    implies_idx = before_equal.rfind("\\implies")
+    if implies_idx > 0:
+        before_equal = before_equal[implies_idx+8:]
+    if "\\implies" not in before_equal and "&" in before_equal:
+        before_equal = before_equal.replace("&\\", "")
+        before_equal = before_equal.replace("&", "")
+if before_equal.startswith("&\ "):
+    before_equal = before_equal[3:]
+elif before_equal.startswith("& "):
+    before_equal = before_equal[2:]
+elif before_equal.startswith("&"):
+    before_equal = before_equal[1:]
+elif before_equal.startswith(" "):
+    before_equal = before_equal[1:]
+snip.rv = match.group(1) + before_equal
+`
+endsnippet
+
