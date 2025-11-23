@@ -308,3 +308,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = true, noremap = true, silent = true, desc = "Run TeXpresso on main.tex or current buffer" })
 	end,
 })
+
+-- map \ to A
+-- vim.keymap.set("n", "\\", "<s-a>")

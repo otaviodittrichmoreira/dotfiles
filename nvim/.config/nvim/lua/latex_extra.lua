@@ -30,6 +30,7 @@ function Find_unenclosed_equal(s)
 		["\\propto"] = true,
 	}
 	local depth = 0
+	local equal_list = {}
 
 	for i = 1, #s do
 		local c = s:sub(i, i)
@@ -44,20 +45,20 @@ function Find_unenclosed_equal(s)
 			depth = math.max(depth - 1, 0)
 		elseif symbols[c_extra] then
 			if depth == 0 then
-				return i, i + 6
+				table.insert(equal_list, { i, i + 6 })
 			end
 		elseif symbols[c_long] then
 			if depth == 0 then
-				return i, i + 3
+				table.insert(equal_list, { i, i + 3 })
 			end
 		elseif symbols[c] then
 			if depth == 0 then
-				return i, i + 1
+				table.insert(equal_list, { i, i + 1 })
 			end
 		end
 	end
 
-	return nil -- no unenclosed '=' found
+	return equal_list
 end
 
 function SafeMin(...)
@@ -103,7 +104,7 @@ function FindMathDelimiters(line, col)
 			return 1, #line
 		end
 		if open and close then
-			has_equal_between = Find_unenclosed_equal(line:sub(open, close)) ~= nil
+			has_equal_between = #Find_unenclosed_equal(line:sub(open, close)) > 0
 			if not has_equal_between then
 				pos = close + 1
 			end
@@ -142,7 +143,8 @@ function SelectLatexValue(after, around)
 	line = line:sub(open, close)
 
 	-- Find equal sign in line
-	local real_eq_pos_beg, real_eq_pos_end = Find_unenclosed_equal(line)
+	local equal_list = Find_unenclosed_equal(line)
+	local real_eq_pos_beg, real_eq_pos_end = equal_list[1][1], equal_list[1][2]
 
 	-- Find position of last character attached to = ( =& or =&\ )
 	local last = SafeMax(real_eq_pos_end, line:find("&"))

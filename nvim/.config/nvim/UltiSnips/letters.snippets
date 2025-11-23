@@ -696,9 +696,21 @@ endsnippet
 context "math()"
 snippet `(?<![a-zA-Z\\])([a-z]);` "Change letter to uppercase" Ar
 `!p 
-if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
 	space = ' '
 else:
 	space = ''
 snip.rv = match.group(1).upper() + space`$0
+endsnippet
+
+context "math()"
+snippet `\\(alpha|beta|gamma|delta|epsilon|eta|lambda|mu|pi|sigma|theta|omega|zeta|xi|rho|nu|phi|chi|psi|tau|upsilon|kappa|iota);` "Change greek letter to uppercase" Ar
+`!p 
+if t[0] and t[0][0] not in [',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+	space = ' '
+else:
+	space = ''
+letter = match.group(1)
+letter = letter[0].upper() + letter[1:]
+snip.rv = "\\" +  letter + space`$0
 endsnippet

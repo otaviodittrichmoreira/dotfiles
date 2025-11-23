@@ -1,7 +1,7 @@
 require("kickstart")
 require("pluggins.ultisnips")
 require("mini.align").setup()
-require("mini.surround").setup()
+-- require("mini.surround").setup()
 require("mini.jump").setup()
 require("mini.move").setup()
 require("mini.operators").setup()
