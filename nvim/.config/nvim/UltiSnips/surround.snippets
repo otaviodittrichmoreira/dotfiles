@@ -89,7 +89,7 @@ endsnippet
 
 
 context "math()"
-snippet '(\+|=|-?)(sp|(?<!e)ps)'  "Parentheses" Ar
+snippet '(\+|=|-?)(?<!\\ma)(sp|(?<!e)ps)'  "Parentheses" Ar
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
 `(${1:${VISUAL}})`!p

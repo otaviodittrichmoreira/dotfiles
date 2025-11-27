@@ -247,12 +247,7 @@ $0
 endsnippet
 
 snippet bpf "Proof" bA
-\begin{proof}{}{`!p
-import random, string
-if not snip.c:
-	random_label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
-snip.rv = random_label
-`}
+\begin{proof}{}{}
 	${1:${VISUAL}}
 \end{proof}
 $0
