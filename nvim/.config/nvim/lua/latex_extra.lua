@@ -49,6 +49,8 @@ function Find_unenclosed_equal(s)
 			end
 		elseif symbols[c_long] then
 			if depth == 0 then
+				print(c_long)
+				print(i, i + 3)
 				table.insert(equal_list, { i, i + 3 })
 			end
 		elseif symbols[c] then
@@ -160,6 +162,42 @@ function Find_two_lower_two_upper(pairs_list, x)
 	return lower1, lower2, upper1, upper2
 end
 
+function table_to_string(t)
+	if type(t) ~= "table" then
+		return tostring(t)
+	end
+
+	local parts = { "{" }
+
+	for k, v in pairs(t) do
+		local key
+		if type(k) == "string" then
+			key = k .. "="
+		elseif type(k) == "number" then
+			-- numeric keys print like list entries
+			key = ""
+		else
+			key = tostring(k) .. "="
+		end
+
+		if type(v) == "table" then
+			table.insert(parts, key .. table_to_string(v))
+		else
+			table.insert(parts, key .. tostring(v))
+		end
+
+		table.insert(parts, ",")
+	end
+
+	-- remove last comma if any
+	if parts[#parts] == "," then
+		table.remove(parts, #parts)
+	end
+
+	table.insert(parts, "}")
+	return table.concat(parts)
+end
+
 function SelectLatexValue(after, around)
 	-- Get current line text and cursor column number
 	local line = vim.api.nvim_get_current_line()
@@ -175,6 +213,7 @@ function SelectLatexValue(after, around)
 
 	-- Find equal sign in line
 	local equal_list = Find_unenclosed_equal(line)
+	print(table_to_string(equal_list))
 	local lower1, lower2, upper1, upper2 = Find_two_lower_two_upper(equal_list, col)
 	local real_eq_pos_beg, real_eq_pos_end
 	local border_low, border_high = 1, #line
@@ -205,7 +244,10 @@ function SelectLatexValue(after, around)
 	if line:sub(border_high, border_high) == " " then
 		border_high = border_high - 1
 	end
+	print(border_low, border_high)
+	print(line)
 	line = line:sub(border_low, border_high)
+	print(line)
 
 	-- Find position of last character attached to = ( =& or =&\ )
 	local last = SafeMax(real_eq_pos_end, line:find("&"))
@@ -290,6 +332,7 @@ function SelectLatexValue(after, around)
 		end
 	end
 
+	print(s_col, e_col)
 	vim.fn.setpos("'<", { 0, vim.fn.line("."), s_col, 0 })
 	vim.fn.setpos("'>", { 0, vim.fn.line("."), e_col, 0 })
 	vim.cmd("normal! gv")
