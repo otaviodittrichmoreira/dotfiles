@@ -135,7 +135,7 @@ local function find_attributer(s)
 			end
 		elseif attributers[c] then
 			if depth == 0 then
-				table.insert(equal_list, { i, i + 1 })
+				table.insert(equal_list, { i, i })
 			end
 		end
 	end
@@ -237,7 +237,7 @@ function SelectLatexValue(after, around)
 		end
 		math_part = line:sub(open_math, close_math)
 	else
-		open_math, close_math = 0, #line
+		open_math, close_math = 1, #line
 		math_part = line
 	end
 
@@ -246,7 +246,7 @@ function SelectLatexValue(after, around)
 	--                                                    --
 	--    * Simple case                                   --
 	--    \(a + b \leq&\ 3 + b + f(x)\)                   --
-	--      ^    ^      ^        ^                        --
+	--      ^    ^      ^           ^                     --
 	--                                                    --
 	--    * Multiple attributers                          --
 	--                          cursor here |             --
@@ -259,7 +259,7 @@ function SelectLatexValue(after, around)
 
 	-- Get all attributer positions
 	local attributers_list = find_attributer(math_part)
-	-- print(dump(attributers_list))
+	-- print(open_math, dump(attributers_list))
 
 	-- Two attributers before cursor, two after
 	local lower1, lower2, upper1, upper2 = find_two_lower_two_upper(attributers_list, relative_col)
@@ -271,13 +271,13 @@ function SelectLatexValue(after, around)
 		middle_attributer = lower1
 		top = #math_part
 		if lower2 == nil then
-			bottom = 0
+			bottom = 1
 		else
-			bottom = lower2[2]
+			bottom = lower2[2] + 1
 		end
 	elseif lower1 == nil and upper1 ~= nil then
 		middle_attributer = upper1
-		bottom = 0
+		bottom = 1
 		if upper2 == nil then
 			top = #math_part
 		else
@@ -287,21 +287,50 @@ function SelectLatexValue(after, around)
 		middle_attributer = lower1
 		top = upper1[1] - 1
 		if lower2 == nil then
-			bottom = 0
+			bottom = 1
 		else
-			bottom = lower2[2]
+			bottom = lower2[2] + 1
 		end
 	end
 
-	local point1, point2, point3, point4 = bottom, middle_attributer[1], middle_attributer[2], top
+	local point1, point2, point3, point4 = bottom, middle_attributer[1] - 1, middle_attributer[2] + 1, top
 
 	-- Change to absolute coordinates
-	point1 = point1 + open_math
-	point2 = point2 + open_math
-	point3 = point3 + open_math
-	point4 = point4 + open_math
+	point1 = point1 + open_math - 1
+	point2 = point2 + open_math - 1
+	point3 = point3 + open_math - 1
+	point4 = point4 + open_math - 1
 
-	-- print(point1, point2, point3, point4)
+	-- Remove trailing spaces
+	-- print(point1, line:sub(point1, point1), line:sub(point1, point1) == " ")
+	while line:sub(point1, point1) == " " do
+		point1 = point1 + 1
+	end
+	while line:sub(point2, point2) == " " do
+		point2 = point2 - 1
+	end
+	while line:sub(point3, point3) == " " do
+		point3 = point3 + 1
+	end
+	while line:sub(point4, point4) == " " do
+		point4 = point4 - 1
+	end
+
+	-- Remove \\ in multiline math if not using around
+	if not around and line:sub(point4 - 1, point4) == "\\\\" then
+		point4 = point4 - 2
+	end
+	while line:sub(point4, point4) == " " do
+		point4 = point4 - 1
+	end
+
+	-- Remove & and \ when not using around
+	while line:sub(point3, point3) == "&" or line:sub(point3, point3) == "\\" or line:sub(point3, point3) == " " do
+		point3 = point3 + 1
+	end
+	while line:sub(point2, point2) == "&" or line:sub(point2, point2) == "\\" or line:sub(point2, point2) == " " do
+		point2 = point2 - 1
+	end
 
 	local left, right
 	if not around then
@@ -314,16 +343,16 @@ function SelectLatexValue(after, around)
 		end
 	else
 		if after then
-			left = point2
+			left = point2 + 1
 			right = point4
 		else
 			left = point1
-			right = point3
+			right = point3 - 1
 		end
 	end
 
-	if not inside_multiline_math then
-		right = right - 1
+	if left > right then
+		return
 	end
 
 	vim.fn.setpos("'<", { 0, vim.fn.line("."), left, 0 })

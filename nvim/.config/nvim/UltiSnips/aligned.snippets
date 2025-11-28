@@ -89,12 +89,12 @@ snippet `(^\s*\S)` "Break line in aligned/ add \\ to the end of equation in alig
 `!p
 row, col = vim.current.window.cursor
 if row > 1:  # No line above the first line
-	# Get the line above (0-based indexing)
-	line_above = vim.current.buffer[row - 2]
-	# Append two backslashes if not already there
-	if not line_above.endswith("\\\\"):
-		vim.current.buffer[row - 2] = line_above + " \\\\"
-snip.rv = match.group(1)
+    # Get the line above (0-based indexing)
+    line_above = vim.current.buffer[row - 2]
+    # Append two backslashes if not already there
+    if not line_above.endswith("\\\\"):
+        vim.current.buffer[row - 2] = line_above + " \\\\"
+    snip.rv = match.group(1)
 `
 endsnippet
 
