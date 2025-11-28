@@ -218,6 +218,8 @@ end
 
 function SelectLatexValue(after, around)
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	-- col is one less than it shouldl for some reason
+	col = col + 1
 	local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
 	local max_row_check = 30
 	local last_visible = vim.fn.line("w$")
@@ -350,8 +352,13 @@ function _SelectLatexValue(line, row, col, after, around)
 	end
 
 	-- Remove & and \ when not using around
-	while line:sub(point3, point3) == "&" or line:sub(point3, point3) == "\\" or line:sub(point3, point3) == " " do
+	while
+		line:sub(point3, point3) == "&"
+		or line:sub(point3, point3 + 1):match("\\[^%a]")
+		or line:sub(point3, point3) == " "
+	do
 		point3 = point3 + 1
+		-- print(line:sub(point3, point3):match("\\[^%a]"), line:sub(point3, point3))
 	end
 	while line:sub(point2, point2) == "&" or line:sub(point2, point2) == "\\" or line:sub(point2, point2) == " " do
 		point2 = point2 - 1
