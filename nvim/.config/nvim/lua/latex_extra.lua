@@ -194,26 +194,46 @@ local function find_two_lower_two_upper(pairs_list, x)
 	return lower1, lower2, upper1, upper2
 end
 
-local function in_multiline_math()
-	return (vim.fn["vimtex#syntax#in"]("texMathZoneEnv") == 1 and vim.fn["vimtex#syntax#in"]("texCmdMathEnv") == 0)
-		or (vim.fn["vimtex#syntax#in"]("texMathZoneLD") == 1 and vim.fn["vimtex#syntax#in"]("texMathDelimZoneLD") == 0)
-		or (vim.fn["vimtex#syntax#in"]("texMathZoneTD") == 1 and vim.fn["vimtex#syntax#in"]("texMathDelimZoneTD") == 0)
+local function in_multiline_math(row, col)
+	return (
+		vim.fn["vimtex#syntax#in"]("texMathZoneEnv", row, col) == 1
+		and vim.fn["vimtex#syntax#in"]("texCmdMathEnv", row, col) == 0
+	)
+		or (vim.fn["vimtex#syntax#in"]("texMathZoneLD", row, col) == 1 and vim.fn["vimtex#syntax#in"](
+			"texMathDelimZoneLD",
+			row,
+			col
+		) == 0)
+		or (
+			vim.fn["vimtex#syntax#in"]("texMathZoneTD", row, col) == 1
+			and vim.fn["vimtex#syntax#in"]("texMathDelimZoneTD", row, col) == 0
+		)
 end
 
-local function in_math_zone()
-	return vim.fn["vimtex#syntax#in_mathzone"]() == 1
-		or vim.fn["vimtex#syntax#in"]("texMathDelimZoneLI") == 1
-		or vim.fn["vimtex#syntax#in"]("texMathDelimZoneTI") == 1
+local function in_math_zone(row, col)
+	return vim.fn["vimtex#syntax#in_mathzone"](row, col) == 1
+		or vim.fn["vimtex#syntax#in"]("texMathDelimZoneLI", row, col) == 1
+		or vim.fn["vimtex#syntax#in"]("texMathDelimZoneTI", row, col) == 1
 end
 
 function SelectLatexValue(after, around)
-	-- Get current line text and cursor column number
-	local line = vim.api.nvim_get_current_line()
-	local col = vim.fn.col(".")
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
+	local max_row_check = 30
+	local last_visible = vim.fn.line("w$")
+	local i = 1
+	while line and not _SelectLatexValue(line, row, col, after, around) and row < last_visible and i < max_row_check do
+		row = row + 1
+		col = 1
+		line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
+		i = i + 1
+	end
+end
 
+function _SelectLatexValue(line, row, col, after, around)
 	-- Is in math zone and is in multiline math bools
-	local inside_math_zone = in_math_zone()
-	local inside_multiline_math = in_multiline_math()
+	local inside_math_zone = in_math_zone(row, col)
+	local inside_multiline_math = in_multiline_math(row, col)
 
 	-- Start point to look for delimiters/attributers
 	local start_search_col
@@ -222,7 +242,7 @@ function SelectLatexValue(after, around)
 	elseif inside_math_zone then
 		start_search_col = last_before_list(line, { "\\(", "$" }, col)
 		if start_search_col == nil then
-			return
+			return false
 		end
 	else
 		start_search_col = col
@@ -233,7 +253,7 @@ function SelectLatexValue(after, around)
 	if not inside_multiline_math then
 		open_math, close_math = find_delimiter_containing_attributer(line, start_search_col, "\\(", "\\)")
 		if open_math == nil or close_math == nil then
-			return
+			return false
 		end
 		math_part = line:sub(open_math, close_math)
 	else
@@ -241,19 +261,6 @@ function SelectLatexValue(after, around)
 		math_part = line
 	end
 
-	--------------------------------------------------------
-	--                4 POINTS OF INTEREST                --
-	--                                                    --
-	--    * Simple case                                   --
-	--    \(a + b \leq&\ 3 + b + f(x)\)                   --
-	--      ^    ^      ^           ^                     --
-	--                                                    --
-	--    * Multiple attributers                          --
-	--                          cursor here |             --
-	--    \(a + b \leq c + d + \int x dx = x^2 = e^x\)    --
-	--                ^                 ^ ^   ^           --
-	--                                                    --
-	--------------------------------------------------------
 	-- Cursor column relative to math part
 	local relative_col = col - open_math
 
@@ -263,7 +270,9 @@ function SelectLatexValue(after, around)
 
 	-- Two attributers before cursor, two after
 	local lower1, lower2, upper1, upper2 = find_two_lower_two_upper(attributers_list, relative_col)
-	-- print(dump(lower1), dump(lower2), dump(upper1), dump(upper2))
+	if lower1 == nil and lower2 == nil and upper1 == nil and upper2 == nil then
+		return false
+	end
 
 	-- Position of the attributer in the middle of the selection
 	local middle_attributer, bottom, top
@@ -292,6 +301,22 @@ function SelectLatexValue(after, around)
 			bottom = lower2[2] + 1
 		end
 	end
+
+	--------------------------------------------------------
+	--                4 POINTS OF INTEREST                --
+	--                                                    --
+	--    * Simple case                                   --
+	--    \(a + b \leq&\ 3 + b + f(x)\)                   --
+	--      ^    ^      ^           ^                     --
+	--      1    2      3           4                     --
+	--                                                    --
+	--    * Multiple attributers                          --
+	--                       cursor here -> |             --
+	--    \(a + b \leq c + d + \int x dx = x^2 = e^x\)    --
+	--                ^                 ^ ^   ^           --
+	--                1                 2 3   4           --
+	--                                                    --
+	--------------------------------------------------------
 
 	local point1, point2, point3, point4 = bottom, middle_attributer[1] - 1, middle_attributer[2] + 1, top
 
@@ -352,10 +377,11 @@ function SelectLatexValue(after, around)
 	end
 
 	if left > right then
-		return
+		return false
 	end
 
-	vim.fn.setpos("'<", { 0, vim.fn.line("."), left, 0 })
-	vim.fn.setpos("'>", { 0, vim.fn.line("."), right, 0 })
+	vim.fn.setpos("'<", { 0, row, left, 0 })
+	vim.fn.setpos("'>", { 0, row, right, 0 })
 	vim.cmd("normal! gv")
+	return true
 end
