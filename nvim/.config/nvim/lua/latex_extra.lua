@@ -49,8 +49,6 @@ function Find_unenclosed_equal(s)
 			end
 		elseif symbols[c_long] then
 			if depth == 0 then
-				print(c_long)
-				print(i, i + 3)
 				table.insert(equal_list, { i, i + 3 })
 			end
 		elseif symbols[c] then
@@ -131,73 +129,6 @@ function FindMathDelimiters(line, col)
 	return open, close
 end
 
-function Find_two_lower_two_upper(pairs_list, x)
-	local lower1, lower2 = nil, nil -- largest and 2nd largest < x
-	local upper1, upper2 = nil, nil -- smallest and 2nd smallest > x
-
-	for _, pair in ipairs(pairs_list) do
-		local a = pair[1]
-
-		-- LOWER numbers
-		if a <= x then
-			if (not lower1) or (a > lower1[1]) then
-				lower2 = lower1
-				lower1 = pair
-			elseif (not lower2) or (a > lower2[1]) then
-				lower2 = pair
-			end
-		end
-
-		-- UPPER numbers
-		if a > x then
-			if (not upper1) or (a < upper1[1]) then
-				upper2 = upper1
-				upper1 = pair
-			elseif (not upper2) or (a < upper2[1]) then
-				upper2 = pair
-			end
-		end
-	end
-
-	return lower1, lower2, upper1, upper2
-end
-
-function table_to_string(t)
-	if type(t) ~= "table" then
-		return tostring(t)
-	end
-
-	local parts = { "{" }
-
-	for k, v in pairs(t) do
-		local key
-		if type(k) == "string" then
-			key = k .. "="
-		elseif type(k) == "number" then
-			-- numeric keys print like list entries
-			key = ""
-		else
-			key = tostring(k) .. "="
-		end
-
-		if type(v) == "table" then
-			table.insert(parts, key .. table_to_string(v))
-		else
-			table.insert(parts, key .. tostring(v))
-		end
-
-		table.insert(parts, ",")
-	end
-
-	-- remove last comma if any
-	if parts[#parts] == "," then
-		table.remove(parts, #parts)
-	end
-
-	table.insert(parts, "}")
-	return table.concat(parts)
-end
-
 function SelectLatexValue(after, around)
 	-- Get current line text and cursor column number
 	local line = vim.api.nvim_get_current_line()
@@ -213,41 +144,7 @@ function SelectLatexValue(after, around)
 
 	-- Find equal sign in line
 	local equal_list = Find_unenclosed_equal(line)
-	print(table_to_string(equal_list))
-	local lower1, lower2, upper1, upper2 = Find_two_lower_two_upper(equal_list, col)
-	local real_eq_pos_beg, real_eq_pos_end
-	local border_low, border_high = 1, #line
-	if lower1 == nil then
-		if upper1 == nil then
-			return
-		else
-			real_eq_pos_beg, real_eq_pos_end = upper1[1], upper1[2]
-			if upper2 ~= nil then
-				border_high = upper2[1] - 1
-			end
-		end
-	else
-		real_eq_pos_beg, real_eq_pos_end = lower1[1], lower1[2]
-		if lower2 ~= nil then
-			border_low = lower2[2]
-		end
-		if upper1 ~= nil then
-			border_high = upper1[1] - 1
-		end
-	end
-	if line:sub(border_low, border_low) == "&" then
-		border_low = border_low + 1
-	end
-	if line:sub(border_low, border_low) == "\\" then
-		border_low = border_low + 1
-	end
-	if line:sub(border_high, border_high) == " " then
-		border_high = border_high - 1
-	end
-	print(border_low, border_high)
-	print(line)
-	line = line:sub(border_low, border_high)
-	print(line)
+	local real_eq_pos_beg, real_eq_pos_end = equal_list[1][1], equal_list[1][2]
 
 	-- Find position of last character attached to = ( =& or =&\ )
 	local last = SafeMax(real_eq_pos_end, line:find("&"))
@@ -312,11 +209,11 @@ function SelectLatexValue(after, around)
 			end
 			local _, last_non_space = line:sub(1, e_col):find(".*%S")
 			if last_non_space then
-				e_col = math.min(e_col, last_non_space) + border_low + open - 1
+				e_col = math.min(e_col, last_non_space) + open - 1
 			end
 		end
 	else
-		e_col = SafeMin(SafeMax(line:find("%S"), open + border_low), s_col)
+		e_col = SafeMin(SafeMax(line:find("%S"), open), s_col)
 	end
 
 	-- Remove spaces from selection
@@ -332,7 +229,6 @@ function SelectLatexValue(after, around)
 		end
 	end
 
-	print(s_col, e_col)
 	vim.fn.setpos("'<", { 0, vim.fn.line("."), s_col, 0 })
 	vim.fn.setpos("'>", { 0, vim.fn.line("."), e_col, 0 })
 	vim.cmd("normal! gv")
