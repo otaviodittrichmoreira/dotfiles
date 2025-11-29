@@ -73,6 +73,8 @@ end
 
 local function find_attributer_bool(s)
 	local depth = 0
+	local depth_curly = 0
+	local depth_curly2 = 0
 	local equal_list = {}
 
 	for i = 1, #s do
@@ -86,16 +88,24 @@ local function find_attributer_bool(s)
 			depth = depth + 1
 		elseif c == ")" or c == "]" then
 			depth = math.max(depth - 1, 0)
+		elseif c_before == "\\{" then
+			depth_curly = depth_curly + 1
+		elseif c_before == "\\}" then
+			depth_curly = math.max(depth_curly - 1, 0)
+		elseif c == "{" then
+			depth_curly2 = depth_curly2 + 1
+		elseif c == "}" then
+			depth_curly2 = math.max(depth_curly2 - 1, 0)
 		elseif attributers[c_extra] then
-			if depth == 0 then
+			if depth == 0 and depth_curly == 0 then
 				return true
 			end
 		elseif attributers[c_long] then
-			if depth == 0 then
+			if depth == 0 and depth_curly == 0 and depth_curly2 == 0 then
 				return true
 			end
 		elseif attributers[c] then
-			if depth == 0 then
+			if depth == 0 and depth_curly == 0 and depth_curly2 == 0 then
 				return true
 			end
 		end
@@ -106,10 +116,13 @@ end
 
 local function find_attributer(s)
 	local depth = 0
+	local depth_curly = 0
+	local depth_curly2 = 0
 	local equal_list = {}
 
 	for i = 1, #s do
 		local c = s:sub(i, i)
+		local c2 = s:sub(i, i + 1)
 		local c_long = s:sub(i, math.min(#s, i + 3))
 		local c_extra = s:sub(i, math.min(#s, i + 6))
 		local c_before = s:sub(math.max(i - 1, 1), i)
@@ -119,16 +132,24 @@ local function find_attributer(s)
 			depth = depth + 1
 		elseif c == ")" or c == "]" then
 			depth = math.max(depth - 1, 0)
+		elseif c_before == "\\{" then
+			depth_curly = depth_curly + 1
+		elseif c_before == "\\}" then
+			depth_curly = math.max(depth_curly - 1, 0)
+		elseif c == "{" then
+			depth_curly2 = depth_curly2 + 1
+		elseif c == "}" then
+			depth_curly2 = math.max(depth_curly2 - 1, 0)
 		elseif attributers[c_extra] then
-			if depth == 0 then
+			if depth == 0 and depth_curly == 0 then
 				table.insert(equal_list, { i, i + 6 })
 			end
 		elseif attributers[c_long] then
-			if depth == 0 then
+			if depth == 0 and depth_curly == 0 and depth_curly2 == 0 then
 				table.insert(equal_list, { i, i + 3 })
 			end
 		elseif attributers[c] then
-			if depth == 0 then
+			if depth == 0 and depth_curly == 0 and depth_curly2 == 0 then
 				table.insert(equal_list, { i, i })
 			end
 		end
@@ -142,7 +163,9 @@ local function find_delimiter_containing_attributer(s, start, open, close)
 	local close_idx
 	local has_attributer
 
-	while not has_attributer and open_idx do
+	local max_iter = 500
+	local i = 0
+	while not has_attributer and open_idx and i < max_iter do
 		open_idx = s:find(open, start, true)
 		if open_idx then
 			open_idx = open_idx + #open
@@ -150,11 +173,25 @@ local function find_delimiter_containing_attributer(s, start, open, close)
 			if close_idx then
 				close_idx = close_idx - #close
 				has_attributer = find_attributer_bool(s:sub(open_idx, close_idx))
-				start = close_idx
+				start = close_idx + 2
 			end
 		end
+		i = i + 1
 	end
 	return open_idx, close_idx
+end
+
+local function find_delimiter_containing_attributer_list(s, start, delimiter_list)
+	local min_open_idx, min_close_idx = 999999, 999999
+	for _, delimiter in ipairs(delimiter_list) do
+		local open, close = delimiter[1], delimiter[2]
+		local open_idx, close_idx = find_delimiter_containing_attributer(s, start, open, close)
+		if open_idx and close_idx and open_idx < min_open_idx then
+			min_open_idx = open_idx
+			min_close_idx = close_idx
+		end
+	end
+	return min_open_idx, min_close_idx
 end
 
 local function find_two_lower_two_upper(pairs_list, x)
@@ -247,7 +284,8 @@ function _SelectLatexValue(line, row, col, after, around)
 	-- Locate start and end the next math zone with a unenclosed delimiter inside
 	local open_math, close_math, math_part
 	if not inside_multiline_math then
-		open_math, close_math = find_delimiter_containing_attributer(line, start_search_col, "\\(", "\\)")
+		open_math, close_math =
+			find_delimiter_containing_attributer_list(line, start_search_col, { { "\\(", "\\)" }, { "$", "$" } })
 		if open_math == nil or close_math == nil then
 			return false
 		end
@@ -262,7 +300,6 @@ function _SelectLatexValue(line, row, col, after, around)
 
 	-- Get all attributer positions
 	local attributers_list = find_attributer(math_part)
-	-- print(open_math, dump(attributers_list))
 
 	-- Two attributers before cursor, two after
 	local lower1, lower2, upper1, upper2 = find_two_lower_two_upper(attributers_list, relative_col)
@@ -323,7 +360,6 @@ function _SelectLatexValue(line, row, col, after, around)
 	point4 = point4 + open_math - 1
 
 	-- Remove trailing spaces
-	-- print(point1, line:sub(point1, point1), line:sub(point1, point1) == " ")
 	while line:sub(point1, point1) == " " do
 		point1 = point1 + 1
 	end
@@ -352,7 +388,6 @@ function _SelectLatexValue(line, row, col, after, around)
 		or line:sub(point3, point3) == " "
 	do
 		point3 = point3 + 1
-		-- print(line:sub(point3, point3):match("\\[^%a]"), line:sub(point3, point3))
 	end
 	while line:sub(point2, point2) == "&" or line:sub(point2, point2) == "\\" or line:sub(point2, point2) == " " do
 		point2 = point2 - 1
@@ -379,6 +414,30 @@ function _SelectLatexValue(line, row, col, after, around)
 
 	if left > right then
 		return true
+	end
+
+	local quad_idx = line:sub(left, right):find("\\quad", 0, false)
+	while quad_idx ~= nil do
+		quad_idx = quad_idx + left - 1
+		if after then
+			right = SafeMin(right, quad_idx - 1)
+		else
+			left = SafeMax(left, quad_idx + 6)
+		end
+		quad_idx = line:sub(left, right):find("\\quad", 0, false)
+	end
+
+	if around then
+		while line:sub(right + 1, right + 1) == " " do
+			right = right + 1
+		end
+	else
+		while line:sub(right, right) == " " do
+			right = right - 1
+		end
+		while line:sub(left, left) == " " do
+			left = left + 1
+		end
 	end
 
 	vim.fn.setpos("'<", { 0, row, left, 0 })
