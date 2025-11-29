@@ -37,12 +37,6 @@ local function dump(o)
 	end
 end
 
-local function find_math_delimiters(line, col)
-	local open = "\\("
-	local close = "\\)"
-	return line:find(open, col, true)
-end
-
 local attributers = {
 	["="] = true,
 	["\\leq"] = true,
@@ -221,7 +215,7 @@ function SelectLatexValue(after, around)
 	-- col is one less than it shouldl for some reason
 	col = col + 1
 	local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
-	local max_row_check = 30
+	local max_row_check = 50
 	local last_visible = vim.fn.line("w$")
 	local i = 1
 	while line and not _SelectLatexValue(line, row, col, after, around) and row < last_visible and i < max_row_check do
@@ -384,7 +378,7 @@ function _SelectLatexValue(line, row, col, after, around)
 	end
 
 	if left > right then
-		return false
+		return true
 	end
 
 	vim.fn.setpos("'<", { 0, row, left, 0 })
