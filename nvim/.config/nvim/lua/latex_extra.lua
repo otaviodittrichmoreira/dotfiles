@@ -383,14 +383,24 @@ function _SelectLatexValue(line, row, col, after, around)
 
 	-- Remove & and \ when not using around
 	while
+		line:sub(point1, point1) == "&"
+		or line:sub(point1, point1 + 1):match("\\[^%a]")
+		or line:sub(point1, point1) == " "
+	do
+		point1 = point1 + 1
+	end
+	while line:sub(point2, point2) == "&" or line:sub(point2, point2) == "\\" or line:sub(point2, point2) == " " do
+		point2 = point2 - 1
+	end
+	while
 		line:sub(point3, point3) == "&"
 		or line:sub(point3, point3 + 1):match("\\[^%a]")
 		or line:sub(point3, point3) == " "
 	do
 		point3 = point3 + 1
 	end
-	while line:sub(point2, point2) == "&" or line:sub(point2, point2) == "\\" or line:sub(point2, point2) == " " do
-		point2 = point2 - 1
+	while line:sub(point4, point4) == "&" or line:sub(point4, point4) == "\\" or line:sub(point4, point4) == " " do
+		point4 = point4 - 1
 	end
 
 	local left, right

@@ -88,7 +88,7 @@ context "not line_above_ends_with_double_backslash() and env('align*') and (not 
 snippet `(^\s*\S)` "Break line in aligned/ add \\ to the end of equation in aligned" rA
 `!p
 row, col = vim.current.window.cursor
-if row > 1:  # No line above the first line
+if row > 1 and not ends_on_begin_env():  # No line above the first line
     # Get the line above (0-based indexing)
     line_above = vim.current.buffer[row - 2]
     # Append two backslashes if not already there

@@ -217,6 +217,19 @@
   \marginnote{\dangersign[3ex]\ \textcolor{red}{\textsf{\small #1}}}%
 }
 
+\newcommand\infosign[1][1.5ex]{%
+  \renewcommand\stacktype{L}%
+  \scaleto{%
+    \stackon[1pt]{\textcolor{blue!70!black}{\large$\circ$}}%
+      {\raisebox{0.1ex}{\tiny\bfseries\textcolor{blue!70!black}{i}}}%
+  }{#1}%
+}
+
+% Discreet info: symbol + optional explanatory text in margin
+\newcommand{\info}[1]{%
+  \marginnote{\infosign[2.8ex]\ \textcolor{blue}{\textsf{\small #1}}}%
+}
+
 \usepackage{xcolor, tikz}
 
 \newcommand{\classseparator}[1]{%

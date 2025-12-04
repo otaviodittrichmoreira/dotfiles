@@ -226,8 +226,14 @@ endsnippet
 
 priority 2000000
 context "math()"
-snippet '\\(alpha|beta|gamma|delta|epsilon|eta|lambda|mu|pi|sigma|theta|omega|zeta|xi|rho|nu|phi|chi|psi|tau|upsilon|kappa|iota)\s?(\d)' "auto subscript for greek letters" rA
+snippet '\\([a|A]lpha|[b|B]eta|[g|G]amma|[d|D]elta|[e|E]psilon|[e|E]ta|[l|L]ambda|[m|M]u|[p|P]i|[s|S]igma|[t|T]heta|[o|O]mega|[z|Z]eta|[x|X]i|[r|R]ho|[n|N]u|[p|P]hi|[c|C]hi|[p|P]si|[t|T]au|[u|U]psilon|[k|K]appa|[i|I]ota)\s?(\d)' "auto subscript for greek letters" rA
 `!p snip.rv = "\\" + match.group(1) + "_" + match.group(2)`
+endsnippet
+
+priority 20000000
+context "math()"
+snippet '(?<![\\\w])(\w)([ijknm])\s' "auto subscript ijkmn" rA
+`!p snip.rv = match.group(1) + "_" + match.group(2) + " "`
 endsnippet
 
 # context "math()"

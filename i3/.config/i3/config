@@ -207,7 +207,7 @@ bindsym $mod+r mode "resize"
 ##############################
 # USER CONFIGURATION FILE #
 ##############################
-exec_always feh --bg-fill ~/Pictures/wallpapers/All+Or+Nothing+Final.jpg
+exec_always feh --bg-fill ~/Pictures/wallpapers/upscaled_all_or_nothing_x4.png
 
 # Swap Caps Lock and Escape
 # exec_always --no-startup-id setxkbmap -option caps:swapescape
