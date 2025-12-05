@@ -15,3 +15,8 @@ prepend_previewers = [
 #    { name = "*.lang_type", run = "rich-preview"} # for particular language files eg. .py, .go., .lua, etc.
 ]
 
+[filter]
+ignore-globs = [
+  "*.toc",
+  "*.fls",
+]
