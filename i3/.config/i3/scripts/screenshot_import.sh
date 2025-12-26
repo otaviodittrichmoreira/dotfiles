@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR=/home/otavio/Pictures/Screenshots
+DIR=$HOME/Pictures/Screenshots
 mkdir -p "$DIR"
 
 FILENAME="screenshot_$(date +'%Y-%m-%d_%H-%M-%S').png"

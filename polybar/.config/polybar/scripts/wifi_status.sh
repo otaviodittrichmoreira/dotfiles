@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IFACE="wlo1"
+IFACE="wlp130s0"
 ETHERNET="enp2s0"
 
 # Check if ethernet cable is connected
