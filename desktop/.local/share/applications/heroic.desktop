@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Heroic Games Launcher
-Exec=bin/Heroic
+Exec=/home/otaviomoreira/bin/Heroic
 Icon=.local/share/icons/heroic.png
 Type=Application
 Categories=Game;

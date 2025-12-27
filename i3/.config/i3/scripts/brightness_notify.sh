@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Get current brightness level using brightnessctl
-BRIGHTNESS=$(brightnessctl g | awk '{printf "%.0f", $1 / 80}')
+BRIGHTNESS=$(brightnessctl g | awk '{printf "%.0f", ($1 / 5) / 10 }')
+BRIGHTNESS=$((BRIGHTNESS * 10))
 
 # Choose an icon based on brightness level
 if [ "$BRIGHTNESS" -ge 66 ]; then
