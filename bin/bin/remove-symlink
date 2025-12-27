@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Start from the current directory
+find . -type l | while read -r symlink; do
+    target="$(readlink -f "$symlink")"
+    
+    if [ -e "$target" ]; then
+        if [ -d "$target" ]; then
+            # If it's a directory
+            cp -a --remove-destination "$target" "$symlink"
+        else
+            # If it's a file
+            cp --remove-destination "$target" "$symlink"
+        fi
+        echo "Replaced symlink $symlink with actual file/directory."
+    else
+        echo "Target of $symlink does not exist, skipping $symlink."
+    fi
+done

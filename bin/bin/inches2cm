@@ -1,0 +1,13 @@
+#!/bin/python3
+import re
+import sys
+
+input = sys.argv[1:]
+input = " ".join(input)
+
+def dashrepl(matchobj):
+    return str(round(float(matchobj.group(0))*2.54, 1))
+
+result = str(re.sub(r"\d+\.?\d*", dashrepl, input))
+result = result.replace('"', 'cm ')
+print(result)
