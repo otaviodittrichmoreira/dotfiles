@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+import re
+import sys
+
+# Read from stdin if data is piped, otherwise from argv
+if not sys.stdin.isatty():
+    text = sys.stdin.read()
+elif len(sys.argv) > 1:
+    text = " ".join(sys.argv[1:])
+else:
+    sys.exit("Usage: echo 'text' | cm2inches  OR  cm2inches text")
+
+# Conversion function: cm → inches (1 inch = 2.54 cm)
+def dashrepl(matchobj):
+    return str(round(float(matchobj.group(0)) / 2.54, 2))
+
+# Replace numbers
+result = re.sub(r"\d+\.?\d*", dashrepl, text)
+result = result.replace("cm", '"')
+
+print(result)
