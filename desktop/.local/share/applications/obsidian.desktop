@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Obsidian
-Exec=/home/otavio/bin/obsidian
-Icon=/home/otavio/.local/share/icons/obsidian-icon.png
+Exec=bin/obsidian
+Icon=.local/share/icons/obsidian-icon.png
 Type=Application
 Categories=Utility;TextEditor;Development;
 StartupNotify=true
