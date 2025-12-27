@@ -9,6 +9,25 @@ def env(name):
 	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
 	return x != '0' and y != '0'
 
+def in_multiline_math():
+    row, col = vim.current.window.cursor
+
+    return (
+        (
+            vim.eval(f"vimtex#syntax#in('texMathZoneEnv', {row}, {col})") == "1" and
+            vim.eval(f"vimtex#syntax#in('texCmdMathEnv', {row}, {col})") == "0"
+        )
+        or (
+            vim.eval(f"vimtex#syntax#in('texMathZoneLD', {row}, {col})") == "1" and
+            vim.eval(f"vimtex#syntax#in('texMathDelimZoneLD', {row}, {col})") == "0"
+        )
+        or (
+            vim.eval(f"vimtex#syntax#in('texMathZoneTD', {row}, {col})") == "1" and
+            vim.eval(f"vimtex#syntax#in('texMathDelimZoneTD', {row}, {col})") == "0"
+        )
+    )
+
+
 def not_in(right_delimiter, left_delimiter):
     row, col = vim.current.window.cursor
     # get all lines up to the cursor
@@ -182,8 +201,14 @@ snippet '^(\s*)jm'  "Plus align beggining of the line" Ar
 `!p snip.rv=match.group(1)`&- $0
 endsnippet
 
+# priority 20000
+# context "align_condition()"
+# snippet AA "For all in aligned" A
+# \quad \forall \ $0
+# endsnippet
+
 priority 20000
-context "align_condition()"
+context "in_multiline_math()"
 snippet AA "For all in aligned" A
 \quad \forall \ $0
 endsnippet

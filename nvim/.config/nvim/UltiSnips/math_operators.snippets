@@ -99,13 +99,23 @@ snippet nnn "bigcap" iA
 endsnippet
 
 context "math()"
-snippet '(\s*)jm' "Minus Symbol" riA
- - $0
+snippet '(\S?)(\s*)jm' "Minus Symbol" riA
+`!p 
+if len(match.group(1))>0:
+	snip.rv = match.group(1) + " - "
+else:
+	snip.rv = match.group(2) + "- "
+`$0
 endsnippet
 
 context "math()"
-snippet '(\s*)jp' "Plus Symbol" riA
- + $0
+snippet '(\S?)(\s*)jp' "Plus Symbol" riA
+`!p 
+if len(match.group(1))>0:
+	snip.rv = match.group(1) + " + "
+else:
+	snip.rv = match.group(2) + "+ "
+`$0
 endsnippet
 
 context "math()"
@@ -232,7 +242,7 @@ endsnippet
 
 priority 20000000
 context "math()"
-snippet '(?<![\\\w])(\w)([ijknm])\s' "auto subscript ijkmn" rA
+snippet '(?<![\\a-zA-Z])([a-zA-Z])([ijknm])\s' "auto subscript ijkmn" rA
 `!p snip.rv = match.group(1) + "_" + match.group(2) + " "`
 endsnippet
 
@@ -263,8 +273,8 @@ snippet `\sargmax` "argmax" wAr
 endsnippet
 
 context "math()"
-snippet `\smax` "max" wAr
- \max $0
+snippet `(?<![\\a-zA-Z])max` "max" Ar
+\max $0
 endsnippet
 
 context "math()"

@@ -17,7 +17,7 @@ endglobal
 priority 10
 context "math()"
 snippet '((\\)?([A-Za-z]+)[\{]?[a-zA-Z]+[\}]?)\s?([bB]f|bold)' "Mathbf above symbol" wrA
-\hat{`!p
+\bm{`!p
 if isinstance(snip.v.text, str) and len(snip.v.text) > 0:
     snip.rv = snip.v.text
 else:

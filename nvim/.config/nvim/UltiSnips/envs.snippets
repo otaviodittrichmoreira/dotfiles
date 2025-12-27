@@ -269,7 +269,7 @@ endsnippet
 
 priority 20000
 snippet `\\begin\{enumerate\}[\[]?` "Enumerate" rA
-\begin{enumerate}[label=(\\${1:alph}*)]`!p
+\begin{enumerate}[label=(\\${1:alph}*)`!p
 if t[1] and len(t[1]) > 3:
 	snip.rv = ""
 else:
