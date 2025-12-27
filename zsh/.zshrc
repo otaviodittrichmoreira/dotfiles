@@ -139,8 +139,8 @@ alias nvim="$HOME/bin/nvim.appimage"
 alias n="$HOME/bin/nvim.appimage"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.tmuxifier/bin:$PATH"
-export EDITOR="$HOME/bin/nvim.appimage"
-export VISUAL="$HOME/bin/nvim.appimage"
+export EDITOR="$HOME/bin/nvim.appimage --clean"
+export VISUAL="$HOME/bin/nvim.appimage --clean"
 bindkey -M vicmd v edit-command-line
 alias copy='xclip -selection clipboard'
 alias ulti='cd $HOME/.config/nvim/UltiSnips/; nvim'
