@@ -51,6 +51,13 @@ bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDI
 bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && $refresh_i3status && $volume_notify
 bindsym XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && $refresh_i3status
 
+# Play/pause next and previous song
+set $player_notify ~/.config/i3/scripts/player_notify.sh
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && $player_notify
+bindsym XF86AudioStop exec --no-startup-id playerctl stop && $player_notify
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous && $player_notify
+bindsym XF86AudioNext exec --no-startup-id playerctl next && $player_notify
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
