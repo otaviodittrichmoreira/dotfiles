@@ -113,6 +113,8 @@
 %%% COLORS %%%
 \definecolor{greentheorembg}{HTML}{E8F5E9}
 \definecolor{greentheoremborder}{HTML}{2E7D32}
+\definecolor{bluetheorembg}{HTML}{E8E9F5}
+\definecolor{bluetheoremborder}{HTML}{2E327D}
 \definecolor{myb}{HTML}{1E88E5} % for exercises
 \definecolor{myp}{RGB}{197, 92, 212}
 
@@ -122,6 +124,7 @@
   plainstyle/.style={
     theorem style=plain,
     coltitle=black,
+    breakable,
     colback=white,
     colframe=white,
     fonttitle=\bfseries,
@@ -133,7 +136,6 @@
 \tcbset{
   plaingreen/.style={
     enhanced,
-    breakable,
     colback=greentheorembg,
     colframe=greentheoremborder,
     coltitle=black,
@@ -147,8 +149,25 @@
   }
 }
 
+\tcbset{
+  plainblue/.style={
+    enhanced,
+    colback=bluetheorembg,
+    colframe=bluttheoremborder,
+    coltitle=black,
+    fonttitle=\bfseries,
+    boxrule=0.6pt,
+    arc=6pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt,
+    theorem style=plain,
+    grow to left by=3mm,
+    grow to right by=3mm,
+  }
+}
+
 \newtcbtheorem[number within=section]{theorem}{Theorem}{plaingreen}{thm}
 \newtcbtheorem[number within=section]{proposition}{Proposition}{plaingreen}{prop}
+\newtcbtheorem[number within=section]{note}{Note}{plainblue}{note}
 \newtcbtheorem[number within=section]{lemma}{Lemma}{plainstyle}{lem}
 \newtcbtheorem[number within=section]{corollary}{Corollary}{plainstyle}{cor}
 \newtcbtheorem[number within=section]{problem}{Problem}{plainstyle}{prob}
@@ -163,7 +182,6 @@
 \makeatletter
 \newtcbtheorem[number from=section]{exercise}{Exercise}{%
   enhanced,
-  breakable,
   colback=white,
   colframe=myb!80!black,
   attach boxed title to top left={yshift*=-\tcboxedtitleheight},
