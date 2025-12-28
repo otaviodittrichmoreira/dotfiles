@@ -1077,6 +1077,7 @@ require("lazy").setup({
 	require("pluggins.texpresso"),
 	require("pluggins.csvview"),
 	require("pluggins.nvim-surround"),
+	require("pluggins.kitty-scrollback"),
 	-- require("pluggins.tabout"),
 	-- require 'pluggins.startup',
 	-- require 'kickstart.plugins.neo-tree',

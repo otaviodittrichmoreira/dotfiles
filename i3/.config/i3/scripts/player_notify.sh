@@ -39,8 +39,11 @@ esac
 [ -z "$TITLE" ] && TITLE="Unknown title"
 [ -z "$ARTIST" ] && ARTIST="Unknown artist"
 
+NOTIFY_ID=9999
+
 # Send notification
 notify-send \
+  -r $NOTIFY_ID \
   -a "Music" \
   -u low \
   "$ICON $STATUS" \

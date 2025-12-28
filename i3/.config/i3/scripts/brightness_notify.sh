@@ -16,7 +16,13 @@ fi
 # Build the brightness bar (only for the visual representation)
 FILLED=$((BRIGHTNESS / 10))
 EMPTY=$((10 - FILLED))
-BAR=$(printf '█%.0s' $(seq 1 $FILLED))$(printf '░%.0s' $(seq 1 $EMPTY))
+if [[ $EMPTY -eq 0 ]]; then
+  BAR=$(printf '█%.0s' $(seq 1 $FILLED))
+elif [[ $FILLED -eq 0 ]]; then
+  BAR=$(printf '░%.0s' $(seq 1 $EMPTY))
+else
+  BAR=$(printf '█%.0s' $(seq 1 $FILLED))$(printf '░%.0s' $(seq 1 $EMPTY))
+fi
 
 # Send notification with a unique ID (-r for replacing)
 notify-send -u low -r 2001 "$ICON Brightness: $BRIGHTNESS%" "$BAR"

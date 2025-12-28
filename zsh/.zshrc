@@ -144,7 +144,11 @@ export VISUAL="$HOME/bin/nvim.appimage --clean"
 bindkey -M vicmd v edit-command-line
 alias copy='xclip -selection clipboard'
 alias ulti='cd $HOME/.config/nvim/UltiSnips/; nvim'
+
+
 alias kitty="$HOME/.local/kitty.app/bin/kitty"
+alias icat="$HOME/.local/kitty.app/bin/kitten icat"
+
 
 # Bind ctrl+Y to accept the autosuggestion
 bindkey '^Y' autosuggest-accept

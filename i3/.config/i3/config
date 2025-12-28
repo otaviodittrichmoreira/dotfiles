@@ -66,7 +66,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec /home/otaviomoreira/.local/kitty.app/bin/kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -214,7 +214,7 @@ bindsym $mod+r mode "resize"
 ##############################
 # USER CONFIGURATION FILE #
 ##############################
-exec_always feh --bg-fill ~/Pictures/wallpapers/upscaled_all_or_nothing_x4.png
+exec_always feh --bg-fill ~/repos/walls-catppuccin-mocha/astronaut.png
 
 # Swap Caps Lock and Escape
 # exec_always --no-startup-id setxkbmap -option caps:swapescape
