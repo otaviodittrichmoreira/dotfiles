@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get current brightness level using brightnessctl
-BRIGHTNESS=$(brightnessctl g | awk '{printf "%.0f", ($1 / 5) / 10 }')
+BRIGHTNESS=$(brightnessctl -d intel_backlight g | awk '{printf "%.0f", ($1 / 5) / 10 }')
 BRIGHTNESS=$((BRIGHTNESS * 10))
 
 # Choose an icon based on brightness level

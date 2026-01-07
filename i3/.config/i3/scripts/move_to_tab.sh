@@ -17,4 +17,4 @@ REL=$(( (CUR_WS - 1) % 10 + 1 ))
 TARGET_WS=$((REL + 10 * (NEW_TAB - 1)))
 
 echo "$NEW_TAB" > "$STATE"
-i3-msg workspace number "$TARGET_WS"
+i3-msg move container to workspace number "$TARGET_WS"

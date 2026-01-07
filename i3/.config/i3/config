@@ -51,7 +51,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDI
 bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && $refresh_i3status && $volume_notify
 bindsym XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && $refresh_i3status
 
-# Play/pause next and previous song
+# Play/pause next and previous song music
 set $player_notify ~/.config/i3/scripts/player_notify.sh
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && $player_notify
 bindsym XF86AudioStop exec --no-startup-id playerctl stop && $player_notify
@@ -157,18 +157,26 @@ bindsym $mod+0 exec --no-startup-id ~/.config/i3/scripts/go_workspace.sh 10
 # --- Tab switching ---
 bindsym $mod+F1 exec --no-startup-id ~/.config/i3/scripts/switch_tab.sh 1
 bindsym $mod+F2 exec --no-startup-id ~/.config/i3/scripts/switch_tab.sh 2
+bindsym $mod+F3 exec --no-startup-id ~/.config/i3/scripts/switch_tab.sh 3
+bindsym $mod+F4 exec --no-startup-id ~/.config/i3/scripts/switch_tab.sh 4
+
+# --- Move container to another tab ---
+bindsym $mod+Shift+F1 exec --no-startup-id ~/.config/i3/scripts/move_to_tab.sh 1
+bindsym $mod+Shift+F2 exec --no-startup-id ~/.config/i3/scripts/move_to_tab.sh 2
+bindsym $mod+Shift+F3 exec --no-startup-id ~/.config/i3/scripts/move_to_tab.sh 3
+bindsym $mod+Shift+F4 exec --no-startup-id ~/.config/i3/scripts/move_to_tab.sh 4
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 1  
+bindsym $mod+Shift+2 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 2  
+bindsym $mod+Shift+3 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 3  
+bindsym $mod+Shift+4 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 4  
+bindsym $mod+Shift+5 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 5  
+bindsym $mod+Shift+6 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 6  
+bindsym $mod+Shift+7 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 7  
+bindsym $mod+Shift+8 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 8  
+bindsym $mod+Shift+9 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 9  
+bindsym $mod+Shift+0 exec --no-startup-id ~/.config/i3/scripts/move_to_workspace.sh 10 
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -214,6 +222,9 @@ bindsym $mod+r mode "resize"
 ##############################
 # USER CONFIGURATION FILE #
 ##############################
+# Change monitor to default in cases of panic
+bindsym $mod+Control+Shift+Return exec --no-startup-id xrandr --output eDP-1 --auto
+
 exec_always feh --bg-fill ~/repos/walls-catppuccin-mocha/astronaut.png
 
 # Swap Caps Lock and Escape
@@ -226,10 +237,10 @@ exec_always --no-startup-id $script_dir/maps.sh
 exec --no-startup-id dunst
 
 # Screen brightness up
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +10% && ~/.config/i3/scripts/brightness_notify.sh
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -d intel_backlight s +10% && ~/.config/i3/scripts/brightness_notify.sh
 
 # Screen brightness down
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && ~/.config/i3/scripts/brightness_notify.sh
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -d intel_backlight s 10%- && ~/.config/i3/scripts/brightness_notify.sh
 
 # Screenshot
 # bindsym Print exec --no-startup-id $script_dir/screenshot_import.sh

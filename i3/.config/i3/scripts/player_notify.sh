@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sleep 0.05
+sleep 0.1
 # Get player status
 STATUS=$(playerctl status 2>/dev/null)
 

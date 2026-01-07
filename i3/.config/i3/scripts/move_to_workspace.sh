@@ -6,6 +6,10 @@ STATE="$HOME/.config/i3/current_tab"
 
 NUM=$1
 
-TARGET_WS=$((NUM + 10 * (TAB - 1)))
+if [[ "$TAB" == "1" ]]; then
+  TARGET_WS=$NUM
+else
+  TARGET_WS=$((NUM + 10))
+fi
 
-i3-msg workspace number "$TARGET_WS"
+i3-msg move container to workspace number "$TARGET_WS"
