@@ -39,6 +39,21 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Run julia file in a tmux pane
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "julia",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(
+			0,
+			"n",
+			"<Leader>r",
+			[[:up<CR>:lua require("tmux_runner")._send_tmux_exec("julia %:p")<CR>]],
+			-- [[:up<CR>:execute "silent !tmux send-keys -t top-right -X cancel; tmux send-keys -t top-right C-u 'python3 %:p' C-m" <CR>]],
+			{ noremap = true, silent = true, desc = "Run python file in a tmux pane" }
+		)
+	end,
+})
+
 -- Run R file in a tmux pane
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "r",

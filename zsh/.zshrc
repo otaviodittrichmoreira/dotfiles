@@ -163,3 +163,12 @@ eval "$(zoxide init zsh)"
 
 precmd() { print '' }  # Adds a blank line before each prompt
 fpath=(~/.zsh.d/ $fpath)
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/otaviomoreira/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<

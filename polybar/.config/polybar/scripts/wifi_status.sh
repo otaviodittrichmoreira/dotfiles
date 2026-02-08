@@ -19,6 +19,16 @@ if [ "$(nmcli radio wifi)" = "disabled" ]; then
     exit 0
 fi
 
+# NordVPN helpers
+nordvpn_connected() {
+    nordvpn status 2>/dev/null | grep -q "Status: Connected"
+}
+
+nordvpn_country() {
+    nordvpn status 2>/dev/null | awk -F': ' '/Country/ {print $2}'
+}
+
+
 if nmcli device status | grep -q "$IFACE.*connected"; then
     ESSID=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)
     SIGNAL=$(nmcli -f IN-USE,SIGNAL dev wifi | grep '*' | awk '{print $2}')
@@ -26,7 +36,8 @@ if nmcli device status | grep -q "$IFACE.*connected"; then
 
     if [[ "$SIGNAL" =~ ^[0-9]+$ ]]; then
         if ping -q -w 1 -c 1 8.8.8.8 >/dev/null 2>&1; then
-            if ip a | grep -qE 'tun0|wg0'; then
+            # if nordvpn_connected; then # Remove bc I have a module for VPN now
+            if false; then
                 # Signal bars
                 if [ "$SIGNAL" -ge 80 ]; then
                     BAR="%{F#a6e3a1}󰤪%{F-}"

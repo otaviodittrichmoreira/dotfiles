@@ -575,6 +575,7 @@ require("lazy").setup({
 				clangd = {},
 				-- gopls = {},
 				pyright = {},
+				julials = {},
 				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
@@ -630,6 +631,7 @@ require("lazy").setup({
 			--
 			--  You can press `g?` for help in this menu.
 			require("mason").setup()
+			require("lspconfig").julials.setup({})
 
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
