@@ -523,9 +523,14 @@ snippet wp "with probability" i
 with probability at least \(1 - ${1:delta}\)$0
 endsnippet
 
+# context "math()"
+# snippet `(?<![\\\w])(pb|prob)` "Probability" Arw
+# \mathbb{P}`!p snip.rv = "_{" if t[1] and len(t[1])>0 else ""`${1:\theta}`!p snip.rv = "}" if t[1] and len(t[1])>0 else ""` \left[ ${2:${VISUAL}} \right]
+# endsnippet
+
 context "math()"
 snippet `(?<![\\\w])(pb|prob)` "Probability" Arw
-\mathbb{P}`!p snip.rv = "_{" if t[1] and len(t[1])>0 else ""`${1:\theta}`!p snip.rv = "}" if t[1] and len(t[1])>0 else ""` \left[ ${2:${VISUAL}} \right]
+\mathbb{P} \left[ ${2:${VISUAL}} \right]
 endsnippet
 
 context "math()"
