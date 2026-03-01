@@ -16,11 +16,12 @@ if [ "$power" == "yes" ]; then
     device_info=$(bluetoothctl info)
 
     device_name=$(echo "$device_info" | grep "Name:" | awk '{print substr($0, index($0,$2))}')
-    battery_level=$(echo "$device_info" | grep "Battery Percentage:" | awk '{print $3}')
+    battery_level=$(echo "$device_info" | grep "Battery Percentage:" | awk '{print $3}' | xargs printf "%d\n")
 
     if [ -n "$device_name" ]; then
         if [ -n "$battery_level" ]; then
-            echo "%{F#89b4fa}%{F-} $device_name ($battery_level%)"
+            # echo "%{F#89b4fa}%{F-} $device_name ($battery_level%)"
+            echo "%{F#89b4fa}%{F-} $device_name"
         else
             echo "%{F#89b4fa}%{F-} $device_name" 
         fi

@@ -12,6 +12,7 @@ require("keymaps")
 require("ruff")
 require("settings")
 require("latex_extra")
+require("md2pdf")
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "tex",

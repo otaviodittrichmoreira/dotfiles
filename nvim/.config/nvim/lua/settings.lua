@@ -87,6 +87,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Use julia to run the current file with :make
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "julia",
+	callback = function()
+		vim.opt_local.makeprg = "julia %"
+	end,
+})
+
 -- Remove <Space>, keymap from r
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "r",

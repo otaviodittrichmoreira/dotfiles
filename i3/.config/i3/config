@@ -298,3 +298,6 @@ for_window [class="^.*"] border pixel 1
 # Notification opens as floating windows in zoom 
 for_window [class="zoom" title="^zoom$"] floating enable, border pixel 1
 
+# Toggle the autoclicker with Ctrl + F1
+bindsym Control+F1 exec --no-startup-id ~/.local/bin/autoclick_toggle.sh
+
