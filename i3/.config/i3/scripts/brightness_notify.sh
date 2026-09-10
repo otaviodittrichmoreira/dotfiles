@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Get current brightness level using brightnessctl
+BRIGHTNESS2=$(brightnessctl -d intel_backlight g | awk '{printf "%.0f", ($1 / 5) }')
 BRIGHTNESS=$(brightnessctl -d intel_backlight g | awk '{printf "%.0f", ($1 / 5) / 10 }')
 BRIGHTNESS=$((BRIGHTNESS * 10))
 
@@ -25,4 +26,8 @@ else
 fi
 
 # Send notification with a unique ID (-r for replacing)
-notify-send -u low -r 2001 "$ICON Brightness: $BRIGHTNESS%" "$BAR"
+if [ "$BRIGHTNESS2" -le 10 ]; then
+  notify-send -u low -r 2001 "$ICON Brightness: $BRIGHTNESS2%" "$BAR"
+else
+  notify-send -u low -r 2001 "$ICON Brightness: $BRIGHTNESS%" "$BAR"
+fi

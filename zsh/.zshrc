@@ -149,12 +149,17 @@ alias ulti='cd $HOME/.config/nvim/UltiSnips/; nvim'
 alias kitty="$HOME/.local/kitty.app/bin/kitty"
 alias icat="$HOME/.local/kitty.app/bin/kitten icat"
 
+alias worm="tmuxifier s worm"
 
 # Bind ctrl+Y to accept the autosuggestion
 bindkey '^Y' autosuggest-accept
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/sbin
 
+export PATH=$PATH:$HOME/.tmux/plugins/tmuxifier/bin
+
+# Fix grep colors
+export GREP_COLORS='mt=38;2;30;30;46;48;2;245;194;231'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(zoxide init zsh)"
@@ -171,4 +176,14 @@ fpath=(~/.zsh.d/ $fpath)
 path=('/home/otaviomoreira/.juliaup/bin' $path)
 export PATH
 
+# Enable python autocomplete
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete generate-dataset)"
+eval "$(register-python-argcomplete generate-gcamp-plots)"
+
 # <<< juliaup initialize <<<
+export PATH="$HOME/.local/npm/bin:$PATH"
+
+# opencode
+export PATH=/home/otaviomoreira/.opencode/bin:$PATH

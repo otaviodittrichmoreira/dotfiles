@@ -237,19 +237,25 @@ endsnippet
 priority 2000000
 context "math()"
 snippet '\\([a|A]lpha|[b|B]eta|[g|G]amma|[d|D]elta|[e|E]psilon|[e|E]ta|[l|L]ambda|[m|M]u|[p|P]i|[s|S]igma|[t|T]heta|[o|O]mega|[z|Z]eta|[x|X]i|[r|R]ho|[n|N]u|[p|P]hi|[c|C]hi|[p|P]si|[t|T]au|[u|U]psilon|[k|K]appa|[i|I]ota)\s?(\d)' "auto subscript for greek letters" rA
-`!p snip.rv = "\\" + match.group(1) + "_" + match.group(2)`
+`!p
+space = ' '
+snip.rv = "\\" + match.group(1) + "_" + match.group(2) + space`$0
 endsnippet
 
 priority 2000000
 context "math()"
-snippet '\\([a|A]lpha|[b|B]eta|[g|G]amma|[d|D]elta|[e|E]psilon|[e|E]ta|[l|L]ambda|[m|M]u|[p|P]i|[s|S]igma|[t|T]heta|[o|O]mega|[z|Z]eta|[x|X]i|[r|R]ho|[n|N]u|[p|P]hi|[c|C]hi|[p|P]si|[t|T]au|[u|U]psilon|[k|K]appa|[i|I]ota)\s?([ijknm])\s' "auto subscript for greek letters" rA
-`!p snip.rv = "\\" + match.group(1) + "_" + match.group(2) + " "`
+snippet '\\([a|A]lpha|[b|B]eta|[g|G]amma|[d|D]elta|[e|E]psilon|[e|E]ta|[l|L]ambda|[m|M]u|[p|P]i|[s|S]igma|[t|T]heta|[o|O]mega|[z|Z]eta|[x|X]i|[r|R]ho|[n|N]u|[p|P]hi|[c|C]hi|[p|P]si|[t|T]au|[u|U]psilon|[k|K]appa|[i|I]ota)([ijknmtsulpv])\s' "auto subscript for greek letters" rA
+`!p 
+space = ' '
+snip.rv = "\\" + match.group(1) + "_" + match.group(2) + space`$0
 endsnippet
 
 priority 20000000
 context "math()"
-snippet '(?<![\\a-zA-Z])([a-zA-Z])([ijknm])\s' "auto subscript ijkmn" rA
-`!p snip.rv = match.group(1) + "_" + match.group(2) + " "`
+snippet '(?<![\\a-zA-Z])([a-zA-Z])([ijknmtsulpv])\s' "auto subscript ijkmn" rA
+`!p
+space = ' '
+snip.rv = match.group(1) + "_" + match.group(2) + space`$0
 endsnippet
 
 # context "math()"
@@ -259,7 +265,7 @@ endsnippet
 
 ########## Operators ##########
 context "math()"
-snippet op "operator" w
+snippet `(?<![a-zA-Z\\])op` "operator" r
 \operatorname{${1:${VISUAL}}} $0
 endsnippet
 
@@ -269,8 +275,8 @@ snippet `\sargmin` "argmin" rwA
 endsnippet
 
 context "math()"
-snippet `\smin` "min" rwA
- \min $0
+snippet `(?<![\\a-zA-Z])min` "min" rA
+\min $0
 endsnippet
 
 context "math()"

@@ -228,6 +228,10 @@ bindsym $mod+r mode "resize"
 ##############################
 # Change monitor to default in cases of panic
 bindsym $mod+Control+Shift+Return exec --no-startup-id xrandr --output eDP-1 --auto
+bindsym $mod+Control+Shift+m exec --no-startup-id \
+    xrandr --output HDMI-1-0 --auto --output eDP-1 --off && \
+    ~/.config/i3/scripts/relaunch_polybar.sh
+# bindsym $mod+Control+Shift+m exec --no-startup-id xrandr --output HDMI-1-0 --auto --output eDP-1 --off
 
 exec_always feh --bg-fill ~/repos/walls-catppuccin-mocha/astronaut.png
 
@@ -241,14 +245,15 @@ exec_always --no-startup-id $script_dir/maps.sh
 exec --no-startup-id dunst
 
 # Screen brightness up
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -d intel_backlight s +10% && ~/.config/i3/scripts/brightness_notify.sh
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/brightness_ajust.sh up && ~/.config/i3/scripts/brightness_notify.sh
 
 # Screen brightness down
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -d intel_backlight s 10%- && ~/.config/i3/scripts/brightness_notify.sh
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/brightness_ajust.sh down && ~/.config/i3/scripts/brightness_notify.sh
 
 # Screenshot
 # bindsym Print exec --no-startup-id $script_dir/screenshot_import.sh
 bindsym Print exec --no-startup-id bash -c "$HOME/.config/i3/scripts/screenshot_import.sh > /tmp/screenshot.log 2>&1"
+bindsym $mod+p exec --no-startup-id bash -c "$HOME/.config/i3/scripts/screenshot_import.sh > /tmp/screenshot.log 2>&1"
 
 # Toggle borders for focused windows
 bindsym $mod+b border toggle
@@ -258,8 +263,9 @@ bindsym $mod+shift+b exec --no-startup-id $script_dir/toggle_polybar.sh
 
 exec_always --no-startup-id killall polybar
 exec_always --no-startup-id bash ~/.config/polybar/launch_polybar.sh
+# exec_always --no-startup-id "pkill polybar; sleep 0.5; ~/.config/polybar/launch_polybar.sh"
 
-exec_always --no-startup-id picom
+exec_always --no-startup-id "pkill picom; sleep 0.2; picom --daemon"
 
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/rofi/powermenu/type-1/powermenu.sh
 
@@ -269,9 +275,12 @@ bindsym $mod+Shift+p exec --no-startup-id ~/.config/rofi/powermenu/type-1/powerm
 # Hide borders
 hide_edge_borders both
 
+# touchpad speed
+exec --no-startup-id ~/.config/i3/scripts/touchpad_speed.sh
+
 # Screen timeout
-exec --no-startup-id xset s 300
-exec --no-startup-id xset dpms 0 0 900
+exec --no-startup-id xset s 600
+exec --no-startup-id xset dpms 0 0 1800
 
 # Ajust screen brightness
 exec $script_dir/ajust_dimmer.sh
@@ -286,7 +295,7 @@ bindsym Mod4+space exec --no-startup-id ~/.config/i3/scripts/toggle_keyboard_lay
 
 # Floating terminal for quick note
 bindsym $mod+n exec --no-startup-id $script_dir/note_clip.sh
-for_window [class="nvimfloat"] floating enable, resize set 80 ppt 40 ppt, move position center
+for_window [class="nvimfloat"] floating enable, resize set 80 ppt 30 ppt, move position 10 ppt 70 ppt
 
 # Floating terminal for editing clipboard
 bindsym $mod+i exec --no-startup-id $script_dir/nvim_edit_clip.sh
@@ -301,3 +310,10 @@ for_window [class="zoom" title="^zoom$"] floating enable, border pixel 1
 # Toggle the autoclicker with Ctrl + F1
 bindsym Control+F1 exec --no-startup-id ~/.local/bin/autoclick_toggle.sh
 
+# # Automatically change monitors using autorandr
+# exec --no-startup-id autorandr --change
+
+
+# # Lock after 10min, hibernate after 20min
+# exec --no-startup-id xautolock -time 10 -locker "xsecurelock" -detectsleep
+# exec --no-startup-id xautolock -time 20 -locker "systemctl hibernate" -detectsleep

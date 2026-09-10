@@ -59,6 +59,10 @@ snippet newdoc "New Document" bA
 \clearpage 
 $0
 
+% \nocite{*}
+% \bibliographystyle{plain} % options: plain, unsrt, alpha, etc.
+% \bibliography{references} % references.bib file
+
 \end{document}
 `ln -s ~/.config/latex/preamble/classnote.tex`
 endsnippet
@@ -80,7 +84,7 @@ endsnippet
 
 snippet begg "begin{} / end{}" bA
 \\begin{$1}
-	$0
+	${0:${VISUAL}}
 \\end{$1}
 endsnippet
 
@@ -343,24 +347,31 @@ $0
 \end{document}
 endsnippet
 
-snippet nf "Beamer Frame" bA
+snippet frame "Beamer Frame" bA
 \begin{frame}{${1:Frame Title}}
 	$0
 \end{frame}
 endsnippet
 
-snippet fig2side "Two side-by-side figures" b
-\begin{columns}
-\column{0.5\textwidth}
-\centering
-\includegraphics[width=\linewidth]{${2:fig1.png}}\\
-{\footnotesize ${3:Caption 1}}
-
-\column{0.5\textwidth}
-\centering
-\includegraphics[width=\linewidth]{${4:fig2.png}}\\
-{\footnotesize ${5:Caption 2}}
-\end{columns}
+snippet `(fig2side|subfig)` "Two side-by-side figures / subfigure" rA
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{${1:graph1}}
+         \caption{Caption 1}
+         \label{fig:subfig1}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{${2:graph2}}
+         \caption{Caption 2}
+         \label{fig:subfig2}
+     \end{subfigure}
+        \caption{Two graphs side by side}
+        \label{fig:two graphs}
+\end{figure}$0
 endsnippet
 
 snippet par "Paragraph" bA

@@ -455,3 +455,14 @@ function _SelectLatexValue(line, row, col, after, around)
 	vim.cmd("normal! gv")
 	return true
 end
+
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "tex",
+-- 	callback = function()
+-- 		-- Disable mini.ai in LaTeX buffers
+-- 		vim.b.miniai_disable = true
+--
+-- 		-- Disable Treesitter textobjects (selection) in this buffer
+-- 		vim.b.ts_textobjects_disable = true
+-- 	end,
+-- })

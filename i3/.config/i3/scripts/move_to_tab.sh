@@ -16,5 +16,5 @@ REL=$(( (CUR_WS - 1) % 10 + 1 ))
 # compute new workspace number
 TARGET_WS=$((REL + 10 * (NEW_TAB - 1)))
 
-echo "$NEW_TAB" > "$STATE"
+# echo "$NEW_TAB" > "$STATE"
 i3-msg move container to workspace number "$TARGET_WS"

@@ -631,7 +631,8 @@ require("lazy").setup({
 			--
 			--  You can press `g?` for help in this menu.
 			require("mason").setup()
-			require("lspconfig").julials.setup({})
+			vim.lsp.config("julials", {})
+			vim.lsp.enable("julials")
 
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
@@ -754,7 +755,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-cmdline",
 			"quangnguyen30192/cmp-nvim-ultisnips",
 			"micangl/cmp-vimtex",
-			"R-nvim/cmp-r",
+			-- "R-nvim/cmp-r",
 		},
 		config = function()
 			-- See `:help cmp`
@@ -865,10 +866,10 @@ require("lazy").setup({
 					{ name = "vimtex" },
 					{ name = "path" },
 					{ name = "render-markdown" },
-					{ name = "cmp_r" },
+					-- { name = "cmp_r" },
 				},
 			})
-			require("cmp_r").setup({})
+			-- require("cmp_r").setup({})
 		end,
 	},
 	{
@@ -1063,6 +1064,7 @@ require("lazy").setup({
 	require("pluggins.nvim-tree"),
 	require("pluggins.pgmt"),
 	require("pluggins.copilot"),
+	require("pluggins.opencode"),
 	require("pluggins.debugging"),
 	require("pluggins.nvim-tmux-navigator"),
 	require("pluggins.git_fugitive"),
@@ -1074,7 +1076,7 @@ require("lazy").setup({
 	require("pluggins.nvim-colorizer"),
 	require("pluggins.neoscroll"),
 	require("pluggins.oil"),
-	-- require("pluggins.jupytext"),
+	require("pluggins.jupytext"),
 	require("pluggins.R"),
 	require("pluggins.texpresso"),
 	require("pluggins.csvview"),

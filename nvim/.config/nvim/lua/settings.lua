@@ -21,7 +21,7 @@ vim.opt.expandtab = true -- Use spaces instead of tabs
 
 -- Spell Check for .tex files
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "tex",
+	pattern = { "tex", "markdown" },
 	callback = function()
 		vim.opt.spell = true
 		vim.opt.spelllang = "en_us"
@@ -95,6 +95,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Use bash to run the current file with :make
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "bash",
+	callback = function()
+		vim.opt_local.makeprg = "bash %"
+	end,
+})
+
 -- Remove <Space>, keymap from r
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "r",
@@ -119,7 +127,8 @@ vim.api.nvim_create_autocmd("BufReadCmd", {
 	pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
 	callback = function()
 		local filename = vim.fn.shellescape(vim.api.nvim_buf_get_name(0))
-		vim.cmd("silent !/home/otavio/bin/feh-viewer.sh  " .. filename .. " &")
+		local home = vim.fn.expand("~")
+		vim.cmd("silent !" .. home .. "/bin/feh-viewer.sh " .. filename .. " &")
 		vim.cmd("let tobedeleted = bufnr('%') | b# | exe \"bd! \" . tobedeleted")
 	end,
 })

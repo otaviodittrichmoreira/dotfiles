@@ -7,3 +7,13 @@ prepend_keymap = [
         "yank"
     ], desc = "Yank image and copy it to clipboard" }
 ]
+
+[[manager.prepend_keymap]]
+on = "z"
+run = "plugin zoxide"
+desc = "zoxide jump"
+
+[[manager.prepend_keymap]]
+on = "Z"
+run = "plugin fzf"
+desc = "fzf jump"

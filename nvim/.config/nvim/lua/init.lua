@@ -39,5 +39,3 @@ vim.notify = function(msg, ...)
 	end
 	return notify_original(msg, ...)
 end
-
-vim.g.maplocalleader = "\\"

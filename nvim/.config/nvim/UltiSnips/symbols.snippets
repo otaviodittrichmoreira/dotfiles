@@ -12,7 +12,7 @@ def env(name):
 endglobal
 
 context "math()"
-snippet `(?<!\\\w)c?dot` "center dot" rA
+snippet `(?<![\\\w])c?dot` "center dot" rA
 \cdot $0
 endsnippet
 
@@ -27,7 +27,7 @@ snippet circ "Circ" wA
 endsnippet
 
 context "math()"
-snippet bullet "Bullet" wA
+snippet (?<![\\a-zA-Z])bullet "Bullet" wA
 \bullet $0
 endsnippet
 

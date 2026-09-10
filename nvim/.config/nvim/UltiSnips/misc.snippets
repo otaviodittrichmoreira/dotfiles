@@ -224,7 +224,7 @@ snippet under "Underbrace" iA
 endsnippet
 
 context "math()"
-snippet stack "Stack Expressions" iA
+snippet `(?<![\\a-zA-Z])stack` "Stack Expressions" rA
 \stackrel{${1:label}}{${2:${VISUAL}}}$0
 endsnippet
 
@@ -239,6 +239,10 @@ endsnippet
 
 snippet rext "Import external .R script" bA
 \Rexternal{./${1:filename}.R}
+endsnippet
+
+snippet `(pyext|python)` "Import external .py script" rA
+\pythonexternal{${1:filename}.py}
 endsnippet
 
 snippet `(^\s*\\codeoutput\{(.*)\})` "Execute code and save output in a .log file and import to latex" rA
@@ -281,13 +285,13 @@ snippet attention "Warning sign" w
 \warning{${1:${VISUAL}}}
 endsnippet
 
-snippet `(\\frac{(.*)}{(.*)})\s?fj` "Change fraction from a/b to 1/b a" Ar
-`!p
-expr = match.group(1)
-num, dem = find_single_fraction(expr)
-if has_unbracketed_plus(num):
-    snip.rv = "\\frac{1}{" + dem + "} \\left(" + num + "\\right )"
-else:
-    snip.rv = "\\frac{1}{" + dem + "} " + num
-`
-endsnippet
+#snippet `(\\frac{(.*)}{(.*)})\s?fj` "Change fraction from a/b to 1/b a" Ar
+#`!p
+#expr = match.group(1)
+#num, dem = find_single_fraction(expr)
+#if has_unbracketed_plus(num):
+#    snip.rv = "\\frac{1}{" + dem + "} \\left(" + num + "\\right )"
+#else:
+#    snip.rv = "\\frac{1}{" + dem + "} " + num
+#`
+#endsnippet

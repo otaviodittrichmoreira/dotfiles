@@ -8,17 +8,30 @@ vim.lsp.config("ruff", {
 
 vim.lsp.enable("ruff")
 
-require("lspconfig").pyright.setup({
+vim.lsp.config("pyright", {
 	settings = {
 		pyright = {
-			-- Using Ruff's import organizer
 			disableOrganizeImports = true,
 		},
 		python = {
 			analysis = {
-				-- Ignore all files for analysis to exclusively use Ruff for linting
 				ignore = { "*" },
 			},
 		},
 	},
 })
+
+vim.lsp.enable("pyright")
+
+vim.lsp.config("ruff", {
+	cmd = { "ruff", "server" },
+	filetypes = { "python" },
+	root_dir = function(bufnr, on_dir)
+		local root = vim.fs.root(bufnr, { "pyproject.toml", ".git" })
+		if root then
+			on_dir(root)
+		end
+	end,
+})
+
+vim.lsp.enable("ruff")

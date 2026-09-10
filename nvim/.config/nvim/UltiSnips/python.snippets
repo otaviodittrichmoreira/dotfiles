@@ -37,3 +37,18 @@ snippet `^main` "if name == main" rbA
 if __name__ == "__main__":
 	$0
 endsnippet
+
+#######################
+# IMPORT SNIPPETS
+#######################
+snippet `^(\s*)import plt` "Import matplotlib" rA
+`!p snip.rv = match.group(1)`import matplotlib.pyplot as plt$0
+endsnippet
+
+snippet `^(\s*)import np` "Import numpy" rA
+`!p snip.rv = match.group(1)`import numpy as np
+endsnippet
+
+snippet `^(\s*)import pd` "Import pandas" rA
+`!p snip.rv = match.group(1)`import pandas as pd
+endsnippet

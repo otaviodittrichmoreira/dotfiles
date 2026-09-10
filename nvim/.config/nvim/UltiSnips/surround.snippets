@@ -75,17 +75,17 @@ else:
 `$0
 endsnippet
 
-context "math()"
-snippet '(\+|=|-?)Sn'  "Norm" Ar
-`!p
-snip.rv = match.group(1) + ' ' if match.group(1) else ''
-`\left\|  ${1:${VISUAL}} \right\|`!p
-if t[0] and t[0][0] not in [',', ' ', '/']:
-	snip.rv = ' '
-else:
-	snip.rv = ''
-`$0
-endsnippet
+#context "math()"
+#snippet '(\+|=|-?)Sn'  "Norm" Ar
+#`!p
+#snip.rv = match.group(1) + ' ' if match.group(1) else ''
+#`\left\|  ${1:${VISUAL}} \right\|`!p
+#if t[0] and t[0][0] not in [',', ' ', '/']:
+#	snip.rv = ' '
+#else:
+#	snip.rv = ''
+#`$0
+#endsnippet
 
 
 context "math()"
@@ -105,6 +105,19 @@ snippet '(\+|=|-?)sb'  "Brackets" iAr
 `!p
 snip.rv = match.group(1) + ' ' if match.group(1) else ''
 `[${1:${VISUAL}}]`!p
+if t[0] and t[0][0] not in [',', ' ', '/']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+#TEMP: remover
+context "math()" 
+snippet '(\+|=|-?)sr'  "RR Brackets" iAr
+`!p
+snip.rv = match.group(1) + ' ' if match.group(1) else ''
+`\rrbracket ${1:${VISUAL}}\rrbracket`!p
 if t[0] and t[0][0] not in [',', ' ', '/']:
 	snip.rv = ' '
 else:

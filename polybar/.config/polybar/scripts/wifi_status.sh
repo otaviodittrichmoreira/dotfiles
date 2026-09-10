@@ -30,7 +30,7 @@ nordvpn_country() {
 
 
 if nmcli device status | grep -q "$IFACE.*connected"; then
-    ESSID=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)
+    ESSID=$(nmcli -g NAME connection show --active | head -n 1)
     SIGNAL=$(nmcli -f IN-USE,SIGNAL dev wifi | grep '*' | awk '{print $2}')
     BAR=""
 

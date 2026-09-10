@@ -1,0 +1,24 @@
+[[manager.prepend_keymap]]
+on = "y"
+run = [
+  '''
+  shell '
+  uris=""
+  for f in "$@"; do
+    uri="file://$(realpath "$f")"
+    uris="$uris$uri\n"
+  done
+  printf "%b" "$uris" | xclip -selection clipboard -t text/uri-list
+  ' --confirm
+  ''',
+  "yank"
+]
+desc = "Yank file(s) (like Nautilus) to clipboard"
+
+[[manager.prepend_keymap]]
+on = "z"
+run = "plugin zoxide"
+
+[[manager.prepend_keymap]]
+on = "Z"
+run = "plugin fzf"

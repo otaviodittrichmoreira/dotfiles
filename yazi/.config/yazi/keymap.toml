@@ -14,3 +14,67 @@ run = [
   "yank"
 ]
 desc = "Yank file(s) (like Nautilus) to clipboard"
+
+[[mgr.prepend_keymap]]
+on = "z"
+run = "plugin zoxide"
+
+[[mgr.prepend_keymap]]
+on = "Z"
+run = "plugin fzf"
+
+[[mgr.prepend_keymap]]
+on = "e"
+run = 'shell --orphan "kitty nvim \"$@\""'
+desc = "Edit in Neovim"
+
+[[mgr.prepend_keymap]]
+on = "<C-t>"   # Ctrl+t
+run = 'shell --orphan "kitty --directory=\"$PWD\""' 
+desc = "Open terminal here"
+
+[[mgr.prepend_keymap]]
+on   = [ "c", "a", "p" ]
+run  = "plugin compress -p"
+desc = "Archive selected files (password)"
+
+[[mgr.prepend_keymap]]
+on   = [ "c", "a", "h" ]
+run  = "plugin compress -ph"
+desc = "Archive selected files (password+header)"
+
+[[mgr.prepend_keymap]]
+on   = [ "c", "a", "l" ]
+run  = "plugin compress -l"
+desc = "Archive selected files (compression level)"
+
+[[mgr.prepend_keymap]]
+on   = [ "c", "a", "u" ]
+run  = "plugin compress -phl"
+desc = "Archive selected files (password+header+level)"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "o"]
+run  = "arrow top"
+desc = "Go to top"
+
+
+[[mgr.prepend_keymap]]
+on = ["<C-c>", "<C-c>"]
+run = [
+  '''
+  shell '
+  first=1
+  for f in "$@"; do
+    escaped=$(realpath "$f" | sed "s/ /\\\\ /g")
+    if [ $first -eq 1 ]; then
+      printf "%s" "$escaped"
+      first=0
+    else
+      printf "\n%s" "$escaped"
+    fi
+  done | xclip -selection clipboard
+  ' --confirm
+  ''',
+]
+desc = "Yank file(s) paths with escaped spaces to clipboard"

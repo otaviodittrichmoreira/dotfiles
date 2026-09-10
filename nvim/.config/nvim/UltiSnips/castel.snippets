@@ -34,7 +34,7 @@ snippet fig "Figure environment" b
 \begin{figure}[${1:htpb}]
 	\centering
 	${2:\includegraphics[width=0.8\textwidth]{$3}}
-	\caption{${4:$3}}
+	\caption{${4:${3/_/-/g}}}
 	\label{fig:${5:${3/\W+/-/g}}}
 \end{figure}
 endsnippet
@@ -70,6 +70,28 @@ endsnippet
 context "not_math()"
 snippet fm "Math" wA
 \(${1:${VISUAL}}\)`!p
+if t[2] and t[2][0] not in [';', ':', ',', '.', '?', '-', ' ', '\'']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+context "not_math()"
+snippet gm "Math" wA
+$${1:${VISUAL}}$`!p
+if t[2] and t[2][0] not in [';', ':', ',', '.', '?', '-', ' ', '\'']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+context "not_math()"
+snippet Gm "Math" wA
+$$
+${1:${VISUAL}}
+$$`!p
 if t[2] and t[2][0] not in [';', ':', ',', '.', '?', '-', ' ', '\'']:
 	snip.rv = ' '
 else:
@@ -204,8 +226,13 @@ endsnippet
 
 
 context "math()"
-snippet `(?<!\\)part|del` "d/dx" wAr
+snippet `(?<!\\)del` "d/dx" wAr
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
+endsnippet
+
+context "math()"
+snippet `(?<!\\)part` "d/dx" wAr
+\partial $0
 endsnippet
 
 
@@ -259,7 +286,7 @@ endsnippet
 
 priority 300
 context "math()"
-snippet `((?<![\\a-zA-Z])xx|times)` "cross" Ar
+snippet `(?<![\\a-zA-Z])(xx|times)` "cross" Ar
 \times 
 endsnippet
 
@@ -311,7 +338,7 @@ snippet !> "mapsto" iA
 endsnippet
 
 context "math()"
-snippet invs "inverse" iA
+snippet `(\s?)inv` "inverse" rA
 ^{-1}`!p
 if t[0] and t[0][0] not in [',', ' ']:
     snip.rv = ' '
@@ -335,7 +362,7 @@ snippet ~~ "~" iA
 endsnippet
 
 context "math()"
-snippet cc "subset" Ai
+snippet `(?<![\\a-zA-Z])cc` "subset" Ar
 \subset 
 endsnippet
 
@@ -356,6 +383,15 @@ endsnippet
 
 snippet RR "real" iA
 \mathbb{R}`!p
+if t[0]:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$0
+endsnippet
+
+snippet FF "F mathbb" iA
+\mathbb{F}`!p
 if t[0]:
 	snip.rv = ' '
 else:

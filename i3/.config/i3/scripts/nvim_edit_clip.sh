@@ -12,7 +12,7 @@ sleep 0.2  # Wait for clipboard to update
 xclip -o -selection clipboard > "$tmpfile"
 
 # Launch floating terminal with Neovim
-alacritty --class nvimfloat -e $HOME/bin/nvim.appimage "$tmpfile"
+alacritty -o "font.size=20" --class nvimfloat -e $HOME/bin/nvim.appimage "$tmpfile"
 
 # After editing, copy updated content back to clipboard
 head -c -1 "$tmpfile" | xclip -selection clipboard
