@@ -20,3 +20,15 @@ ignore-globs = [
   "*.toc",
   "*.fls",
 ]
+
+
+[opener]
+visualizar-hdf5 = [
+	{ run = 'h5tui "$@"', block = true, desc = "Abrir no h5tui" }
+]
+
+[open]
+prepend_rules = [
+	{ name = "*.h5", use = "visualizar-hdf5" },
+	{ name = "*.hdf5", use = "visualizar-hdf5" }
+]

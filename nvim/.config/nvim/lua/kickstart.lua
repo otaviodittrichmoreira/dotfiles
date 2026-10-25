@@ -601,6 +601,10 @@ require("lazy").setup({
 					},
 				},
 				r_language_server = {
+					-- Keep R LSP features while disabling diagnostics from the lintr package.
+					settings = {
+						r = { lsp = { diagnostics = false } },
+					},
 					handlers = {
 						["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
 							if result.diagnostics ~= nil then
@@ -866,7 +870,7 @@ require("lazy").setup({
 					{ name = "vimtex" },
 					{ name = "path" },
 					{ name = "render-markdown" },
-					-- { name = "cmp_r" },
+					{ name = "cmp_r" },
 				},
 			})
 			-- require("cmp_r").setup({})
@@ -1064,7 +1068,7 @@ require("lazy").setup({
 	require("pluggins.nvim-tree"),
 	require("pluggins.pgmt"),
 	require("pluggins.copilot"),
-	require("pluggins.opencode"),
+	-- require("pluggins.opencode"),
 	require("pluggins.debugging"),
 	require("pluggins.nvim-tmux-navigator"),
 	require("pluggins.git_fugitive"),

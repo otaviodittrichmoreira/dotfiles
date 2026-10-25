@@ -187,3 +187,5 @@ export PATH="$HOME/.local/npm/bin:$PATH"
 
 # opencode
 export PATH=/home/otaviomoreira/.opencode/bin:$PATH
+
+export PATH=/usr/local/cuda-13.2/bin:$PATH
