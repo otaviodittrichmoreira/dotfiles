@@ -78,3 +78,8 @@ run = [
   ''',
 ]
 desc = "Yank file(s) paths with escaped spaces to clipboard"
+
+[[mgr.prepend_keymap]]
+on = "<C-q>"
+run = "close"
+desc = "Close current tab"
