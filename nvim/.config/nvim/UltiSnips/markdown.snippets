@@ -1,0 +1,137 @@
+global !p
+import re
+
+def _escaped(text, index):
+	backslashes = 0
+	index -= 1
+	while index >= 0 and text[index] == '\\':
+		backslashes += 1
+		index -= 1
+	return backslashes % 2 == 1
+
+def math():
+	row, _ = vim.current.window.cursor
+	lines = list(vim.current.buffer[:row - 1])
+	lines.append(vim.eval("strpart(getline('.'), 0, col('.') - 1)"))
+
+	delimiter = None
+	code_ticks = None
+	fence = None
+
+	for line_number, line in enumerate(lines):
+		stripped = line.lstrip(' ')
+		indent = len(line) - len(stripped)
+
+		if fence:
+			closing = re.match(r'^(' + re.escape(fence[0]) + r'{' + str(fence[1]) + r',})\s*$', stripped)
+			if indent <= 3 and closing:
+				fence = None
+			continue
+
+		if delimiter is None and code_ticks is None and indent <= 3:
+			opening = re.match(r'^(`{3,}|~{3,})', stripped)
+			if opening:
+				marker = opening.group(1)
+				fence = (marker[0], len(marker))
+				continue
+
+		i = 0
+		while i < len(line):
+			if delimiter is None and line[i] == '`' and not _escaped(line, i):
+				j = i
+				while j < len(line) and line[j] == '`':
+					j += 1
+				ticks = j - i
+				if code_ticks is None:
+					code_ticks = ticks
+				elif ticks == code_ticks:
+					code_ticks = None
+				i = j
+				continue
+
+			if code_ticks is not None:
+				i += 1
+				continue
+
+			if delimiter == '$$' and line.startswith('$$', i) and not _escaped(line, i):
+				delimiter = None
+				i += 2
+				continue
+			if delimiter == '$' and line[i] == '$' and not _escaped(line, i):
+				delimiter = None
+				i += 1
+				continue
+			if delimiter == r'\(' and line.startswith(r'\)', i) and not _escaped(line, i):
+				delimiter = None
+				i += 2
+				continue
+			if delimiter == r'\[' and line.startswith(r'\]', i) and not _escaped(line, i):
+				delimiter = None
+				i += 2
+				continue
+
+			if delimiter is None:
+				if line.startswith('$$', i) and not _escaped(line, i):
+					delimiter = '$$'
+					i += 2
+					continue
+				if line[i] == '$' and not _escaped(line, i):
+					delimiter = '$'
+					i += 1
+					continue
+				if line.startswith(r'\(', i) and not _escaped(line, i):
+					delimiter = r'\('
+					i += 2
+					continue
+				if line.startswith(r'\[', i) and not _escaped(line, i):
+					delimiter = r'\['
+					i += 2
+					continue
+
+			i += 1
+
+		if delimiter == '$' and line_number < len(lines) - 1:
+			delimiter = None
+
+	return delimiter is not None
+endglobal
+
+context "math()"
+snippet `(?<![\\\w])c?dot` "center dot" rA
+\cdot $0
+endsnippet
+
+context "math()"
+snippet `(otimes|oxx)` "o times" wAr
+\otimes $0
+endsnippet
+
+context "math()"
+snippet circ "Circ" wA
+\circ $0
+endsnippet
+
+context "math()"
+snippet (?<![\\a-zA-Z])bullet "Bullet" wA
+\bullet $0
+endsnippet
+
+context "math()"
+snippet `(?<![\\a-zA-Z])equiv` "Equiv" rA
+\equiv $0
+endsnippet
+
+context "math()"
+snippet `(?<![\\a-zA-Z])mid` "Vertical bar |" rA
+\mid $0
+endsnippet
+
+context "math()"
+snippet `(?<![\\a-zA-Z])oo` "\infty" rA
+\infty 
+endsnippet
+
+context "math()"
+snippet `(?<![\\a-zA-Z])wedge` "\wedge" rA
+\wedge 
+endsnippet

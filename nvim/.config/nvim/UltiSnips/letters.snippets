@@ -57,6 +57,7 @@ else:
 endsnippet
 
 ########## Greek Letters ##########
+
 context "math()"
 snippet `(;a)|((?<![\a-zA-Z])alpha)` "Alpha" Ar
 \alpha`!p
@@ -723,4 +724,14 @@ else:
 letter = match.group(1)
 letter = letter[0].upper() + letter[1:]
 snip.rv = "\\" +  letter + space`$0
+endsnippet
+
+context "math()"
+snippet `(?<![\\\w])ell` "ell" Ar
+\ell`!p
+if t[0] and t[0][0] not in [';',',', ' ', '/', "\'", '0' '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+	snip.rv = ''
+else:
+	snip.rv = ''
+`$0
 endsnippet

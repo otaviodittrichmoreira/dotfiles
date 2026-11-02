@@ -291,6 +291,13 @@ snippet '-\s' "Init Itemize" bAr
 \end{itemize}$0
 endsnippet
 
+context "not_math() and not env('itemize') and not env('enumerate')"
+snippet '1.\s' "Init Enumera" bAr 
+\begin{enumerate}
+	\item $1
+\end{enumerate}$0
+endsnippet
+
 priority 100
 context "env('itemize') or env('enumerate')"
 snippet item "Item" bA
@@ -374,6 +381,7 @@ snippet `(fig2side|subfig)` "Two side-by-side figures / subfigure" rA
 \end{figure}$0
 endsnippet
 
+context "not_math()"
 snippet par "Paragraph" bA
 \paragraph{${1:${VISUAL}}} $0
 endsnippet

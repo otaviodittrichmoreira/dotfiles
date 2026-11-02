@@ -14,6 +14,7 @@ require("settings")
 require("latex_extra")
 require("md2pdf")
 require("file_paste").setup()
+require("overleaf_sync").setup()
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "tex",
