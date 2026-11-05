@@ -1,11 +1,13 @@
--- Quietly check Overleaf Git repositories after saving a file.
+-- Quietly synchronize Overleaf Git repositories after saving a file.
 --
 -- The origin URL must be https://git.overleaf.com/<project-id>. Fetches are
 -- asynchronous, non-interactive, and silent on every failure (including when
 -- offline). When origin has commits that HEAD does not contain, a floating
 -- prompt offers a fast-forward-only pull. Saved but uncommitted changes are
--- automatically stashed and reapplied around that pull. Choosing No (or Esc)
--- disables this feature for every repository until Neovim is restarted.
+-- automatically stashed and reapplied around that pull. Once the remote is
+-- current, all repository changes are staged, committed as "Update" (when
+-- needed), and pushed. Choosing No (or Esc) disables both pulling and pushing
+-- for every repository until Neovim is restarted.
 local M = {}
 local api = vim.api
 
@@ -69,6 +71,48 @@ local function disable_for_session()
 	end
 end
 
+local function publish(repo)
+	if disabled then
+		stop(repo)
+		return
+	end
+	local branch = repo.remote_ref and repo.remote_ref:match("^origin/(.+)$")
+	if not branch then
+		stop(repo)
+		return
+	end
+
+	local function push()
+		repo.job = run_git(repo.root, { "push", "--quiet", "origin", "HEAD:refs/heads/" .. branch }, 60000, function()
+			stop(repo)
+		end)
+	end
+
+	repo.running = true
+	repo.job = run_git(repo.root, { "add", "--all" }, 10000, function(add_result)
+		if add_result.code ~= 0 or disabled then
+			stop(repo)
+			return
+		end
+		repo.job = run_git(repo.root, { "diff", "--cached", "--quiet" }, 5000, function(diff_result)
+			if diff_result.code == 0 then
+				-- Nothing new to commit, but publish any commits already ahead of origin.
+				push()
+			elseif diff_result.code == 1 then
+				repo.job = run_git(repo.root, { "commit", "--quiet", "--message", "Update" }, 60000, function(commit_result)
+					if commit_result.code == 0 and not disabled then
+						push()
+					else
+						stop(repo)
+					end
+				end)
+			else
+				stop(repo)
+			end
+		end)
+	end)
+end
+
 local function update_prompt(repo, count)
 	if disabled or repo.prompt_open then
 		return
@@ -77,8 +121,8 @@ local function update_prompt(repo, count)
 
 	local lines = {
 		("Overleaf has %d remote update%s."):format(count, count == 1 and "" or "s"),
-		"Pull now?",
-		"[y/Enter] Pull    [n/Esc] No; stop checking this session",
+		"Pull, then commit and push local changes?",
+		"[y/Enter] Sync    [n/Esc] No; stop syncing this session",
 	}
 	local width = math.max(30, math.min(68, vim.o.columns - 4))
 	local buf = api.nvim_create_buf(false, true)
@@ -120,10 +164,10 @@ local function update_prompt(repo, count)
 		if not close() or disabled then
 			return
 		end
-		repo.pulling = true
+		repo.running = true
 		local branch = repo.remote_ref and repo.remote_ref:match("^origin/(.+)$")
 		if not branch then
-			repo.pulling = false
+			stop(repo)
 			return
 		end
 		repo.job = run_git(
@@ -131,15 +175,13 @@ local function update_prompt(repo, count)
 			{ "pull", "--quiet", "--ff-only", "--autostash", "origin", branch },
 			60000,
 			function(result)
-				repo.pulling = false
 				repo.job = nil
 				if result.code == 0 and not disabled then
 					-- Reload unchanged buffers and warn normally for locally modified ones.
 					pcall(vim.cmd, "checktime")
-				end
-				if repo.pending and not disabled then
-					repo.pending = false
-					M.check(repo.root)
+					publish(repo)
+				else
+					stop(repo)
 				end
 			end
 		)
@@ -157,13 +199,17 @@ local function compare_remote(repo)
 	local function compare(ref)
 		repo.remote_ref = ref
 		repo.job = run_git(repo.root, { "rev-list", "--count", "HEAD.." .. ref }, 5000, function(result)
-			if result.code == 0 then
-				local count = tonumber(trim(result.stdout)) or 0
-				if count > 0 then
-					update_prompt(repo, count)
-				end
+			if result.code ~= 0 then
+				stop(repo)
+				return
 			end
-			stop(repo)
+			local count = tonumber(trim(result.stdout)) or 0
+			if count > 0 then
+				update_prompt(repo, count)
+				stop(repo)
+			else
+				publish(repo)
+			end
 		end)
 	end
 
@@ -217,7 +263,7 @@ function M.check(root)
 		repo = { root = root }
 		repos[root] = repo
 	end
-	if repo.running or repo.pulling then
+	if repo.running or repo.prompt_open then
 		repo.pending = true
 		return
 	end
@@ -244,7 +290,7 @@ function M.setup()
 	local group = api.nvim_create_augroup(group_name, { clear = true })
 	api.nvim_create_autocmd("BufWritePost", {
 		group = group,
-		desc = "Silently check Overleaf origin for updates",
+		desc = "Silently synchronize an Overleaf Git repository",
 		callback = function(event)
 			if disabled then
 				return
