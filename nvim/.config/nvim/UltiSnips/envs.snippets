@@ -12,6 +12,19 @@ def env(name):
 	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
 	return x != '0' and y != '0'
 
+def list_context(snip):
+	if math() or env('itemize') or env('enumerate'):
+		return False
+	return {"suffix": snip.buffer[snip.line][len(snip.before):]}
+
+def prepare_list_expansion(snip, match):
+	suffix = snip.context["suffix"]
+	line = snip.buffer[snip.line]
+	content_end = len(line) - len(suffix) if suffix else len(line)
+	prefix = line[:content_end - len(match.group(0))]
+	snip.buffer[snip.line] = prefix
+	snip.cursor.set(snip.line, len(prefix.encode("utf-8")))
+
 endglobal
 
 snippet newhomework "New Homework Document" b
@@ -284,17 +297,19 @@ else:
 `
 endsnippet
 
-context "not_math() and not env('itemize') and not env('enumerate')"
+context "list_context(snip)"
+pre_expand "prepare_list_expansion(snip, match)"
 snippet '-\s' "Init Itemize" bAr 
 \begin{itemize}
-	\item $1
+	\item ${1:`!p snip.rv = snip.context["suffix"]`}
 \end{itemize}$0
 endsnippet
 
-context "not_math() and not env('itemize') and not env('enumerate')"
+context "list_context(snip)"
+pre_expand "prepare_list_expansion(snip, match)"
 snippet '1.\s' "Init Enumera" bAr 
 \begin{enumerate}
-	\item $1
+	\item ${1:`!p snip.rv = snip.context["suffix"]`}
 \end{enumerate}$0
 endsnippet
 
