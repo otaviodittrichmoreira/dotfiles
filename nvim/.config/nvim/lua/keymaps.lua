@@ -277,6 +277,10 @@ end, { silent = true, desc = "[D]ebug: Send line to [R]EPL" })
 
 -- Auto-correct previous misspelled word and restore cursor position
 function CorrectLastMisspelledInsert()
+	-- Keep the spelling correction separate from text typed earlier in this
+	-- insert session, so one undo restores only the misspelled word.
+	vim.go.undolevels = vim.go.undolevels
+
 	-- Exit insert mode temporarily
 	vim.cmd("stopinsert")
 

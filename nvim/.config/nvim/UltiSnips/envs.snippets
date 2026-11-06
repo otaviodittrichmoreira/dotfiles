@@ -325,6 +325,11 @@ snippet '-\s' "Item" bAr
 \item $0
 endsnippet
 
+context "env('enumerate')"
+snippet '[0-9]{1,2}\.\s' "Item" bAr
+\item $0
+endsnippet
+
 snippet beq "Equations" bA
 \begin{equation}
 	\label{eq:$1}
