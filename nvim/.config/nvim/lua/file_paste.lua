@@ -523,7 +523,8 @@ local function begin(clip, before)
 				end
 				local lines
 				if tex and image then
-					local label = vim.fs.basename(dest)
+					local basename = vim.fs.basename(dest)
+					local label = basename:sub(1, #basename - #suffix)
 					lines = {
 						"\\begin{figure}",
 						"    \\centering",
