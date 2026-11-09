@@ -84,6 +84,21 @@ snippet '\\input\{(.*)\}' "Create file input" r
 `!p filename = match.group(1); os.makedirs(os.path.dirname(filename), exist_ok=True) if '/' in filename else None; open(filename, "a").close(); snip.rv = match.group(0)`
 endsnippet
 
+snippet '^\\subsection\{([^{}]+)\}$' "Add subsection input" r
+`!p
+subsection_name = match.group(1).replace(" ", "-").lower()
+section_name = None
+for line in reversed(snip.buffer[:snip.snippet_start[0]]):
+	section_match = re.match(r'^\s*\\section\{([^{}]+)\}\s*$', line)
+	if section_match:
+		section_name = section_match.group(1).replace(" ", "-").lower()
+		break
+snip.rv = match.group(0)
+if section_name is not None:
+	snip.rv += "\n\\input{" + section_name + "/" + subsection_name + ".tex}"
+`
+endsnippet
+
 snippet genfiles "Create file input" b
 `!p 
 text = snip.v.text

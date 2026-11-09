@@ -3,6 +3,7 @@ return {
 	lazy = false, -- Load the plugin immediately
 	init = function()
 		vim.g.vimtex_syntax_enabled = 1 -- Enable syntax highlighting
+		vim.g.vimtex_indent_lists = {} -- Keep continuation lines aligned with the current \item line
 		vim.wo.conceallevel = 2 -- Enable conceal level
 		vim.g.vimtex_quickfix_open_on_warning = 0
 		vim.g.vimtex_view_method = "zathura"
