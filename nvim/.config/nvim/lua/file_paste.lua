@@ -523,12 +523,13 @@ local function begin(clip, before)
 				end
 				local lines
 				if tex and image then
+					local label = vim.fs.basename(dest)
 					lines = {
 						"\\begin{figure}",
 						"    \\centering",
 						"    \\includegraphics[width=0.5\\linewidth]{" .. ref .. "}",
 						"    \\caption{Enter Caption}",
-						"    \\label{fig:placeholder}",
+						"    \\label{fig:" .. label .. "}",
 						"\\end{figure}",
 					}
 				elseif tex and ext:lower() == "tex" then
